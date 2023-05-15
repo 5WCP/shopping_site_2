@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歡迎註冊</title>
+    <link rel="stylesheet" href="./signUpPageStyle.css">
+</head>
+<body>
+    <div class="backToHome">
+        <a href="../index.html">回首頁</a>
+    </div>
+    <div class="signUpArea">
+        <div id="message" class="message"></div>
+        <h1>註冊頁面</h1>
+        <label for="userId">用戶名</label>
+        <input type="text" id="userId" name="userId">
+        <label for="password">密碼</label>
+        <input type="password" id="password" name="password">
+        <label for="pwdCheck">密碼再確認</label>
+        <input type="password" id="pwdCheck" name="pwdCheck">
+        <label for="name">真實姓名</label>
+        <input type="text" id="name" name="name">
+        <label for="mail">信箱</label>
+        <input type="email" id="mail" name="mail" placeholder="例 : 123456@gmail.com">
+        <label for="birthDate">出生年月日</label>
+        <input type="date" id="birthDate" name="birthDate">
+        <button id="signUpButton">註冊</button>
+
+        <script src="../javascript/signUp.js"></script>
+</body>
+</html>

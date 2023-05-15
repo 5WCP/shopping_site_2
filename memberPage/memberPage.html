@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心</title>
+    <link rel="stylesheet" href="./memberPageStyle.css">
+</head>
+
+<body>
+    <div class="memTit">
+        <h1>會員中心</h1>
+    </div>
+    <div class="tabs">
+        <input type="radio" class="tRadio" name="tab" id="alrBuyPro" checked>
+        <label for="alrBuyPro" class="tLabel">已購買商品</label>
+        <div class="tContent">
+            <select name="buyProSta" id="buyProSta">
+                <option value="prepare">準備中</option>
+                <option value="ship">運送中</option>
+                <option value="finish">已完成</option>
+            </select>
+            <button id="searBuyBtn">搜尋</button>
+            <div class="respBuy"></div>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="BCancelPro">
+        <label for="BCancelPro" class="tLabel">取消訂單(買)</label>
+        <div class="tContent">
+            <p>商品代號</p>
+            <select name="BCancelProId" id="BCancelProId"></select>
+            <label for="BCancelProName">商品名稱</label>
+            <input type="text" name="BCancelProName" id="BCancelProName">
+            <button id="BCancelProBtn">取消購買</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="alrSellPro">
+        <label for="alrSellPro" class="tLabel">已販賣商品</label>
+        <div class="tContent">
+            <p>商品代號</p>
+            <select name="alrSellProId" id="alrSellProId"></select>
+            <label for="alrSellProName">商品名稱</label>
+            <input type="text" name="alrSellProName" id="alrSellProName">
+            <select name="sellProSta" id="sellProSta">
+                <option value="prepare">準備中</option>
+                <option value="ship">運送中</option>
+                <option value="finish">已完成</option>
+            </select>
+            <button id="deviseSellStaBtn">變更</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="SCancelPro">
+        <label for="SCancelPro" class="tLabel">取消訂單(賣)</label>
+        <div class="tContent">
+            <p>商品代號</p>
+            <select name="SCancelProId" id="SCancelProId"></select>
+            <label for="SCancelProName">商品名稱</label>
+            <input type="text" name="SCancelProName" id="SCancelProName">
+            <button id="SCancelProBtn">取消訂單</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="addPro">
+        <label for="addPro" class="tLabel">新增商品</label>
+        <div class="tContent">
+            <div>
+                <label for="addProPict">商品圖片</label>
+                <input type="file" name="addProPict" id="addProPict">
+            </div>
+            <label for="addProName">商品名稱</label>
+            <input type="text" name="addProName" id="addProName">
+            <p>商品分類</p>
+            <div class="sortsArea">
+                <label for="sort1">分類1</label>
+                <input type="text" name="sort1" id="sort1" class="sort1">
+                <label for="sort2">分類2</label>
+                <input type="text" name="sort2" id="sort2">
+                <label for="sort3">分類3</label>
+                <input type="text" name="sort3" id="sort3">
+            </div>
+            <label for="addProPrice">價格</label>
+            <input type="number" name="addProPrice" id="addProPrice">
+            <label for="addProStock">庫存</label>
+            <input type="number" name="naddProStock" id="addProStock">
+            <button id="addProBtn">新增</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="revisePro">
+        <label for="revisePro" class="tLabel">修改商品</label>
+        <div class="tContent">
+            <p>商品代號</p>
+            <select name="reviseProId" id="reviseProId"></select>
+            <div>
+                <label for="reviseProPict">商品圖片</label>
+                <input type="file" name="reviseProPict" id="reviseProPict">
+            </div>
+            <label for="reviseProName">商品名稱</label>
+            <input type="text" name="reviseProName" id="reviseProName">
+            <p>商品分類</p>
+            <div class="sortsArea">
+                <label for="sort1">分類1</label>
+                <input type="text" name="sort1" id="sort1" class="sort1">
+                <label for="sort2">分類2</label>
+                <input type="text" name="sort2" id="sort2">
+                <label for="sort3">分類3</label>
+                <input type="text" name="sort3" id="sort3">
+            </div>
+            <label for="reviseProPrice">價格</label>
+            <input type="number" name="reviseProPrice" id="reviseProPrice">
+            <label for="reviseProStock">庫存</label>
+            <input type="number" name="reviseProStock" id="reviseProStock">
+            <button id="reviseProBtn">修改</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="delePro">
+        <label for="delePro" class="tLabel">刪除商品</label>
+        <div class="tContent">
+            <p>商品代號</p>
+            <select name="deleProId" id="deleProId"></select>
+            <label for="deleProName">商品名稱</label>
+            <input type="text" name="deleProName" id="deleProName">
+            <button id="deleProBtn">刪除</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="chaState">
+        <label for="chaState" class="tLabel">上/下架商品</label>
+        <div class="tContent">
+            <p>商品代號</p>
+            <select name="chaStateProId" id="chaStateProId"></select>
+            <label for="chaStateProName">商品名稱</label>
+            <input type="text" name="chaStateProName" id="chaStateProName">
+            <select name="state" id="state">
+                <option value="on">上架</option>
+                <option value="off">下架</option>
+            </select>
+            <button id="chaStatetn">提交</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="editInfo">
+        <label for="editInfo" class="tLabel">修改會員資料</label>
+        <div class="tContent">
+            <label for="name">姓名</label>
+            <input type="text" name="name" id="name">
+            <label for="birthDate">生日</label>
+            <input type="date" name="birthDate" id="birthDate">
+            <label for="email">信箱</label>
+            <input type="text" name="email" id="email">
+            <button id="edInBtn">修改</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="chaPwd">
+        <label for="chaPwd" class="tLabel">更改密碼</label>
+        <div class="tContent">
+            <label for="pwd">舊密碼</label>
+            <input type="text" name="pwd" id="pwd">
+            <label for="newPwd">新密碼</label>
+            <input type="text" name="newPwd" id="newPwd">
+            <label for="newPwd">新密碼確認</label>
+            <input type="text" name="newPwd" id="newPwd">
+            <button id="chPwBtn">提交</button>
+        </div>
+
+        <input type="radio" class="tRadio" name="tab" id="deleMem">
+        <label for="deleMem" class="tLabel">刪除會員</label>
+        <div class="tContent">
+            <h2>確定要刪除帳號嗎?</h2>
+            <button id="deleMemBtn">刪除</button>
+        </div>
+
+    </div>
+
+    <script src="../javascript/memPage.js"></script>
+</body>
+
+</html>
