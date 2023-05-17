@@ -12,6 +12,29 @@ body {
   margin: 0;
   background-image: url(./memberPageP.jpg);
   background-size: cover;
+  position: relative;
+}
+body .backToHome {
+  position: absolute;
+  padding: 8px 12px;
+  background-color: #fff;
+  font-size: 32px;
+  border-radius: 5px;
+  top: 5px;
+  left: 5px;
+}
+body .backToHome a {
+  text-decoration: none;
+}
+body .message {
+  padding: 5px 0;
+  background-color: #504b92;
+  opacity: 0.9;
+  border-radius: 5px;
+  margin: 10px 0;
+  color: #fff;
+  position: absolute;
+  top: -10px;
 }
 
 .memTit {
@@ -27,7 +50,7 @@ body {
 
 .tabs {
   height: 500px;
-  width: 400px;
+  width: 500px;
   position: relative;
 }
 .tabs .tLabel {
@@ -68,6 +91,20 @@ body {
   border-radius: 0 5px 5px 5px;
   overflow: auto;
 }
+.tabs .tRadio:checked + .tLabel + .tContent .addProImg {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 37px;
+  right: 62px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .revProImg {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 67px;
+  right: 61px;
+}
 .tabs .tRadio:checked + .tLabel + .tContent .sortsArea {
   margin: 10px 0;
 }
@@ -75,7 +112,7 @@ body {
   width: 50px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent input {
-  margin: 15px 0;
+  margin: 15px 5px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent button {
   border: none;

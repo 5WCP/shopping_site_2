@@ -10,6 +10,10 @@
 </head>
 
 <body>
+    <div class="backToHome">
+        <a href="../index.html">回首頁</a>
+    </div>
+    <div id="message" class="message"></div>
     <div class="memTit">
         <h1>會員中心</h1>
     </div>
@@ -67,22 +71,23 @@
             <div>
                 <label for="addProPict">商品圖片</label>
                 <input type="file" name="addProPict" id="addProPict">
+                <img class="addProImg" src="" alt="">
             </div>
             <label for="addProName">商品名稱</label>
             <input type="text" name="addProName" id="addProName">
             <p>商品分類</p>
             <div class="sortsArea">
-                <label for="sort1">分類1</label>
-                <input type="text" name="sort1" id="sort1" class="sort1">
-                <label for="sort2">分類2</label>
-                <input type="text" name="sort2" id="sort2">
-                <label for="sort3">分類3</label>
-                <input type="text" name="sort3" id="sort3">
+                <label for="addSort1">分類1</label>
+                <input type="text" name="addSort1" id="addSort1">
+                <label for="addSort2">分類2</label>
+                <input type="text" name="addSort2" id="addSort2">
+                <label for="addSort3">分類3</label>
+                <input type="text" name="addSort3" id="addSort3">
             </div>
             <label for="addProPrice">價格</label>
             <input type="number" name="addProPrice" id="addProPrice">
             <label for="addProStock">庫存</label>
-            <input type="number" name="naddProStock" id="addProStock">
+            <input type="number" name="addProStock" id="addProStock">
             <button id="addProBtn">新增</button>
         </div>
 
@@ -94,17 +99,18 @@
             <div>
                 <label for="reviseProPict">商品圖片</label>
                 <input type="file" name="reviseProPict" id="reviseProPict">
+                <img class="revProImg" src="" alt="">
             </div>
             <label for="reviseProName">商品名稱</label>
             <input type="text" name="reviseProName" id="reviseProName">
             <p>商品分類</p>
             <div class="sortsArea">
-                <label for="sort1">分類1</label>
-                <input type="text" name="sort1" id="sort1" class="sort1">
-                <label for="sort2">分類2</label>
-                <input type="text" name="sort2" id="sort2">
-                <label for="sort3">分類3</label>
-                <input type="text" name="sort3" id="sort3">
+                <label for="revSort1">分類1</label>
+                <input type="text" name="revSort1" id="revSort1">
+                <label for="revSort2">分類2</label>
+                <input type="text" name="revSort2" id="revSort2">
+                <label for="revSort3">分類3</label>
+                <input type="text" name="revSort3" id="revSort3">
             </div>
             <label for="reviseProPrice">價格</label>
             <input type="number" name="reviseProPrice" id="reviseProPrice">

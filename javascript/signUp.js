@@ -10,8 +10,8 @@ const SUB = document.querySelector("#signUpButton");
 const checkSUSu = /註冊成功/;
 
 SUB.addEventListener("click", function(){
-    body = {
-        member_info: {
+    let body = {
+        "member_info": {
             "userId": usId.value,
             "password": pwd.value,
             "name": na.value,

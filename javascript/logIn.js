@@ -7,7 +7,7 @@ const checkLISu = /登入成功/;
 
 LIB.addEventListener("click", function() {
     body = {
-        member_info: {
+        "member_info": {
             "userId": usId.value,
             "password": pwd.value
         }
