@@ -14,17 +14,97 @@ body {
   background-size: cover;
   position: relative;
 }
-body .backToHome {
+body .dropDown {
   position: absolute;
-  padding: 8px 12px;
+  top: 15px;
+  right: 15px;
+  padding: 5px;
+  height: 38px;
   background-color: #fff;
-  font-size: 32px;
+  opacity: 0.9;
   border-radius: 5px;
-  top: 5px;
-  left: 5px;
 }
-body .backToHome a {
+body .dropBtn {
+  background-color: black;
+  height: 5px;
+  width: 30px;
+  border-radius: 15px;
+  position: relative;
+  padding: 0;
+  opacity: 0.9;
+}
+body .dropBtn::before, body .dropBtn::after {
+  content: "";
+  background-color: black;
+  height: 5px;
+  width: 30px;
+  border-radius: 15px;
+  position: absolute;
+  opacity: 0.9;
+}
+body .dropBtn::before {
+  top: -12px;
+  right: -2px;
+}
+body .dropBtn::after {
+  top: 8px;
+  right: -2px;
+}
+body .dropDownContent {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  list-style-type: none;
+  width: 110px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 0;
+  right: 0;
+  top: 40px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.6s;
+}
+body .dropDownContent li {
+  margin: 10px 0;
+}
+body .dropDownContent a {
   text-decoration: none;
+  color: black;
+  padding: 6px 6px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #5d66b1;
+  transition: 0.6s;
+}
+body .dropDownContent a:hover {
+  background-color: #2a37a7;
+  color: aliceblue;
+}
+body .dropDownContent a:active {
+  transform: scale(0.9);
+}
+body .dropDownContent button {
+  margin: 10px 0;
+  padding: 4px 6px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #5d66b1;
+  transition: 0.6s;
+}
+body .dropDownContent button:hover {
+  background-color: #2a37a7;
+  color: aliceblue;
+}
+body .dropDownContent button:active {
+  transform: scale(0.9);
+}
+body .show {
+  display: block;
+  opacity: 0.95;
 }
 body .message {
   padding: 5px 0;
@@ -52,6 +132,7 @@ body .message {
   height: 500px;
   width: 500px;
   position: relative;
+  margin-right: 140px;
 }
 .tabs .tLabel {
   padding: 12px 16px;
@@ -91,25 +172,124 @@ body .message {
   border-radius: 0 5px 5px 5px;
   overflow: auto;
 }
+.tabs .tRadio:checked + .tLabel + .tContent .proDeleModal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .proDeleModalContent {
+  background-color: rgba(212, 217, 226, 0.9);
+  margin: 0 0 0 0;
+  border-radius: 5px;
+  padding: 20px;
+  width: 220px;
+  height: 166px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: 65px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .closeProDeleAlert {
+  color: #aaa;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  transition: 0.6s;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .closeProDeleAlert:hover {
+  color: #065a81;
+  cursor: pointer;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .memDeleModal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .memDeleModalContent {
+  background-color: rgba(212, 217, 226, 0.9);
+  margin: 0 0 0 0;
+  border-radius: 5px;
+  padding: 20px;
+  width: 220px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: 50px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .closeMemDeleAlert {
+  color: #aaa;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  transition: 0.6s;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .closeMemDeleAlert:hover {
+  color: #065a81;
+  cursor: pointer;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .deleBtn {
+  border: none;
+  padding: 4px 6px;
+  border-radius: 3px;
+  background-color: #065a81;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: 0.6s;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .deleBtn:hover {
+  color: aliceblue;
+  background-color: red;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .deleBtn:active {
+  transform: scale(0.95);
+}
 .tabs .tRadio:checked + .tLabel + .tContent .addProImg {
   width: 80px;
   height: 80px;
   position: absolute;
-  top: 37px;
+  top: 40px;
   right: 62px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .revProImg {
   width: 80px;
   height: 80px;
   position: absolute;
-  top: 67px;
+  top: 70px;
   right: 61px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .sortsArea {
   margin: 10px 0;
 }
-.tabs .tRadio:checked + .tLabel + .tContent .sortsArea input {
-  width: 50px;
+.tabs .tRadio:checked + .tLabel + .tContent .sortsArea p {
+  display: inline-block;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sortsArea select {
+  display: inline-block;
+  margin-right: 10px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent input {
   margin: 15px 5px;
