@@ -8,21 +8,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(193, 174, 197, 0.8);
   width: 100vw;
   height: 100vh;
-}
-body .backToHome {
-  position: absolute;
-  padding: 8px 12px;
-  background-color: #fff;
-  font-size: 32px;
-  border-radius: 5px;
-  top: 5px;
-  left: 5px;
-}
-body .backToHome a {
-  text-decoration: none;
 }
 
 h1 {
@@ -38,21 +25,20 @@ input {
   margin: 10px 0;
 }
 
-button {
-  margin: 10px 0;
-  padding: 4px 6px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  background-color: #5d66b1;
-  transition: 0.6s;
+body {
+  background-image: url(../../signUpPage/signUpPageImg.jpg);
+  background-size: cover;
 }
-button:hover {
-  background-color: #2a37a7;
-  color: aliceblue;
-}
-button:active {
-  transform: scale(0.9);
+
+.signUpArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  border-radius: 6px;
+  background-color: rgba(193, 174, 197, 0.8);
+  padding: 0 20px 20px 20px;
 }
 
 .message {
@@ -61,15 +47,24 @@ button:active {
   border-radius: 5px;
   margin: 10px 0;
   color: #fff;
+  position: absolute;
+  top: 8px;
 }
 
-.signUpArea {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  border-radius: 6px;
-  background-color: #fff;
-  opacity: 0.9;
+button {
+  margin: 20px 0 10px 0;
+  padding: 4px 6px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #5d66b1;
+  font-size: 16px;
+  transition: 0.6s;
+}
+button:hover {
+  background-color: #2a37a7;
+  color: aliceblue;
+}
+button:active {
+  transform: scale(0.9);
 }/*# sourceMappingURL=signUpPageStyle.css.map */

@@ -8,21 +8,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(193, 174, 197, 0.8);
   width: 100vw;
   height: 100vh;
-}
-body .backToHome {
-  position: absolute;
-  padding: 8px 12px;
-  background-color: #fff;
-  font-size: 32px;
-  border-radius: 5px;
-  top: 5px;
-  left: 5px;
-}
-body .backToHome a {
-  text-decoration: none;
 }
 
 h1 {
@@ -38,42 +25,23 @@ input {
   margin: 10px 0;
 }
 
-button {
-  margin: 10px 0;
-  padding: 4px 6px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  background-color: #5d66b1;
-  transition: 0.6s;
-}
-button:hover {
-  background-color: #2a37a7;
-  color: aliceblue;
-}
-button:active {
-  transform: scale(0.9);
-}
-
-.message {
-  padding: 5px 0;
-  background-color: #504b92;
-  border-radius: 5px;
-  margin: 10px 0;
-  color: #fff;
+body {
+  background-color: #a980b9;
 }
 
 .dropDown {
   position: absolute;
   top: 15px;
   right: 25px;
-  padding: 5px;
   background-color: #fff;
   opacity: 0.8;
+  padding: 15px 5px;
   border-radius: 5px;
 }
-
-.dropBtn {
+.dropDown:hover {
+  padding: 16px 6px;
+}
+.dropDown .dropStyle {
   background-color: black;
   height: 5px;
   width: 30px;
@@ -81,8 +49,9 @@ button:active {
   position: relative;
   padding: 0;
   opacity: 0.9;
+  top: 0;
 }
-.dropBtn::before, .dropBtn::after {
+.dropDown .dropStyle::before, .dropDown .dropStyle::after {
   content: "";
   background-color: black;
   height: 5px;
@@ -91,16 +60,15 @@ button:active {
   position: absolute;
   opacity: 0.9;
 }
-.dropBtn::before {
+.dropDown .dropStyle::before {
   top: -10px;
   right: 0;
 }
-.dropBtn::after {
+.dropDown .dropStyle::after {
   top: 10px;
   right: 0;
 }
-
-.dropDownContent {
+.dropDown .dropDownContent {
   display: none;
   position: absolute;
   z-index: 1;
@@ -113,31 +81,266 @@ button:active {
   right: 0;
   top: 40px;
   text-align: center;
-  opacity: 0;
-  transition: 0.6s;
+  opacity: 0.95;
 }
-.dropDownContent li {
-  margin: 10px 0;
+.dropDown .dropDownContent li {
+  margin-top: 10px;
 }
-.dropDownContent a {
+.dropDown .dropDownContent button {
+  padding: 2px 6px;
+}
+.dropDown .dropDownContent a {
+  padding: 6px 6px;
+}
+.dropDown .dropDownContent a, .dropDown .dropDownContent button {
   text-decoration: none;
   color: black;
-  padding: 6px 6px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   background-color: #5d66b1;
   transition: 0.6s;
+  font-size: 16px;
+  margin: 10px 0;
 }
-.dropDownContent a:hover {
-  background-color: #2a37a7;
+.dropDown .dropDownContent a:hover, .dropDown .dropDownContent button:hover {
   color: aliceblue;
 }
-.dropDownContent a:active {
+.dropDown .dropDownContent a:active, .dropDown .dropDownContent button:active {
+  transform: scale(0.9);
+}
+.dropDown .show {
+  display: block;
+}
+
+.searProArea {
+  position: absolute;
+  top: 26px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searProArea .searInp {
+  opacity: 0.7;
+  width: 39%;
+  height: 30px;
+  font-size: 16px;
+}
+.searProArea .searSort {
+  font-size: 16px;
+  height: 30px;
+  font-size: 16px;
+  width: 88px;
+  float: right;
+  opacity: 0.7;
+  text-align: center;
+}
+.searProArea .searProBtn {
+  height: 30px;
+  opacity: 0.7;
+  font-size: 16px;
+}
+
+.proArea {
+  width: 888px;
+  background-color: rgba(250, 248, 248, 0.3);
+  height: 500px;
+  border-radius: 5px;
+  overflow: auto;
+  margin-top: 88px;
+}
+.proArea .pro {
+  width: 828px;
+  margin: 20px 0 10px 20px;
+  background-color: rgba(250, 248, 248, 0.8);
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+}
+.proArea .pro .proImg {
+  width: 108px;
+  height: 108px;
+  float: left;
+  margin-right: 20px;
+}
+.proArea .pro .info {
+  overflow: hidden;
+}
+.proArea .pro .info .proId {
+  margin: 0;
+}
+.proArea .pro .info .proName {
+  margin: 8px 0 0 0;
+}
+.proArea .pro .info .proPrice {
+  margin: 8px 0 0 0;
+}
+.proArea .pro .info .proStock {
+  margin: 8px 0 0 0;
+}
+.proArea .pro .addCartArea {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  text-align: center;
+}
+.proArea .pro .addCartArea .addCartBtn {
+  margin-top: 35px;
+  padding: 4px 6px;
+  border: none;
+  border-radius: 3px;
+  background-color: #986da5;
+  transition: 0.6s ease;
+  cursor: pointer;
+}
+.proArea .pro .addCartArea .addCartBtn:hover {
+  color: aliceblue;
+  font-weight: bold;
+}
+.proArea .pro .addCartArea .addCartBtn:active {
+  transform: scale(0.95);
+}
+.proArea .pro .addCartArea .countArea {
+  display: flex;
+  align-items: center;
+}
+.proArea .pro .addCartArea .countArea .countInput {
+  border: none;
+  margin: 0 10px;
+  width: 25px;
+  background-color: rgba(245, 241, 241, 0);
+  font-size: 18px;
+  text-align: center;
+  opacity: 0.6;
+}
+.proArea .pro .addCartArea .countArea .countInput::-webkit-inner-spin-button, .proArea .pro .addCartArea .countArea .countInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.proArea .pro .addCartArea .countArea .countBtn {
+  border: none;
+  outline: none;
+  background-color: rgba(245, 241, 241, 0);
+  font-size: 18px;
+  transition: 0.6s ease;
+  opacity: 0.6;
+}
+.proArea .pro .addCartArea .countArea .countBtn:hover {
+  color: #5e0e6e;
+}
+.proArea .pro .addCartArea .countArea .countBtn:active {
   transform: scale(0.9);
 }
 
-.show {
-  display: block;
-  opacity: 0.95;
+.cartArea {
+  width: 300px;
+  background-color: rgba(250, 248, 248, 0.3);
+  height: 250px;
+  border-radius: 5px;
+  overflow: auto;
+  margin: 88px 0 0 39px;
+  position: relative;
+}
+.cartArea .cartTitle {
+  color: #5e0e6e;
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+.cartArea .cartInfo {
+  margin: 20px auto 10px auto;
+  background-color: #4950b8;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  width: 220px;
+}
+.cartArea .cartInfo .removeCart {
+  color: #1a1010;
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  transition: 0.6s;
+}
+.cartArea .cartInfo .removeCart:hover {
+  color: red;
+  cursor: pointer;
+}
+.cartArea .cartInfo .cartProImg {
+  width: 80px;
+  height: 80px;
+  float: left;
+  margin-right: 10px;
+}
+.cartArea .cartInfo .cartProInfo {
+  overflow: hidden;
+  color: aliceblue;
+}
+.cartArea .cartInfo .cartProInfo .cartProName {
+  margin: 0;
+  font-size: 12px;
+}
+.cartArea .cartInfo .cartProInfo .cartProPrice {
+  margin: 15px 0 0 0;
+  font-size: 12px;
+}
+.cartArea .cartInfo .cartProInfo .cartProAmount {
+  margin: 15px 0 0 0;
+  font-size: 12px;
+}
+
+.bgc1 {
+  width: 100px;
+  height: 90px;
+  position: absolute;
+  top: 10px;
+  left: 140px;
+}
+
+.bgc2 {
+  width: 100px;
+  height: 75px;
+  position: absolute;
+  top: 26px;
+  right: 150px;
+}
+
+.checkout {
+  width: 300px;
+  background-color: rgba(250, 248, 248, 0.3);
+  border-radius: 5px;
+  overflow: auto;
+  margin: 20px 0 0 39px;
+  position: relative;
+  text-align: center;
+  padding: 10px;
+}
+.checkout .checkoutBtn {
+  margin: 0;
+  padding: 4px 6px;
+  border: none;
+  border-radius: 3px;
+  background-color: #986da5;
+  transition: 0.6s ease;
+  cursor: pointer;
+}
+.checkout .checkoutBtn:hover {
+  color: aliceblue;
+  font-weight: bold;
+}
+.checkout .checkoutBtn:active {
+  transform: scale(0.95);
+}
+
+.message {
+  padding: 5px 0;
+  background-color: #504b92;
+  opacity: 0.9;
+  border-radius: 5px;
+  margin: 10px 0;
+  color: #fff;
+  position: absolute;
+  top: 69px;
 }/*# sourceMappingURL=style.css.map */

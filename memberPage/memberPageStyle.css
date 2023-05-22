@@ -10,101 +10,9 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0;
-  background-image: url(./memberPageP.jpg);
+  background-image: url(./memberPageImg.jpg);
   background-size: cover;
   position: relative;
-}
-body .dropDown {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  padding: 5px;
-  height: 38px;
-  background-color: #fff;
-  opacity: 0.9;
-  border-radius: 5px;
-}
-body .dropBtn {
-  background-color: black;
-  height: 5px;
-  width: 30px;
-  border-radius: 15px;
-  position: relative;
-  padding: 0;
-  opacity: 0.9;
-}
-body .dropBtn::before, body .dropBtn::after {
-  content: "";
-  background-color: black;
-  height: 5px;
-  width: 30px;
-  border-radius: 15px;
-  position: absolute;
-  opacity: 0.9;
-}
-body .dropBtn::before {
-  top: -12px;
-  right: -2px;
-}
-body .dropBtn::after {
-  top: 8px;
-  right: -2px;
-}
-body .dropDownContent {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  list-style-type: none;
-  width: 110px;
-  padding: 8px 12px;
-  border-radius: 5px;
-  background-color: #fff;
-  margin: 0;
-  right: 0;
-  top: 40px;
-  text-align: center;
-  opacity: 0;
-  transition: 0.6s;
-}
-body .dropDownContent li {
-  margin: 10px 0;
-}
-body .dropDownContent a {
-  text-decoration: none;
-  color: black;
-  padding: 6px 6px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  background-color: #5d66b1;
-  transition: 0.6s;
-}
-body .dropDownContent a:hover {
-  background-color: #2a37a7;
-  color: aliceblue;
-}
-body .dropDownContent a:active {
-  transform: scale(0.9);
-}
-body .dropDownContent button {
-  margin: 10px 0;
-  padding: 4px 6px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  background-color: #5d66b1;
-  transition: 0.6s;
-}
-body .dropDownContent button:hover {
-  background-color: #2a37a7;
-  color: aliceblue;
-}
-body .dropDownContent button:active {
-  transform: scale(0.9);
-}
-body .show {
-  display: block;
-  opacity: 0.95;
 }
 body .message {
   padding: 5px 0;
@@ -315,4 +223,90 @@ body .message {
 }
 .tabs select {
   margin: 10px 0;
+}
+
+.dropDown {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background-color: #fff;
+  opacity: 0.8;
+  padding: 15px 5px;
+  border-radius: 5px;
+}
+.dropDown:hover {
+  padding: 16px 6px;
+}
+.dropDown .dropStyle {
+  background-color: black;
+  height: 5px;
+  width: 30px;
+  border-radius: 15px;
+  position: relative;
+  padding: 0;
+  opacity: 0.9;
+  top: 0;
+}
+.dropDown .dropStyle::before, .dropDown .dropStyle::after {
+  content: "";
+  background-color: black;
+  height: 5px;
+  width: 30px;
+  border-radius: 15px;
+  position: absolute;
+  opacity: 0.9;
+}
+.dropDown .dropStyle::before {
+  top: -10px;
+  right: 0;
+}
+.dropDown .dropStyle::after {
+  top: 10px;
+  right: 0;
+}
+.dropDown .dropDownContent {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  list-style-type: none;
+  width: 110px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 0;
+  right: 0;
+  top: 40px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.6s;
+}
+.dropDown .dropDownContent li {
+  margin-top: 10px;
+}
+.dropDown .dropDownContent a {
+  padding: 6px 6px;
+}
+.dropDown .dropDownContent button {
+  padding: 2px 6px;
+}
+.dropDown .dropDownContent a, .dropDown .dropDownContent button {
+  text-decoration: none;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #5d66b1;
+  transition: 0.6s;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.dropDown .dropDownContent a:hover, .dropDown .dropDownContent button:hover {
+  background-color: #2a37a7;
+  color: aliceblue;
+}
+.dropDown .dropDownContent a:active, .dropDown .dropDownContent button:active {
+  transform: scale(0.9);
+}
+.dropDown .show {
+  opacity: 1;
 }/*# sourceMappingURL=memberPageStyle.css.map */

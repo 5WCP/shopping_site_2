@@ -3,16 +3,13 @@ if(!sessionStorage.getItem("userId")) {
     window.location.href = "../logInPage/logInPage.html";
 }
 
-const dropB = document.querySelector(".dropBtn");
-const dropDC = document.querySelector(".dropDownContent");
+const dropDC = document.querySelector("#dropDownContent");
 const logOut = document.querySelector("#logOutB");
 
-dropB.addEventListener("click", function() {
-    dropDC.classList.toggle("show");
-})
-
-window.addEventListener("click", function(event) {
-    if (!event.target.matches(".dropBtn")) {
+window.addEventListener("click", function(e) {
+    if (e.target.matches("#dropDown") || e.target.matches("#dropStyle")) {
+        dropDC.classList.toggle("show");
+    } else {
         if (dropDC.classList.contains("show")) {
             dropDC.classList.remove("show");
         }
@@ -200,7 +197,7 @@ let revPP;
 
 // 給出下拉式選單種類的值
 
-const sortsName = ["電子", "貴重品", "生活用品", "其他", "清潔用品"];
+const sortsName = ["電子", "貴重品", "生活用品", "清潔用品", "其他"];
 const sortSelect = [addS1, addS2, addS3, revS1, revS2, revS3];
 
 sortsName.forEach((i) => {

@@ -8,14 +8,36 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="dropDown">
-        <button class="dropBtn"></button>
-        <ul class="dropDownContent">
+    <div id="message" class="message"></div>
+    <img class="bgc1" src="./imgs/咖波(左).gif" alt="">
+    <img class="bgc2" src="./imgs/咖波2(右).gif" alt="">
+    <div id="dropDown" class="dropDown">
+        <div id="dropStyle" class="dropStyle"></div>
+        <ul id="dropDownContent" class="dropDownContent">
             <li><a href="./memberPage/memberPage.html">會員中心</a></li>
             <li><button id="logOutB">登出</button></li>
         </ul>
     </div>
-    <h1>我是首頁</h1>
+    
+    <div class="searProArea">
+        <select id="searSort" class="searSort"></select>
+        <input type="text" id="searInp" class="searInp" placeholder="商品名稱">
+        <button id="searProBtn" class="searProBtn">搜尋</button>
+    </div>
+    <div id="proArea" class="proArea">
+
+    </div>
+    <div class="checkoutArea">
+        <div class="cartArea">
+            <h2 class="cartTitle">購物車</h2>
+            
+        </div>
+        <div class="checkout">
+            <p id="totalCount">商品總數為 : </p>
+            <p id="totalPrice">總價格為 : </p>
+            <button id="checkoutBtn" class="checkoutBtn">購買</button>
+        </div>
+    </div>
 
     <script src="./javascript/main.js"></script>
 </body>

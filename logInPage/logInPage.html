@@ -8,18 +8,15 @@
     <link rel="stylesheet" href="./logInPageStyle.css">
 </head>
 <body>
-    <div class="backToHome">
-        <a href="../index.html">回首頁</a>
-    </div>
+    <div id="message" class="message"></div>
     <div class="logInArea">
-        <div id="message" class="message"></div>
         <h1>登入</h1>
         <label for="userId">用戶名</label>
         <input type="text" id="userId" name="userId">
         <label for="password">密碼</label>
         <input type="password" id="password" name="password">
         <div class="btnArea">
-            <button id="logInButton">登入</button>
+            <button id="logInButton"><span>登入</span></button>
             <button class="logInABtn">
                 <a class="logInA" href="../signUpPage/signUpPage.html">註冊</a>
             </button>
