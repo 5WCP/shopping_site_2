@@ -34,6 +34,9 @@ SUB.addEventListener("click", function(){
         const checkData = JSON.parse(JSON.stringify(data));
         if(checkData.message) {
             mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+            setTimeout(() => {
+                mge.innerHTML = "";
+            }, 2000);
         }
 
         if(checkSUSu.test(checkData.message)) {

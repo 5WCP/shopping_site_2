@@ -23,54 +23,80 @@
     </div>
     <div class="tabs">
         <input type="radio" class="tRadio" name="tab" id="alrBuyPro" checked>
-        <label for="alrBuyPro" class="tLabel">已購買商品</label>
+        <label for="alrBuyPro" class="tLabel">商品狀態(買)</label>
         <div class="tContent">
             <select name="buyProSta" id="buyProSta">
-                <option value="prepare">準備中</option>
-                <option value="ship">運送中</option>
-                <option value="finish">已完成</option>
+                <option value="運送中">運送中</option>
+                <option value="已完成">已完成</option>
+                <option value="已取消">已取消</option>
             </select>
             <button id="searBuyBtn">搜尋</button>
-            <div class="respBuy"></div>
+            <div id="resBuyPro" class="resBuyPro">
+                <div class="buyPro">
+                    <div><p>商品名稱</p></div>
+                    <div><p>價格</p></div>
+                    <div><p>數量</p></div>
+                    <div><p>訂單狀態</p></div>
+                    <div class="bPUpdA"><p>更新時間</p></div>
+                </div>
+            </div>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="BCancelPro">
         <label for="BCancelPro" class="tLabel">取消訂單(買)</label>
         <div class="tContent">
-            <p>商品代號</p>
-            <select name="BCancelProId" id="BCancelProId">
-                <option value=""></option>
-            </select>
-            <label for="BCancelProName">商品名稱</label>
-            <input type="text" name="BCancelProName" id="BCancelProName">
-            <button id="BCancelProBtn">取消購買</button>
+            <div id="canCancelProA" class="canCancelProA">
+
+            </div> 
+            <button class="checkBtn" onclick="BCPCheckAlert()">取消購買</button>
+            <div id="BCPModal" class="BCPModal">
+                <div class="BCPModalContent">
+                    <span onclick="closeBCPCheAlert()" class="closeBCPAlert">&times;</span>
+                    <h2>確定要取消購買訂單嗎?</h2>
+                    <button id="BCancelProBtn" class="deleBtn" onclick="closeBCPCheAlert()">確定</button>
+                </div>
+            </div>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="alrSellPro">
-        <label for="alrSellPro" class="tLabel">已販賣商品</label>
+        <label for="alrSellPro" class="tLabel">商品狀態(賣)</label>
         <div class="tContent">
-            <p>商品代號</p>
-            <select name="alrSellProId" id="alrSellProId">
-                <option value=""></option>
-            </select>
-            <label for="alrSellProName">商品名稱</label>
-            <input type="text" name="alrSellProName" id="alrSellProName">
             <select name="sellProSta" id="sellProSta">
-                <option value="prepare">準備中</option>
-                <option value="ship">運送中</option>
-                <option value="finish">已完成</option>
+                <option value="準備中">準備中</option>
+                <option value="運送中">運送中</option>
+                <option value="待收貨">待收貨</option>
+                <option value="已取消">已取消</option>
+                <option value="已完成">已完成</option>
             </select>
-            <button id="deviseSellStaBtn">變更</button>
+            <button id="searSellBtn">搜尋</button>
+            <div id="resSellPro" class="resSellPro">
+                <div class="sellPro">
+                    <div><input type="radio" class="radioS"></div>
+                    <div><p>買家(用戶名)</p></div>
+                    <div><p>商品名稱</p></div>
+                    <div><p>價格</p></div>
+                    <div><p>數量</p></div>
+                    <div><p>狀態</p></div>
+                    <div class="CPSUpdA"><p>更新時間</p></div>
+                </div>
+            </div>
+            <button id="devSellStaBtn" class="checkBtn">狀態變更</button>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="SCancelPro">
         <label for="SCancelPro" class="tLabel">取消訂單(賣)</label>
         <div class="tContent">
-            <p>商品代號</p>
-            <select name="SCancelProId" id="SCancelProId"></select>
-            <label for="SCancelProName">商品名稱</label>
-            <input type="text" name="SCancelProName" id="SCancelProName">
-            <button id="SCancelProBtn">取消訂單</button>
+            <div id="sCanCancelProA" class="sCanCancelProA">
+
+            </div> 
+            <button class="checkBtn" onclick="SCPCheckAlert()">取消訂單</button>
+            <div id="SCPModal" class="SCPModal">
+                <div class="SCPModalContent">
+                    <span onclick="closeSCPCheAlert()" class="closeSCPAlert">&times;</span>
+                    <h2>確定要取消購買訂單嗎?</h2>
+                    <button id="SCancelProBtn" class="deleBtn" onclick="closeSCPCheAlert()">確定</button>
+                </div>
+            </div>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="addPro">
@@ -138,7 +164,7 @@
             <input type="number" name="reviseProPrice" id="reviseProPrice">
             <label for="reviseProStock">庫存</label>
             <input type="number" name="reviseProStock" id="reviseProStock">
-            <button id="reviseProBtn">修改</button>
+            <button id="reviseProBtn" class="checkBtn">修改</button>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="delePro">
@@ -150,12 +176,12 @@
             </select>
             <label for="deleProName">商品名稱</label>
             <input type="text" name="deleProName" id="deleProName">
-            <button onclick="proDeleCheckAlert()" class="deleBtn">刪除</button>
+            <button onclick="proDeleCheckAlert()" class="checkBtn">刪除</button>
             <div id="proDeleModal" class="proDeleModal">
                 <div class="proDeleModalContent">
                     <span onclick="closeProDeleCheAlert()" class="closeProDeleAlert">&times;</span>
-                    <h2>確定要刪除?</h2>
-                    <button id="deleProBtn" class="deleBtn">確定</button>
+                    <h2>確定要刪除商品嗎?</h2>
+                    <button id="deleProBtn" class="deleBtn" onclick="closeProDeleCheAlert()">確定</button>
                 </div>
             </div>
         </div>
@@ -185,7 +211,7 @@
             <input type="date" name="birthDate" id="birthDate">
             <label for="mail">信箱</label>
             <input type="text" name="mail" id="mail">
-            <button id="edInBtn">修改</button>
+            <button id="edInBtn" class="checkBtn">修改</button>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="chaPwd">
@@ -197,14 +223,14 @@
             <input type="password" name="newPwd" id="newPwd">
             <label for="newPwdCheck">新密碼確認</label>
             <input type="password" name="newPwdCheck" id="newPwdCheck">
-            <button id="chPwBtn">提交</button>
+            <button id="chPwBtn" class="checkBtn">提交</button>
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="deleMem">
         <label for="deleMem" class="tLabel">刪除會員</label>
         <div class="tContent">
             <h2>確定要刪除帳號嗎?</h2>
-            <button onclick="memDeleCheckAlert()" class="deleBtn">刪除</button>
+            <button onclick="memDeleCheckAlert()" class="checkBtn">刪除</button>
             <div id="memDeleModal" class="memDeleModal">
                 <div class="memDeleModalContent">
                     <span onclick="closeMemDeleCheAlert()" class="closeMemDeleAlert">&times;</span>

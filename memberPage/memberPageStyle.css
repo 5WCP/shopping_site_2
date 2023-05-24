@@ -80,6 +80,128 @@ body .message {
   border-radius: 0 5px 5px 5px;
   overflow: auto;
 }
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro {
+  margin: 20px 0 0 0;
+  background-color: rgba(212, 217, 226, 0.9);
+  width: 450px;
+  height: 300px;
+  overflow: auto;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro {
+  display: flex;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro .bPUpdA p {
+  width: 150px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro div {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro div p {
+  width: 120px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro {
+  margin: 10px 0;
+  background-color: rgba(212, 217, 226, 0.9);
+  width: 450px;
+  height: 300px;
+  overflow: auto;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro .sellPro {
+  display: flex;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro .sellPro div {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro .sellPro div p {
+  width: 120px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro .sellPro .CPSUpdA p {
+  width: 150px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro .sellPro input {
+  margin: 0 5px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resSellPro .sellPro .radioS {
+  visibility: hidden;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA {
+  margin: 0 0 20px 0;
+  background-color: rgba(212, 217, 226, 0.9);
+  width: 450px;
+  height: 300px;
+  overflow: auto;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA .sCanCancelPro {
+  display: flex;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA .sCanCancelPro div {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA .sCanCancelPro div p {
+  width: 120px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA .sCanCancelPro .sCPUpdA p {
+  width: 150px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA .sCanCancelPro input {
+  margin: 0 5px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .sCanCancelProA .sCanCancelPro .radioST {
+  visibility: hidden;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA {
+  margin: 0 0 20px 0;
+  background-color: rgba(212, 217, 226, 0.9);
+  width: 450px;
+  height: 300px;
+  overflow: auto;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA .canCancelPro {
+  display: flex;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA .canCancelPro div {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA .canCancelPro div p {
+  width: 120px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA .canCancelPro .bCPUpdA p {
+  width: 150px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA .canCancelPro input {
+  margin: 0 5px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .canCancelProA .canCancelPro .radioT {
+  visibility: hidden;
+}
 .tabs .tRadio:checked + .tLabel + .tContent .proDeleModal {
   display: none;
   justify-content: center;
@@ -158,6 +280,100 @@ body .message {
 .tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .closeMemDeleAlert:hover {
   color: #065a81;
   cursor: pointer;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .BCPModal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .BCPModal .BCPModalContent {
+  background-color: rgba(212, 217, 226, 0.9);
+  margin: 0 0 0 0;
+  border-radius: 5px;
+  padding: 20px;
+  width: 220px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: 50px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .BCPModal .closeBCPAlert {
+  color: #aaa;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  transition: 0.6s;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .BCPModal .closeBCPAlert:hover {
+  color: #065a81;
+  cursor: pointer;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .SCPModal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .SCPModal .SCPModalContent {
+  background-color: rgba(212, 217, 226, 0.9);
+  margin: 0 0 0 0;
+  border-radius: 5px;
+  padding: 20px;
+  width: 220px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: 50px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .SCPModal .closeSCPAlert {
+  color: #aaa;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  transition: 0.6s;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .SCPModal .closeSCPAlert:hover {
+  color: #065a81;
+  cursor: pointer;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .checkBtn {
+  border: none;
+  padding: 4px 6px;
+  border-radius: 3px;
+  background-color: #065a81;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: 0.6s;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .checkBtn:hover {
+  color: blue;
+  background-color: yellow;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .checkBtn:active {
+  transform: scale(0.95);
 }
 .tabs .tRadio:checked + .tLabel + .tContent .deleBtn {
   border: none;

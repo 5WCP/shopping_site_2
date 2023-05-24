@@ -246,10 +246,10 @@ body {
 .cartArea {
   width: 300px;
   background-color: rgba($color: #faf8f8, $alpha: 0.3);
-  height: 250px;
+  height: 300px;
   border-radius: 5px;
   overflow: auto;
-  margin: 88px 0 0 39px;
+  margin: 0 0 0 39px;
   position: relative;
 
   .cartTitle {
@@ -366,4 +366,8 @@ body {
   color: #fff;
   position: absolute;
   top: 69px;
+}
+
+.checkoutArea {
+  margin-top: 128px;
 }

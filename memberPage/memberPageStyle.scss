@@ -86,6 +86,170 @@ body {
         border-radius: 0 5px 5px 5px;
         overflow: auto;
 
+        .resBuyPro {
+            margin: 20px 0 0 0;
+            background-color: rgba(212, 217, 226, 0.9);
+            width: 450px;
+            height: 300px;
+            overflow: auto;           
+
+            .buyPro {
+                display: flex;
+
+                .bPUpdA {
+
+                    p {
+                        width: 150px;
+                        text-align: center;
+                    }
+                }
+
+                div {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 2px;
+
+                    p {
+                        width: 120px;
+                        text-align: center;
+                    }
+                }
+                
+            }
+
+        }
+
+        .resSellPro {
+            margin: 10px 0;
+            background-color: rgba(212, 217, 226, 0.9);
+            width: 450px;
+            height: 300px;
+            overflow: auto;
+
+            .sellPro {
+                display: flex;
+
+                div {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 2px;
+
+                    p {
+                        width: 120px;
+                        text-align: center;
+                    }
+                }
+
+                .CPSUpdA {
+
+                    p {
+                        width: 150px;
+                        text-align: center;
+                    }
+                }
+
+                input {
+                    margin: 0 5px;
+                }
+    
+                .radioS {
+                    visibility: hidden;
+                }
+            }
+
+        }
+
+        .sCanCancelProA {
+            margin: 0 0 20px 0;
+            background-color: rgba(212, 217, 226, 0.9);
+            width: 450px;
+            height: 300px;
+            overflow: auto;
+
+            .sCanCancelPro {
+                display: flex;
+
+                div {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 2px;
+
+                    p {
+                        width: 120px;
+                        text-align: center;
+                    }
+                }
+
+                .sCPUpdA {
+
+                    p {
+                        width: 150px;
+                        text-align: center;
+                    }
+                }
+
+                input {
+                    margin: 0 5px;
+                }
+
+                .radioST {
+                    visibility: hidden;
+                }
+            }
+        }
+
+        .canCancelProA {
+            margin: 0 0 20px 0;
+            background-color: rgba(212, 217, 226, 0.9);
+            width: 450px;
+            height: 300px;
+            overflow: auto;
+
+            .canCancelPro {
+                display: flex;
+
+                div {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 2px;
+
+                    p {
+                        width: 120px;
+                        text-align: center;
+                    }
+                }
+
+                .bCPUpdA {
+
+                    p {
+                        width: 150px;
+                        text-align: center;
+                    }
+                }
+
+                input {
+                    margin: 0 5px;
+                }
+
+                .radioT {
+                    visibility: hidden;
+                }
+
+            }
+        }
+
         .proDeleModal {
             display: none;
             justify-content: center;
@@ -170,6 +334,112 @@ body {
                     color: #065a81;
                     cursor: pointer;
                 }
+            }
+        }
+
+        .BCPModal {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: auto;
+            text-align: center;
+
+            .BCPModalContent {
+                background-color: rgba(212, 217, 226, 0.9);
+                margin: 0 0 0 0;
+                border-radius: 5px;
+                padding: 20px;
+                width: 220px;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                position: relative;
+                margin: 50px 0 0 120px;
+            }
+
+            .closeBCPAlert {
+                color: #aaa;
+                position: absolute;
+                top: 5px;
+                right: 15px;
+                font-size: 28px;
+                font-weight: bold;
+                transition: 0.6s;
+
+                &:hover {
+                    color: #065a81;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .SCPModal {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: auto;
+            text-align: center;
+
+            .SCPModalContent {
+                background-color: rgba(212, 217, 226, 0.9);
+                margin: 0 0 0 0;
+                border-radius: 5px;
+                padding: 20px;
+                width: 220px;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                position: relative;
+                margin: 50px 0 0 120px;
+            }
+
+            .closeSCPAlert {
+                color: #aaa;
+                position: absolute;
+                top: 5px;
+                right: 15px;
+                font-size: 28px;
+                font-weight: bold;
+                transition: 0.6s;
+
+                &:hover {
+                    color: #065a81;
+                    cursor: pointer;
+                }
+            }
+        }
+
+
+        .checkBtn {
+            border: none;
+            padding: 4px 6px;
+            border-radius: 3px;
+            background-color: #065a81;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: 0.6s;
+
+            &:hover {
+                color: blue;
+                background-color: yellow;
+            }
+
+            &:active {
+                transform: scale(0.95);
             }
         }
 
