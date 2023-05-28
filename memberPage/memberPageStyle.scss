@@ -270,12 +270,18 @@ body {
                 border-radius: 5px;
                 padding: 20px;
                 width: 220px;
-                height: 166px;
+                height: 268px;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
                 position: relative;
                 margin: 65px 0 0 120px;
+
+                .proDeleVer {
+                    width: 88px;
+                    height: 25px;
+                    border-radius: 5px;
+                }
             }
 
             .closeProDeleAlert {
@@ -314,11 +320,19 @@ body {
                 border-radius: 5px;
                 padding: 20px;
                 width: 220px;
+                height: 268px;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
                 position: relative;
                 margin: 50px 0 0 120px;
+
+                .memDeleVer {
+                    width: 88px;
+                    height: 25px;
+                    border-radius: 5px;
+                }
+
             }
 
             .closeMemDeleAlert {

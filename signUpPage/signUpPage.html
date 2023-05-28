@@ -12,19 +12,25 @@
     <div class="signUpArea">
         <h1>註冊頁面</h1>
         <label for="userId">用戶名</label>
-        <input type="text" id="userId" name="userId">
+        <input type="text" id="userId" name="userId" placeholder="2~8位的英文或數字">
         <label for="password">密碼</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" placeholder="大小寫英文*1 數字*3 8~15位">
         <label for="pwdCheck">密碼再確認</label>
         <input type="password" id="pwdCheck" name="pwdCheck">
         <label for="name">真實姓名</label>
         <input type="text" id="name" name="name">
-        <label for="birthDate">出生年月日</label>
-        <input type="date" id="birthDate" name="birthDate">
         <label for="mail">信箱</label>
         <input type="email" id="mail" name="mail" placeholder="例 : 123456@gmail.com">
-        <button id="signUpButton">註冊</button>
-
+        <label for="birthDate">出生年月日</label>
+        <input type="date" id="birthDate" name="birthDate">
+        <label for="phone">手機號碼</label>
+        <input type="text" id="phone" name="phone" placeholder="0912345678">
+        <div class="btnArea">   
+            <button id="signUpButton">註冊</button>
+            <button class="logInABtn">
+                <a class="logInA" href="../logInPage/logInPage.html">回到登入頁面</a>
+            </button>
+        </div>
         <script src="../javascript/signUp.js"></script>
 </body>
 </html>

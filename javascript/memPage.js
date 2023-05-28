@@ -1,7 +1,11 @@
+// 未登入 跳轉首頁
+
 if(!sessionStorage.getItem("userId")) {
     alert("請先登入")
     window.location.href = "../logInPage/logInPage.html";
 }
+
+// 下拉式選單
 
 const dropDC = document.querySelector("#dropDownContent");
 const logOut = document.querySelector("#logOutB");
@@ -16,11 +20,218 @@ window.addEventListener("click", function(e) {
     }
 });
 
+// 登出
+
 logOut.addEventListener("click", function() {
     sessionStorage.removeItem("userId");
     alert("已登出，進入登入頁面")
     window.location.href = "../logInPage/logInPage.html";
 })
+
+// 驗證碼程式
+
+function randomNum(min,max) {
+    return Math.floor( Math.random()*(max-min)+min);
+}
+
+function randomColor(min,max) {
+    let r = randomNum(min,max);
+    let g = randomNum(min,max);
+    let b = randomNum(min,max);
+    return "rgb("+r+","+g+","+b+")";
+}
+
+// 刪除商品驗證碼
+
+const im = document.querySelector("#verImg");
+const i = document.querySelector("#proDeleVer");
+let verRes = "";
+
+let code = "";
+
+function verify() {
+    let iU = i.value.toUpperCase();
+
+    function clearAndUpdate() {
+        i.value = "";
+        drawPic();
+    }
+
+    if(iU.trim().length === 0) {
+        mge.innerHTML = "\u00A0請輸入驗證碼\u00A0";
+        setTimeout(() => {
+           mge.innerHTML = ""; 
+        }, 2000);
+        clearAndUpdate();
+        
+    } else if (iU.length !== 5) {
+        mge.innerHTML = "\u00A0請輸入正確格式的驗證碼\u00A0";
+        setTimeout(() => {
+           mge.innerHTML = ""; 
+        }, 2000);  
+        clearAndUpdate();
+        
+    } else if (iU === code) {
+        verRes = "PASS";
+        clearAndUpdate();
+        
+    } else { 
+        mge.innerHTML = "\u00A0驗證碼錯誤\u00A0";
+        setTimeout(() => {
+           mge.innerHTML = ""; 
+        }, 2000);
+        clearAndUpdate()
+    }   
+}
+
+im.onclick = function(e) {
+e.preventDefault();
+drawPic();
+};
+
+function drawPic() {
+    
+    const w = im.width;
+    const h = im.height;
+
+    let img = im.getContext("2d");
+    img.textBaseline = 'bottom'; 
+    img.fillStyle = randomColor(200,240); 
+    img.fillRect(0,0,w,h);
+    
+    let str = "ABCEFGHJKLMNPQRSTWXY123456789";
+    code = "";
+    
+    for(let i = 0; i < 5; i++) {
+        
+        let txt = str[randomNum(0,str.length)];
+        code += txt;
+        img.fillStyle = randomColor(39,108);
+        img.font = randomNum(15,20)+'px SimHei';
+        
+        let x = 10+i*20;
+        let y = randomNum(20,30);
+        let deg = randomNum(-45, 45);
+        
+        img.translate(x,y);
+        img.rotate(deg*Math.PI/180);
+        img.fillText(txt, 0, 0);
+
+        img.rotate(-deg*Math.PI/180);
+        img.translate(-x,-y);
+        }
+
+    for(let i = 0; i < 3; i++) {
+        img.strokeStyle = randomColor(40,180);
+        img.beginPath();
+        img.moveTo( randomNum(0,w), randomNum(0,h) );
+        img.lineTo( randomNum(0,w), randomNum(0,h) );
+        img.stroke();
+    }
+    
+    for(let i = 0; i < 26; i++) {
+        img.fillStyle = randomColor(0,255);
+        img.beginPath();
+        img.arc(randomNum(0,w),randomNum(0,h), 1, 0, 2*Math.PI);
+        img.fill();
+    }
+}
+
+// 刪除會員驗證碼
+
+const imM = document.querySelector("#verImgM");
+const iM = document.querySelector("#memDeleVer");
+let verResM = "";
+
+let codeM = "";
+
+function verifyM() {
+    let iUM = iM.value.toUpperCase();
+
+    function clearAndUpdateM() {
+        iM.value = "";
+        drawPicM();
+    }
+
+    if(iUM.trim().length === 0) {
+        mge.innerHTML = "\u00A0請輸入驗證碼\u00A0";
+        setTimeout(() => {
+            mge.innerHTML = ""; 
+         }, 2000);
+        clearAndUpdateM();
+        
+    } else if (iUM.length !== 5) {
+        mge.innerHTML = "\u00A0請輸入正確格式的驗證碼\u00A0";
+        setTimeout(() => {
+            mge.innerHTML = ""; 
+         }, 2000);   
+        clearAndUpdateM();
+        
+    } else if (iUM === codeM) {
+        verResM = "PASS";
+        clearAndUpdateM();
+        
+    } else { 
+        mge.innerHTML = "\u00A0驗證碼錯誤\u00A0";
+        setTimeout(() => {
+            mge.innerHTML = ""; 
+         }, 2000);
+        clearAndUpdateM()
+    }   
+}
+
+imM.onclick = function(e) {
+e.preventDefault();
+drawPicM();
+};
+
+function drawPicM() {
+    
+    const wM = imM.width;
+    const hM = imM.height;
+
+    let imgM = imM.getContext("2d");
+    imgM.textBaseline = 'bottom'; 
+    imgM.fillStyle = randomColor(200,240); 
+    imgM.fillRect(0,0,wM,hM);
+    
+    let strM = "ABCEFGHJKLMNPQRSTWXY123456789";
+    codeM = "";
+    
+    for(let i = 0; i < 5; i++) {
+        
+        let txtM = strM[randomNum(0,strM.length)];
+        codeM += txtM;
+        imgM.fillStyle = randomColor(39,108);
+        imgM.font = randomNum(15,20)+'px SimHei';
+        
+        let xM = 10+i*20;
+        let yM = randomNum(20,30);
+        let degM = randomNum(-45, 45);
+        
+        imgM.translate(xM,yM);
+        imgM.rotate(degM*Math.PI/180);
+        imgM.fillText(txtM, 0, 0);
+
+        imgM.rotate(-degM*Math.PI/180);
+        imgM.translate(-xM,-yM);
+        }
+
+    for(let i = 0; i < 3; i++) {
+        imgM.strokeStyle = randomColor(40,180);
+        imgM.beginPath();
+        imgM.moveTo( randomNum(0,wM), randomNum(0,hM) );
+        imgM.lineTo( randomNum(0,wM), randomNum(0,hM) );
+        imgM.stroke();
+    }
+    
+    for(let i = 0; i < 26; i++) {
+        imgM.fillStyle = randomColor(0,255);
+        imgM.beginPath();
+        imgM.arc(randomNum(0,wM),randomNum(0,hM), 1, 0, 2*Math.PI);
+        imgM.fill();
+    }
+}
 
 // 帶出用戶名販賣的商品
 
@@ -112,6 +323,12 @@ searBuyB.addEventListener("click", () => {
         buySPATA.appendChild(buySPAT);
         BuyPT.appendChild(buySPATA);
 
+        const buySPPhTA = document.createElement("div");
+        const buySPPhT = document.createElement("p");
+        buySPPhT.innerText = "賣家電話";
+        buySPPhTA.appendChild(buySPPhT);
+        BuyPT.appendChild(buySPPhTA);
+
         const buySPSTA = document.createElement("div");
         const buySPST = document.createElement("p");
         buySPST.innerText = "訂單狀態";
@@ -155,6 +372,12 @@ searBuyB.addEventListener("click", () => {
                 buySPA.innerText = i.amount;
                 buySPAA.appendChild(buySPA);
                 BuyP.appendChild(buySPAA);
+
+                const buySPPhA = document.createElement("div");
+                const buySPPh = document.createElement("p");
+                buySPPh.innerText = i.phone;
+                buySPPhA.appendChild(buySPPh);
+                BuyP.appendChild(buySPPhA);
 
                 const buySPSA = document.createElement("div");
                 const buySPS = document.createElement("p");
@@ -241,6 +464,12 @@ fetch("http://localhost:8080/sear_buy_pro", {
     canCPATA.appendChild(canCPAT);
     canCPT.appendChild(canCPATA);
 
+    const canCPPhTA = document.createElement("div");
+    const canCPPhT = document.createElement("p");
+    canCPPhT.innerText = "賣家電話";
+    canCPPhTA.appendChild(canCPPhT);
+    canCPT.appendChild(canCPPhTA);
+
     const canCPSTA = document.createElement("div");
     const canCPST = document.createElement("p");
     canCPST.innerText = "訂單狀態";
@@ -287,6 +516,12 @@ fetch("http://localhost:8080/sear_buy_pro", {
             canCPAm.innerText = i.amount;
             canCPAmA.appendChild(canCPAm);
             canCP.appendChild(canCPAmA);
+
+            const canCPPhA = document.createElement("div");
+            const canCPPh = document.createElement("p");
+            canCPPh.innerText = i.phone;
+            canCPPhA.appendChild(canCPPh);
+            canCP.appendChild(canCPPhA);
         
             const canCPSA = document.createElement("div");
             const canCPS = document.createElement("p");
@@ -393,6 +628,12 @@ searSellB.addEventListener("click", (i) => {
         sellPBT.innerText = "買家(用戶名)";
         sellPBTA.appendChild(sellPBT);
         sellPT.appendChild(sellPBTA);
+
+        const sellPBPTA = document.createElement("div");
+        const sellPBPT = document.createElement("p");
+        sellPBPT.innerText = "買家電話";
+        sellPBPTA.appendChild(sellPBPT);
+        sellPT.appendChild(sellPBPTA);
         
         const sellPNTA = document.createElement("div");
         const sellPNT = document.createElement("p");
@@ -429,6 +670,7 @@ searSellB.addEventListener("click", (i) => {
 
             if(body.state === "準備中" || body.state === "運送中" || body.state === "待收貨") {
                 devSellStaB.disabled = false;
+                // devSellStaB.style.display = inline;
 
                 checkData.cart_info_list.forEach((i, index) => {
                     const sellP = document.createElement("div");
@@ -448,6 +690,12 @@ searSellB.addEventListener("click", (i) => {
                     sellPB.innerText = i.userId;
                     sellPBA.appendChild(sellPB);
                     sellP.appendChild(sellPBA);
+
+                    const sellPBPA = document.createElement("div");
+                    const sellPBP = document.createElement("p");
+                    sellPBP.innerText = i.phone;
+                    sellPBPA.appendChild(sellPBP);
+                    sellP.appendChild(sellPBPA);
                     
                     const sellPNA = document.createElement("div");
                     const sellPN = document.createElement("p");
@@ -522,6 +770,7 @@ searSellB.addEventListener("click", (i) => {
             if(body.state === "已取消" || body.state === "已完成") {
                 sellPCTA.parentNode.removeChild(sellPCTA);
                 devSellStaB.disabled = true;
+                // devSellStaB.style.display = none;
 
                 checkData.cart_info_list.forEach((i) => {
                     const sellP = document.createElement("div");
@@ -533,6 +782,12 @@ searSellB.addEventListener("click", (i) => {
                     sellPB.innerText = i.userId;
                     sellPBA.appendChild(sellPB);
                     sellP.appendChild(sellPBA);
+
+                    const sellPBPA = document.createElement("div");
+                    const sellPBP = document.createElement("p");
+                    sellPBP.innerText = i.phone;
+                    sellPBPA.appendChild(sellPBP);
+                    sellP.appendChild(sellPBPA);
                     
                     const sellPNA = document.createElement("div");
                     const sellPN = document.createElement("p");
@@ -621,6 +876,12 @@ fetch("http://localhost:8080/sear_sell_pro", {
     sCanCPBTA.appendChild(sCanCPBT);
     sCanCPT.appendChild(sCanCPBTA);
     
+    const sCanCPBPTA = document.createElement("div");
+    const sCanCPBPT = document.createElement("p");
+    sCanCPBPT.innerText = "買家電話";
+    sCanCPBPTA.appendChild(sCanCPBPT);
+    sCanCPT.appendChild(sCanCPBPTA);
+
     const sCanCPNTA = document.createElement("div");
     const sCanCPNT = document.createElement("p");
     sCanCPNT.innerText = "商品名稱";
@@ -673,6 +934,12 @@ fetch("http://localhost:8080/sear_sell_pro", {
             sCanCPB.innerText = i.userId;
             sCanCPBA.appendChild(sCanCPB);
             sCanCP.appendChild(sCanCPBA);
+
+            const sCanCPBPA = document.createElement("div");
+            const sCanCPBP = document.createElement("p");
+            sCanCPBP.innerText = i.phone;
+            sCanCPBPA.appendChild(sCanCPBP);
+            sCanCP.appendChild(sCanCPBPA);
             
             const sCanCPNA = document.createElement("div");
             const sCanCPN = document.createElement("p");
@@ -810,9 +1077,64 @@ addProB.addEventListener("click", function() {
         return response.json()
     })
     .then(function(data) {
+
+        addPI.src = "";
+        addProN.value = "";
+        addProS.value = "";
+        addProPr.value = "";
+        addS1.value = "";
+        addS2.value = "";
+        addS3.value = "";
+        addProP.value = "";
+
         const checkData = JSON.parse(JSON.stringify(data));
+
         if(checkData.message) {
             mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+
+            fetch("http://localhost:8080/find_mem_sell", {
+                method: "Post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify(user)
+            })
+            .then(function(response) {
+                return response.json()
+            })
+            .then(function(data) {
+                const checkData = JSON.parse(JSON.stringify(data));
+                if(checkData.message) {
+                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0"; 
+                }
+            
+                const seleProId = [revProId, deleProId, CSProId];
+
+                revProId.innerHTML = "";
+                deleProId.innerHTML = "";
+                CSProId.innerHTML = "";
+                const rNullOp = document.createElement("option");
+                const dNullOp = document.createElement("option");
+                const cNullOp = document.createElement("option");
+                revProId.appendChild(rNullOp);
+                deleProId.appendChild(dNullOp);
+                CSProId.appendChild(cNullOp);
+            
+                if(checkData.pro_id_list) {
+                    checkData.pro_id_list.forEach(function(i) {
+                        seleProId.forEach((proId) => {
+                            const op = document.createElement('option');
+                            op.value = i;
+                            op.innerText = i;
+                            proId.appendChild(op);
+                        });
+                    })
+                }
+            })
+            .catch(function(error) {
+                console.log(error)
+            })
+
             setTimeout(() => {
                 mge.innerHTML = "";
             }, 2000);
@@ -883,7 +1205,7 @@ let revPP;
 
 // 給出下拉式選單種類的值
 
-const sortsName = ["電子", "貴重品", "生活用品", "清潔用品", "其他"];
+const sortsName = ["電子", "貴重品", "生活用品", "清潔用品", "寵物用品", "玩具", "文具用品", "運動用品", "其他"];
 const sortSelect = [addS1, addS2, addS3, revS1, revS2, revS3];
 
 sortsName.forEach((i) => {
@@ -1002,37 +1324,94 @@ deleProId.addEventListener("change", function() {
 
 // 刪除商品
 
+drawPic();
+
 deleProB.addEventListener("click", function() {
-    let body = {
-        "product_info": {
-            "productId": deleProId.value,
-            "productName": deleProN.value,
-            "userId": sessionStorage.getItem("userId")
+
+    verify();
+
+    if(verRes === "PASS") {
+        let body = {
+            "product_info": {
+                "productId": deleProId.value,
+                "productName": deleProN.value,
+                "userId": sessionStorage.getItem("userId")
+            }
         }
+    
+        fetch("http://localhost:8080/delete_product", {
+            method: "Post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+
+            deleProN.value = "";
+
+            const checkData = JSON.parse(JSON.stringify(data));
+
+            if(checkData.message) {
+                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+
+                fetch("http://localhost:8080/find_mem_sell", {
+                    method: "Post",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body:JSON.stringify(user)
+                })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(data) {
+                    const checkData = JSON.parse(JSON.stringify(data));
+                    if(checkData.message) {
+                        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0"; 
+                    }
+                
+                    const seleProId = [revProId, deleProId, CSProId];
+
+                    revProId.innerHTML = "";
+                    deleProId.innerHTML = "";
+                    CSProId.innerHTML = "";
+                    const rNullOp = document.createElement("option");
+                    const dNullOp = document.createElement("option");
+                    const cNullOp = document.createElement("option");
+                    revProId.appendChild(rNullOp);
+                    deleProId.appendChild(dNullOp);
+                    CSProId.appendChild(cNullOp);
+                
+                    if(checkData.pro_id_list) {
+                        checkData.pro_id_list.forEach(function(i) {
+                            seleProId.forEach((proId) => {
+                                const op = document.createElement('option');
+                                op.value = i;
+                                op.innerText = i;
+                                proId.appendChild(op);
+                            });
+                        })
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error)
+                })
+                
+                
+                setTimeout(() => {
+                    mge.innerHTML = "";
+                }, 2000);
+            }
+        })
+        .catch(function(error) {
+            console.log(error)
+        })
     }
 
-    fetch("http://localhost:8080/delete_product", {
-        method: "Post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-    })
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        const checkData = JSON.parse(JSON.stringify(data));
-        if(checkData.message) {
-            mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
-            setTimeout(() => {
-                mge.innerHTML = "";
-            }, 2000);
-        }
-    })
-    .catch(function(error) {
-        console.log(error)
-    })
 })
 
 // 帶出上下架商品頁面選取的商品名稱
@@ -1109,6 +1488,7 @@ chaStaB.addEventListener("click", function() {
 const na = document.querySelector("#name");
 const birth = document.querySelector("#birthDate");
 const ma = document.querySelector("#mail");
+const pho = document.querySelector("#phone");
 const edInB = document.querySelector("#edInBtn");
 
 let userM = {
@@ -1133,6 +1513,7 @@ fetch("http://localhost:8080/find_mem_info", {
         na.value = checkData.member_info.name
         ma.value = checkData.member_info.mail
         birth.value = checkData.member_info.birthDate
+        pho.value = checkData.member_info.phone
     }
 })
 .catch(function(error) {
@@ -1147,6 +1528,7 @@ edInB.addEventListener("click", function() {
             "name": na.value,
             "mail": ma.value,
             "birthDate": birth.value,
+            "phone": pho.value,
             "userId": sessionStorage.getItem("userId")
         }
     }
@@ -1230,35 +1612,48 @@ function closeMemDeleCheAlert() {
     memDeleM.style.display = "none";
 }
 
+drawPicM();
+
 deleMemB.addEventListener("click", function() {
-    body = {
-        "member_info": {
-            "userId": sessionStorage.getItem("userId")
+
+    verifyM();
+
+    if(verResM === "PASS") {  
+        body = {
+            "member_info": {
+                "userId": sessionStorage.getItem("userId")
+            }
         }
+    
+        fetch("http://localhost:8080/dele_mem_info", {
+            method: "Post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+            const checkData = JSON.parse(JSON.stringify(data))
+            if(checkData.message) {
+                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                if(checkData.message === "會員刪除成功") {
+                    setTimeout(function() {
+                        sessionStorage.removeItem("userId")
+                        alert("跳轉至登入頁面")
+                        window.location.href = "../logInPage/logInPage.html"
+                    },2000)
+                }
+                setTimeout(function() {
+                    mge.innerHTML = "";
+                },2000)
+            }
+        })
+        .catch(function(error) {
+            console.log(error)
+        })
     }
 
-    fetch("http://localhost:8080/dele_mem_info", {
-        method: "Post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-    })
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        const checkData = JSON.parse(JSON.stringify(data))
-        if(checkData.message) {
-            mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
-            setTimeout(function() {
-                sessionStorage.removeItem("userId")
-                alert("跳轉至登入頁面")
-                window.location.href = "../logInPage/logInPage.html"
-            },2000)
-        }
-    })
-    .catch(function(error) {
-        console.log(error)
-    })
 })

@@ -36,6 +36,7 @@
                     <div><p>商品名稱</p></div>
                     <div><p>價格</p></div>
                     <div><p>數量</p></div>
+                    <div><p>賣家手機</p></div>
                     <div><p>訂單狀態</p></div>
                     <div class="bPUpdA"><p>更新時間</p></div>
                 </div>
@@ -73,6 +74,7 @@
                 <div class="sellPro">
                     <div><input type="radio" class="radioS"></div>
                     <div><p>買家(用戶名)</p></div>
+                    <div><p>買家手機</p></div>
                     <div><p>商品名稱</p></div>
                     <div><p>價格</p></div>
                     <div><p>數量</p></div>
@@ -93,7 +95,7 @@
             <div id="SCPModal" class="SCPModal">
                 <div class="SCPModalContent">
                     <span onclick="closeSCPCheAlert()" class="closeSCPAlert">&times;</span>
-                    <h2>確定要取消購買訂單嗎?</h2>
+                    <h2>確定要取消該商品訂單嗎?</h2>
                     <button id="SCancelProBtn" class="deleBtn" onclick="closeSCPCheAlert()">確定</button>
                 </div>
             </div>
@@ -180,6 +182,13 @@
             <div id="proDeleModal" class="proDeleModal">
                 <div class="proDeleModalContent">
                     <span onclick="closeProDeleCheAlert()" class="closeProDeleAlert">&times;</span>
+                    <div>
+                        <input id="proDeleVer" type="text" class="proDeleVer">
+                    </div>
+                    <div>
+                        <canvas id="verImg" width="130" height="30">
+                        </canvas>
+                    </div>
                     <h2>確定要刪除商品嗎?</h2>
                     <button id="deleProBtn" class="deleBtn" onclick="closeProDeleCheAlert()">確定</button>
                 </div>
@@ -211,6 +220,8 @@
             <input type="date" name="birthDate" id="birthDate">
             <label for="mail">信箱</label>
             <input type="text" name="mail" id="mail">
+            <label for="phone">手機號碼</label>
+            <input type="text" name="phone" id="phone">
             <button id="edInBtn" class="checkBtn">修改</button>
         </div>
 
@@ -234,8 +245,15 @@
             <div id="memDeleModal" class="memDeleModal">
                 <div class="memDeleModalContent">
                     <span onclick="closeMemDeleCheAlert()" class="closeMemDeleAlert">&times;</span>
+                    <div>
+                        <input id="memDeleVer" type="text" class="memDeleVer">
+                    </div>
+                    <div>
+                        <canvas id="verImgM" width="130" height="30">
+                        </canvas>
+                    </div>
                     <h2>確定要刪除?</h2>
-                    <button id="deleMemBtn" class="deleBtn">確定</button>
+                    <button id="deleMemBtn" class="deleBtn" onclick="closeMemDeleCheAlert()">確定</button>
                 </div>
             </div>
         </div>

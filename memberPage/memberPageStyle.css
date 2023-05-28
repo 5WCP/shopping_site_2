@@ -222,12 +222,17 @@ body .message {
   border-radius: 5px;
   padding: 20px;
   width: 220px;
-  height: 166px;
+  height: 268px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   margin: 65px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .proDeleModalContent .proDeleVer {
+  width: 88px;
+  height: 25px;
+  border-radius: 5px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .closeProDeleAlert {
   color: #aaa;
@@ -262,11 +267,17 @@ body .message {
   border-radius: 5px;
   padding: 20px;
   width: 220px;
+  height: 268px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   margin: 50px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .memDeleModalContent .memDeleVer {
+  width: 88px;
+  height: 25px;
+  border-radius: 5px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .closeMemDeleAlert {
   color: #aaa;

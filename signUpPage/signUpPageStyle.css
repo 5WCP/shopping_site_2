@@ -35,10 +35,26 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 500px;
   border-radius: 6px;
   background-color: rgba(193, 174, 197, 0.8);
   padding: 0 20px 20px 20px;
+}
+.signUpArea .btnArea {
+  margin-bottom: 20px;
+}
+.signUpArea .btnArea .logInABtn {
+  margin-left: 30px;
+}
+.signUpArea .btnArea .logInABtn .logInA {
+  text-decoration: none;
+  color: black;
+  transition: 0.6s;
+  font-size: 16px;
+}
+.signUpArea .btnArea .logInABtn .logInA:hover {
+  background-color: #2a37a7;
+  color: aliceblue;
 }
 
 .message {
@@ -48,7 +64,7 @@ body {
   margin: 10px 0;
   color: #fff;
   position: absolute;
-  top: 8px;
+  top: -8px;
 }
 
 button {

@@ -42,16 +42,16 @@ body {
 .logInArea .btnArea {
   margin-bottom: 20px;
 }
-.logInArea .btnArea .logInABtn {
+.logInArea .btnArea .signUpABtn {
   margin-left: 10px;
 }
-.logInArea .btnArea .logInABtn .logInA {
+.logInArea .btnArea .signUpABtn .signUpA {
   text-decoration: none;
   color: black;
   transition: 0.6s;
   font-size: 16px;
 }
-.logInArea .btnArea .logInABtn .logInA:hover {
+.logInArea .btnArea .signUpABtn .signUpA:hover {
   background-color: #2a37a7;
   color: aliceblue;
 }

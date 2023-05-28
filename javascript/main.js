@@ -7,7 +7,7 @@ if(!sessionStorage.getItem("userId")) {
 
 // 搜尋種類
 
-const sortsName = ["全部搜尋", "電子", "貴重品", "生活用品", "清潔用品", "其他"];
+const sortsName = ["全部搜尋", "電子", "貴重品", "生活用品", "清潔用品", "寵物用品", "玩具", "文具用品", "運動用品", "其他"];
 const searS = document.querySelector("#searSort");
 
 sortsName.forEach((i) => {
@@ -81,7 +81,7 @@ fetch("http://localhost:8080/sear_all_pro", {
             div.appendChild(di);
     
             const id = document.createElement("p");
-            id.innerText = "商品名稱 : " + i.productId;
+            id.innerText = "商品代碼 : " + i.productId;
             id.classList.add("proId");
             di.appendChild(id);
     
@@ -468,7 +468,7 @@ searS.addEventListener("change", () => {
                 div.appendChild(di);
     
                 const id = document.createElement("p");
-                id.innerText = "商品名稱 : " + i.productId;
+                id.innerText = "商品代碼 : " + i.productId;
                 id.classList.add("proId");
                 di.appendChild(id);
     
@@ -763,7 +763,7 @@ searProB.addEventListener("click", () => {
                 div.appendChild(di);
     
                 const id = document.createElement("p");
-                id.innerText = "商品名稱 : " + i.productId;
+                id.innerText = "商品代碼 : " + i.productId;
                 id.classList.add("proId");
                 di.appendChild(id);
     
@@ -1064,7 +1064,7 @@ checkoutB.addEventListener("click", () => {
                     div.appendChild(di);
             
                     const id = document.createElement("p");
-                    id.innerText = "商品名稱 : " + i.productId;
+                    id.innerText = "商品代碼 : " + i.productId;
                     id.classList.add("proId");
                     di.appendChild(id);
             

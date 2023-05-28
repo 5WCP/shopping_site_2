@@ -4,6 +4,7 @@ const pwdC = document.querySelector("#pwdCheck");
 const na = document.querySelector("#name");
 const ma = document.querySelector("#mail");
 const birth = document.querySelector("#birthDate");
+const pho = document.querySelector("#phone");
 const mge = document.querySelector("#message");
 const SUB = document.querySelector("#signUpButton");
 
@@ -16,7 +17,8 @@ SUB.addEventListener("click", function(){
             "password": pwd.value,
             "name": na.value,
             "mail": ma.value,
-            "birthDate": birth.value
+            "birthDate": birth.value,
+            "phone": pho.value
         },
         "pwd_check": pwdC.value
     }
