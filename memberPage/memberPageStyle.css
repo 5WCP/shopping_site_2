@@ -13,6 +13,7 @@ body {
   background-image: url(./memberPageImg.jpg);
   background-size: cover;
   position: relative;
+  font-family: "Microsoft JhengHei", Arial, sans-serif;
 }
 body .message {
   padding: 5px 0;
@@ -87,11 +88,35 @@ body .message {
   height: 300px;
   overflow: auto;
 }
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .divide {
+  border: 1px solid black;
+  height: 27px;
+  width: 690px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .orderInfo {
+  display: flex;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .orderInfo div {
+  border: 1px solid black;
+  padding: 2px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .orderInfo div .orderN {
+  width: 120px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .orderInfo div .orderA {
+  width: 432px;
+  text-align: center;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .orderInfo div .orderSP {
+  width: 120px;
+  text-align: center;
+}
 .tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro {
   display: flex;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro .bPUpdA p {
-  width: 150px;
+  width: 180px;
   text-align: center;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .resBuyPro .buyPro div {
@@ -229,6 +254,9 @@ body .message {
   position: relative;
   margin: 65px 0 0 120px;
 }
+.tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .proDeleModalContent p {
+  font-size: 12px;
+}
 .tabs .tRadio:checked + .tLabel + .tContent .proDeleModal .proDeleModalContent .proDeleVer {
   width: 88px;
   height: 25px;
@@ -273,6 +301,9 @@ body .message {
   flex-direction: column;
   position: relative;
   margin: 50px 0 0 120px;
+}
+.tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .memDeleModalContent p {
+  font-size: 12px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .memDeleModal .memDeleModalContent .memDeleVer {
   width: 88px;
@@ -413,7 +444,7 @@ body .message {
   width: 80px;
   height: 80px;
   position: absolute;
-  top: 70px;
+  top: 138px;
   right: 61px;
 }
 .tabs .tRadio:checked + .tLabel + .tContent .sortsArea {

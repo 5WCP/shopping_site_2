@@ -13,6 +13,7 @@ body {
     background-image: url(./memberPageImg.jpg);
     background-size: cover;
     position: relative;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
 
     .message {
         padding: 5px 0;
@@ -91,7 +92,37 @@ body {
             background-color: rgba(212, 217, 226, 0.9);
             width: 450px;
             height: 300px;
-            overflow: auto;           
+            overflow: auto;
+
+            .divide {
+                border: 1px solid black;
+                height: 27px;
+                width: 690px;
+            }
+            
+            .orderInfo {
+                display: flex;
+
+                div {
+                    border: 1px solid black;
+                    padding: 2px;
+
+                    .orderN {
+                        width: 120px;
+                        text-align: center;
+                    }
+
+                    .orderA {
+                        width: 432px;
+                        text-align: center;
+                    }
+
+                    .orderSP {
+                        width: 120px;
+                        text-align: center;
+                    }
+                }
+            }
 
             .buyPro {
                 display: flex;
@@ -99,7 +130,7 @@ body {
                 .bPUpdA {
 
                     p {
-                        width: 150px;
+                        width: 180px;
                         text-align: center;
                     }
                 }
@@ -277,6 +308,10 @@ body {
                 position: relative;
                 margin: 65px 0 0 120px;
 
+                p {
+                    font-size: 12px;
+                }
+
                 .proDeleVer {
                     width: 88px;
                     height: 25px;
@@ -326,6 +361,10 @@ body {
                 flex-direction: column;
                 position: relative;
                 margin: 50px 0 0 120px;
+
+                p {
+                    font-size: 12px;
+                }
 
                 .memDeleVer {
                     width: 88px;
@@ -488,7 +527,7 @@ body {
             width: 80px;
             height: 80px;
             position: absolute;
-            top: 70px;
+            top: 138px;
             right: 61px;
         }
 

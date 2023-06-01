@@ -46,6 +46,7 @@ const proA = document.querySelector("#proArea");
 const mge = document.querySelector("#message");
 const totalC = document.querySelector("#totalCount");
 const totalP = document.querySelector("#totalPrice");
+const checkP = document.querySelector("#checkPrice");
 let totC = 0;
 let totP = 0;
 
@@ -137,7 +138,7 @@ fetch("http://localhost:8080/sear_all_pro", {
             addCartB.innerText = "加入購物車";
             di2.appendChild(addCartB);
     
-            // 購物車數量增減按鈕
+            // 新增進購物車數量增減按鈕
     
             const incr = document.querySelector(`#increase${index}`);
             const decr = document.querySelector(`#decrease${index}`);
@@ -152,6 +153,15 @@ fetch("http://localhost:8080/sear_all_pro", {
             incr.addEventListener("click", () => {
                 countInput.value++;
             })
+
+            // 自己的商品無法購買
+
+            if(i.userId === sessionStorage.getItem("userId")) {
+                addCartB.disabled = true;
+                incr.disabled = true;
+                decr.disabled = true;
+                countInput.disabled = true;
+            }
 
             // 新增進購物車
 
@@ -213,9 +223,10 @@ fetch("http://localhost:8080/sear_all_pro", {
                         }
                     
                         if(checkData.cart_info_list) {
-                            totC = 0;
                             totP = 0;
-                            checkData.cart_info_list.forEach((i) => {
+                            totC = 0;
+                            checkData.cart_info_list.forEach((i,index) => {
+                                let chaAmount = i.amount;
                                 const cartI = document.createElement("div");
                                 cartI.classList.add("cartInfo");
                                 cartA.appendChild(cartI);
@@ -245,15 +256,204 @@ fetch("http://localhost:8080/sear_all_pro", {
                                 cartProP.innerText = "價格 : " + i.price;
                                 cartProIn.appendChild(cartProP);
                     
-                                const cartProA = document.createElement("p");
-                                cartProA.classList.add("cartProAmount");
-                                cartProA.innerText = "數量 : " + i.amount;
-                                cartProIn.appendChild(cartProA);
+                                // const cartProA = document.createElement("p");
+                                // cartProA.classList.add("cartProAmount");
+                                // cartProA.innerText = "數量 : " + i.amount;
+                                // cartProIn.appendChild(cartProA);
                                 totP += i.price * i.amount;
-                                totalP.innerText = "總價格為 : " + totP;
+                                totalP.innerText = "總價格為 : $" + totP;
+                                checkP.innerText = "總價格為 : $" + totP;
                                 totC += i.amount;
                                 totalC.innerText = "商品總數為 : " + totC; 
+
+                                const decC = document.createElement("button");
+                                decC.classList.add("countBtn");
+                                decC.innerText = "◄";
+                                decC.id = `decrease${index}C`;
+                                cartProIn.appendChild(decC);
+                        
+                                const countC = document.createElement("input");
+                                countC.type = "number";
+                                countC.min = "0";
+                                countC.max = "99";
+                                countC.value = "0";
+                                countC.value = i.amount;
+                                countC.classList.add("countInputC");
+                                countC.id = `${i.productId}CountC`;
+                                countC.dataset.value = `${i.productId}`;
+                                cartProIn.appendChild(countC);
+                        
+                                const incC = document.createElement("button");
+                                incC.classList.add("countBtn");
+                                incC.innerText = "►";
+                                incC.id = `increase${index}C`;
+                                cartProIn.appendChild(incC);
                     
+                                // 購物車數量增減按鈕
+                        
+                                const incrC = document.querySelector(`#increase${index}C`);
+                                const decrC = document.querySelector(`#decrease${index}C`);
+                                const countInputC = document.querySelector(`#${i.productId}CountC`)
+                        
+                                // 增減數量存進購物車
+                                
+                                // 監聽減少數量按鈕
+                                decrC.addEventListener("click", () => {
+                                    if(countInputC.value > 0) {
+                                        countInputC.value--;
+                                        totP -= i.price;
+                                        totalP.innerText = "總價格為 : $" + totP;
+                                        checkP.innerText = "總價格為 : $" + totP;
+                                        totC --;
+                                        totalC.innerText = "商品總數為 : " + totC;
+                                    }
+                    
+                                    let body = {
+                                        "order_status": {
+                                            "userId": sessionStorage.getItem("userId"),
+                                            "productId": i.productId,
+                                            "updateTime": i.updateTime,
+                                            "amount": countInputC.value
+                                        }
+                                    }
+                    
+                                    fetch("http://localhost:8080/change_cart_amount", {
+                                        method: "Post",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify(body)
+                                    })
+                                    .then(function(response) {
+                                        return response.json()
+                                    })
+                                    .then(function(data) {
+                                        const checkData = JSON.parse(JSON.stringify(data))
+                    
+                                        if(checkData.message) {
+                                            mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                            setTimeout(() => {
+                                                mge.innerHTML = "";
+                                            }, 2000);
+                    
+                                            if(checkData.message === "移出購物車") {
+                                                cartI.innerHTML = "";
+                                                cartI.classList.remove("cartInfo");
+                                            }
+                    
+                                        }
+                                    })
+                                    .catch(function(error) {
+                                        console.log(error)
+                                    })
+                                
+                                })
+                        
+                                // 監聽增加數量按鈕
+                                incrC.addEventListener("click", () => {
+                                    if(countInputC.value < i.stock) {
+                                        countInputC.value++;
+                                        totP += i.price;
+                                        totalP.innerText = "總價格為 : $" + totP;
+                                        checkP.innerText = "總價格為 : $" + totP;
+                                        totC ++;
+                                        totalC.innerText = "商品總數為 : " + totC;
+                                    }
+                    
+                                    let body = {
+                                        "order_status": {
+                                            "userId": sessionStorage.getItem("userId"),
+                                            "productId": i.productId,
+                                            "updateTime": i.updateTime,
+                                            "amount": countInputC.value
+                                        }
+                                    }
+                    
+                                    fetch("http://localhost:8080/change_cart_amount", {
+                                        method: "Post",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify(body)
+                                    })
+                                    .then(function(response) {
+                                        return response.json()
+                                    })
+                                    .then(function(data) {
+                                        const checkData = JSON.parse(JSON.stringify(data))
+                    
+                                        if(checkData.message) {
+                                            mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                            setTimeout(() => {
+                                                mge.innerHTML = "";
+                                            }, 2000);
+                                            
+                                        }
+                    
+                                    })
+                                    .catch(function(error) {
+                                        console.log(error)
+                                    })
+                    
+                                })
+                    
+                                // 監聽input框
+                                countInputC.addEventListener("change", () => {
+                    
+                                    if(countInputC.value === "") {
+                                        countInputC.value = chaAmount;
+                                    }
+                    
+                                    let body = {
+                                        "order_status": {
+                                            "userId": sessionStorage.getItem("userId"),
+                                            "productId": i.productId,
+                                            "updateTime": i.updateTime,
+                                            "amount": countInputC.value
+                                        }
+                                    }
+                    
+                                    fetch("http://localhost:8080/change_cart_amount", {
+                                        method: "Post",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify(body)
+                                    })
+                                    .then(function(response) {
+                                        return response.json()
+                                    })
+                                    .then(function(data) {
+                                        const checkData = JSON.parse(JSON.stringify(data))
+                                        if(checkData.message) {
+                                            mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                            setTimeout(() => {
+                                                mge.innerHTML = "";
+                                            }, 2000);
+                                            
+                                            if(overSto.test(checkData.message)) {
+                                                countInputC.value = i.stock;
+                                            }
+                    
+                                            if(checkData.message === "移出購物車") {
+                                                cartI.innerHTML = "";
+                                                cartI.classList.remove("cartInfo");
+                                            }
+                                        }
+                    
+                                        totP += i.price * (countInputC.value - chaAmount);
+                                        totalP.innerText = "總價格為 : $" + totP;
+                                        checkP.innerText = "總價格為 : $" + totP;
+                                        totC += +(countInputC.value - chaAmount);
+                                        totalC.innerText = "商品總數為 : " + totC;
+                                        chaAmount = countInputC.value;
+                    
+                                    })
+                                    .catch(function(error) {
+                                        console.log(error)
+                                    })
+                                })
+
                                 // 刪除購物車的商品
                     
                                 const removeProB = document.querySelector(`#remove${i.productId}`);
@@ -289,7 +489,8 @@ fetch("http://localhost:8080/sear_all_pro", {
                                         cartI.innerHTML = "";
                                         cartI.classList.remove("cartInfo")
                                         totP -= i.price * i.amount;
-                                        totalP.innerText = "總價格為 : " + totP;
+                                        totalP.innerText = "總價格為 : $" + totP;
+                                        checkP.innerText = "總價格為 : $" + totP;
                                         totC -= i.amount;
                                         totalC.innerText = "商品總數為 : " + totC; 
                                     })
@@ -320,6 +521,7 @@ fetch("http://localhost:8080/sear_all_pro", {
 // 帶出購物車資料
 
 const cartA = document.querySelector("#cartArea");
+const overSto = /該商品最多可輸入的數量為/;
 
 fetch("http://localhost:8080/user_cart_info", {
     method: "Post",
@@ -341,7 +543,8 @@ fetch("http://localhost:8080/user_cart_info", {
     }
 
     if(checkData.cart_info_list) {
-        checkData.cart_info_list.forEach((i) => {
+        checkData.cart_info_list.forEach((i,index) => {
+            let chaAmount = i.amount;
             const cartI = document.createElement("div");
             cartI.classList.add("cartInfo");
             cartA.appendChild(cartI);
@@ -371,14 +574,203 @@ fetch("http://localhost:8080/user_cart_info", {
             cartProP.innerText = "價格 : " + i.price;
             cartProIn.appendChild(cartProP);
 
-            const cartProA = document.createElement("p");
-            cartProA.classList.add("cartProAmount");
-            cartProA.innerText = "數量 : " + i.amount;
-            cartProIn.appendChild(cartProA);
+            // const cartProA = document.createElement("p");
+            // cartProA.classList.add("cartProAmount");
+            // cartProA.innerText = "數量 : " + i.amount;
+            // cartProIn.appendChild(cartProA);
             totP += i.price * i.amount;
-            totalP.innerText = "總價格為 : " + totP;
+            totalP.innerText = "總價格為 : $" + totP;
+            checkP.innerText = "總價格為 : $" + totP;
             totC += i.amount;
-            totalC.innerText = "商品總數為 : " + totC; 
+            totalC.innerText = "商品總數為 : " + totC;
+
+            const decC = document.createElement("button");
+            decC.classList.add("countBtn");
+            decC.innerText = "◄";
+            decC.id = `decrease${index}C`;
+            cartProIn.appendChild(decC);
+    
+            const countC = document.createElement("input");
+            countC.type = "number";
+            countC.min = "0";
+            countC.max = "99";
+            countC.value = "0";
+            countC.value = i.amount;
+            countC.classList.add("countInputC");
+            countC.id = `${i.productId}CountC`;
+            countC.dataset.value = `${i.productId}`;
+            cartProIn.appendChild(countC);
+    
+            const incC = document.createElement("button");
+            incC.classList.add("countBtn");
+            incC.innerText = "►";
+            incC.id = `increase${index}C`;
+            cartProIn.appendChild(incC);
+
+            // 購物車數量增減按鈕
+    
+            const incrC = document.querySelector(`#increase${index}C`);
+            const decrC = document.querySelector(`#decrease${index}C`);
+            const countInputC = document.querySelector(`#${i.productId}CountC`)
+    
+            // 增減數量存進購物車
+            
+            // 監聽減少數量按鈕
+            decrC.addEventListener("click", () => {
+                if(countInputC.value > 0) {
+                    countInputC.value--;
+                    totP -= i.price;
+                    totalP.innerText = "總價格為 : $" + totP;
+                    checkP.innerText = "總價格為 : $" + totP;
+                    totC --;
+                    totalC.innerText = "商品總數為 : " + totC;
+                }
+
+                let body = {
+                    "order_status": {
+                        "userId": sessionStorage.getItem("userId"),
+                        "productId": i.productId,
+                        "updateTime": i.updateTime,
+                        "amount": countInputC.value
+                    }
+                }
+
+                fetch("http://localhost:8080/change_cart_amount", {
+                    method: "Post",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(data) {
+                    const checkData = JSON.parse(JSON.stringify(data))
+
+                    if(checkData.message) {
+                        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                        setTimeout(() => {
+                            mge.innerHTML = "";
+                        }, 2000);
+
+                        if(checkData.message === "移出購物車") {
+                            cartI.innerHTML = "";
+                            cartI.classList.remove("cartInfo");
+                        }
+
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error)
+                })
+            
+            })
+    
+            // 監聽增加數量按鈕
+            incrC.addEventListener("click", () => {
+                if(countInputC.value < i.stock) {
+                    countInputC.value++;
+                    totP += i.price;
+                    totalP.innerText = "總價格為 : $" + totP;
+                    checkP.innerText = "總價格為 : $" + totP;
+                    totC ++;
+                    totalC.innerText = "商品總數為 : " + totC;
+                }
+
+                let body = {
+                    "order_status": {
+                        "userId": sessionStorage.getItem("userId"),
+                        "productId": i.productId,
+                        "updateTime": i.updateTime,
+                        "amount": countInputC.value
+                    }
+                }
+
+                fetch("http://localhost:8080/change_cart_amount", {
+                    method: "Post",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(data) {
+                    const checkData = JSON.parse(JSON.stringify(data))
+
+                    if(checkData.message) {
+                        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                        setTimeout(() => {
+                            mge.innerHTML = "";
+                        }, 2000);
+                        
+                    }
+
+                })
+                .catch(function(error) {
+                    console.log(error)
+                })
+
+            })
+
+            // 監聽input框
+            countInputC.addEventListener("change", () => {
+
+                if(countInputC.value === "") {
+                    countInputC.value = chaAmount;
+                }
+
+                let body = {
+                    "order_status": {
+                        "userId": sessionStorage.getItem("userId"),
+                        "productId": i.productId,
+                        "updateTime": i.updateTime,
+                        "amount": countInputC.value
+                    }
+                }
+
+                fetch("http://localhost:8080/change_cart_amount", {
+                    method: "Post",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(data) {
+                    const checkData = JSON.parse(JSON.stringify(data))
+                    if(checkData.message) {
+                        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                        setTimeout(() => {
+                            mge.innerHTML = "";
+                        }, 2000);
+                        
+                        if(overSto.test(checkData.message)) {
+                            countInputC.value = i.stock;
+                        }
+
+                        if(checkData.message === "移出購物車") {
+                            cartI.innerHTML = "";
+                            cartI.classList.remove("cartInfo");
+                        }
+                    }
+
+                    totP += i.price * (countInputC.value - chaAmount);
+                    totalP.innerText = "總價格為 : $" + totP;
+                    checkP.innerText = "總價格為 : $" + totP;
+                    totC += +(countInputC.value - chaAmount);
+                    totalC.innerText = "商品總數為 : " + totC;
+                    chaAmount = countInputC.value;
+
+                })
+                .catch(function(error) {
+                    console.log(error)
+                })
+            })
 
             // 刪除購物車的商品
 
@@ -415,7 +807,8 @@ fetch("http://localhost:8080/user_cart_info", {
                     cartI.innerHTML = "";
                     cartI.classList.remove("cartInfo");
                     totP -= i.price * i.amount;
-                    totalP.innerText = "總價格為 : " + totP;
+                    totalP.innerText = "總價格為 : $" + totP;
+                    checkP.innerText = "總價格為 : $" + totP;
                     totC -= i.amount;
                     totalC.innerText = "商品總數為 : " + totC; 
                 })
@@ -524,7 +917,7 @@ searS.addEventListener("change", () => {
                 addCartB.innerText = "加入購物車";
                 di2.appendChild(addCartB);
     
-                // 購物車數量增減按鈕
+                // 新增進購物車數量增減按鈕
     
                 const incr = document.querySelector(`#increase${index}`);
                 const decr = document.querySelector(`#decrease${index}`);
@@ -539,6 +932,15 @@ searS.addEventListener("change", () => {
                 incr.addEventListener("click", () => {
                     countInput.value++;
                 })
+
+                // 自己的商品無法購買
+
+                if(i.userId === sessionStorage.getItem("userId")) {
+                    addCartB.disabled = true;
+                    incr.disabled = true;
+                    decr.disabled = true;
+                    countInput.disabled = true;
+                }
     
                 // 新增進購物車
     
@@ -600,9 +1002,10 @@ searS.addEventListener("change", () => {
                             }
                         
                             if(checkData.cart_info_list) {
-                                totC = 0;
                                 totP = 0;
-                                checkData.cart_info_list.forEach((i) => {
+                                totC = 0;
+                                checkData.cart_info_list.forEach((i,index) => {
+                                    let chaAmount = i.amount;
                                     const cartI = document.createElement("div");
                                     cartI.classList.add("cartInfo");
                                     cartA.appendChild(cartI);
@@ -632,14 +1035,203 @@ searS.addEventListener("change", () => {
                                     cartProP.innerText = "價格 : " + i.price;
                                     cartProIn.appendChild(cartProP);
                         
-                                    const cartProA = document.createElement("p");
-                                    cartProA.classList.add("cartProAmount");
-                                    cartProA.innerText = "數量 : " + i.amount;
-                                    cartProIn.appendChild(cartProA);
+                                    // const cartProA = document.createElement("p");
+                                    // cartProA.classList.add("cartProAmount");
+                                    // cartProA.innerText = "數量 : " + i.amount;
+                                    // cartProIn.appendChild(cartProA);
                                     totP += i.price * i.amount;
-                                    totalP.innerText = "總價格為 : " + totP;
+                                    totalP.innerText = "總價格為 : $" + totP;
+                                    checkP.innerText = "總價格為 : $" + totP;
                                     totC += i.amount;
-                                    totalC.innerText = "商品總數為 : " + totC; 
+                                    totalC.innerText = "商品總數為 : " + totC;
+
+                                    const decC = document.createElement("button");
+                                    decC.classList.add("countBtn");
+                                    decC.innerText = "◄";
+                                    decC.id = `decrease${index}C`;
+                                    cartProIn.appendChild(decC);
+                            
+                                    const countC = document.createElement("input");
+                                    countC.type = "number";
+                                    countC.min = "0";
+                                    countC.max = "99";
+                                    countC.value = "0";
+                                    countC.value = i.amount;
+                                    countC.classList.add("countInputC");
+                                    countC.id = `${i.productId}CountC`;
+                                    countC.dataset.value = `${i.productId}`;
+                                    cartProIn.appendChild(countC);
+                            
+                                    const incC = document.createElement("button");
+                                    incC.classList.add("countBtn");
+                                    incC.innerText = "►";
+                                    incC.id = `increase${index}C`;
+                                    cartProIn.appendChild(incC);
+                        
+                                    // 購物車數量增減按鈕
+                            
+                                    const incrC = document.querySelector(`#increase${index}C`);
+                                    const decrC = document.querySelector(`#decrease${index}C`);
+                                    const countInputC = document.querySelector(`#${i.productId}CountC`)
+                            
+                                    // 增減數量存進購物車
+                                    
+                                    // 監聽減少數量按鈕
+                                    decrC.addEventListener("click", () => {
+                                        if(countInputC.value > 0) {
+                                            countInputC.value--;
+                                            totP -= i.price;
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
+                                            totC --;
+                                            totalC.innerText = "商品總數為 : " + totC;
+                                        }
+                        
+                                        let body = {
+                                            "order_status": {
+                                                "userId": sessionStorage.getItem("userId"),
+                                                "productId": i.productId,
+                                                "updateTime": i.updateTime,
+                                                "amount": countInputC.value
+                                            }
+                                        }
+                        
+                                        fetch("http://localhost:8080/change_cart_amount", {
+                                            method: "Post",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(body)
+                                        })
+                                        .then(function(response) {
+                                            return response.json()
+                                        })
+                                        .then(function(data) {
+                                            const checkData = JSON.parse(JSON.stringify(data))
+                        
+                                            if(checkData.message) {
+                                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                setTimeout(() => {
+                                                    mge.innerHTML = "";
+                                                }, 2000);
+                        
+                                                if(checkData.message === "移出購物車") {
+                                                    cartI.innerHTML = "";
+                                                    cartI.classList.remove("cartInfo");
+                                                }
+                        
+                                            }
+                                        })
+                                        .catch(function(error) {
+                                            console.log(error)
+                                        })
+                                    
+                                    })
+                            
+                                    // 監聽增加數量按鈕
+                                    incrC.addEventListener("click", () => {
+                                        if(countInputC.value < i.stock) {
+                                            countInputC.value++;
+                                            totP += i.price;
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
+                                            totC ++;
+                                            totalC.innerText = "商品總數為 : " + totC;
+                                        }
+                        
+                                        let body = {
+                                            "order_status": {
+                                                "userId": sessionStorage.getItem("userId"),
+                                                "productId": i.productId,
+                                                "updateTime": i.updateTime,
+                                                "amount": countInputC.value
+                                            }
+                                        }
+                        
+                                        fetch("http://localhost:8080/change_cart_amount", {
+                                            method: "Post",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(body)
+                                        })
+                                        .then(function(response) {
+                                            return response.json()
+                                        })
+                                        .then(function(data) {
+                                            const checkData = JSON.parse(JSON.stringify(data))
+                        
+                                            if(checkData.message) {
+                                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                setTimeout(() => {
+                                                    mge.innerHTML = "";
+                                                }, 2000);
+                                                
+                                            }
+                        
+                                        })
+                                        .catch(function(error) {
+                                            console.log(error)
+                                        })
+                        
+                                    })
+                        
+                                    // 監聽input框
+                                    countInputC.addEventListener("change", () => {
+                        
+                                        if(countInputC.value === "") {
+                                            countInputC.value = chaAmount;
+                                        }
+                        
+                                        let body = {
+                                            "order_status": {
+                                                "userId": sessionStorage.getItem("userId"),
+                                                "productId": i.productId,
+                                                "updateTime": i.updateTime,
+                                                "amount": countInputC.value
+                                            }
+                                        }
+                        
+                                        fetch("http://localhost:8080/change_cart_amount", {
+                                            method: "Post",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(body)
+                                        })
+                                        .then(function(response) {
+                                            return response.json()
+                                        })
+                                        .then(function(data) {
+                                            const checkData = JSON.parse(JSON.stringify(data))
+                                            if(checkData.message) {
+                                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                setTimeout(() => {
+                                                    mge.innerHTML = "";
+                                                }, 2000);
+                                                
+                                                if(overSto.test(checkData.message)) {
+                                                    countInputC.value = i.stock;
+                                                }
+                        
+                                                if(checkData.message === "移出購物車") {
+                                                    cartI.innerHTML = "";
+                                                    cartI.classList.remove("cartInfo");
+                                                }
+                                            }
+                        
+                                            totP += i.price * (countInputC.value - chaAmount);
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
+                                            totC += +(countInputC.value - chaAmount);
+                                            totalC.innerText = "商品總數為 : " + totC;
+                                            chaAmount = countInputC.value;
+                        
+                                        })
+                                        .catch(function(error) {
+                                            console.log(error)
+                                        })
+                                    })
                         
                                     // 刪除購物車的商品
                         
@@ -676,7 +1268,8 @@ searS.addEventListener("change", () => {
                                             cartI.innerHTML = "";
                                             cartI.classList.remove("cartInfo");
                                             totP -= i.price * i.amount;
-                                            totalP.innerText = "總價格為 : " + totP;
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
                                             totC -= i.amount;
                                             totalC.innerText = "商品總數為 : " + totC; 
                                         })
@@ -834,6 +1427,15 @@ searProB.addEventListener("click", () => {
                 incr.addEventListener("click", () => {
                     countInput.value++;
                 })
+
+                // 自己的商品無法購買
+
+                if(i.userId === sessionStorage.getItem("userId")) {
+                    addCartB.disabled = true;
+                    incr.disabled = true;
+                    decr.disabled = true;
+                    countInput.disabled = true;
+                }
     
                 // 新增進購物車
     
@@ -895,9 +1497,10 @@ searProB.addEventListener("click", () => {
                             }
                         
                             if(checkData.cart_info_list) {
-                                totC = 0;
                                 totP = 0;
-                                checkData.cart_info_list.forEach((i) => {
+                                totC = 0;
+                                checkData.cart_info_list.forEach((i,index) => {
+                                    let chaAmount = i.amount;
                                     const cartI = document.createElement("div");
                                     cartI.classList.add("cartInfo");
                                     cartA.appendChild(cartI);
@@ -927,14 +1530,203 @@ searProB.addEventListener("click", () => {
                                     cartProP.innerText = "價格 : " + i.price;
                                     cartProIn.appendChild(cartProP);
                         
-                                    const cartProA = document.createElement("p");
-                                    cartProA.classList.add("cartProAmount");
-                                    cartProA.innerText = "數量 : " + i.amount;
-                                    cartProIn.appendChild(cartProA);
+                                    // const cartProA = document.createElement("p");
+                                    // cartProA.classList.add("cartProAmount");
+                                    // cartProA.innerText = "數量 : " + i.amount;
+                                    // cartProIn.appendChild(cartProA);
                                     totP += i.price * i.amount;
-                                    totalP.innerText = "總價格為 : " + totP;
+                                    totalP.innerText = "總價格為 : $" + totP;
+                                    checkP.innerText = "總價格為 : $" + totP;
                                     totC += i.amount;
-                                    totalC.innerText = "商品總數為 : " + totC; 
+                                    totalC.innerText = "商品總數為 : " + totC;
+
+                                    const decC = document.createElement("button");
+                                    decC.classList.add("countBtn");
+                                    decC.innerText = "◄";
+                                    decC.id = `decrease${index}C`;
+                                    cartProIn.appendChild(decC);
+                            
+                                    const countC = document.createElement("input");
+                                    countC.type = "number";
+                                    countC.min = "0";
+                                    countC.max = "99";
+                                    countC.value = "0";
+                                    countC.value = i.amount;
+                                    countC.classList.add("countInputC");
+                                    countC.id = `${i.productId}CountC`;
+                                    countC.dataset.value = `${i.productId}`;
+                                    cartProIn.appendChild(countC);
+                            
+                                    const incC = document.createElement("button");
+                                    incC.classList.add("countBtn");
+                                    incC.innerText = "►";
+                                    incC.id = `increase${index}C`;
+                                    cartProIn.appendChild(incC);
+                        
+                                    // 購物車數量增減按鈕
+                            
+                                    const incrC = document.querySelector(`#increase${index}C`);
+                                    const decrC = document.querySelector(`#decrease${index}C`);
+                                    const countInputC = document.querySelector(`#${i.productId}CountC`)
+                            
+                                    // 增減數量存進購物車
+                                    
+                                    // 監聽減少數量按鈕
+                                    decrC.addEventListener("click", () => {
+                                        if(countInputC.value > 0) {
+                                            countInputC.value--;
+                                            totP -= i.price;
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
+                                            totC --;
+                                            totalC.innerText = "商品總數為 : " + totC;
+                                        }
+                        
+                                        let body = {
+                                            "order_status": {
+                                                "userId": sessionStorage.getItem("userId"),
+                                                "productId": i.productId,
+                                                "updateTime": i.updateTime,
+                                                "amount": countInputC.value
+                                            }
+                                        }
+                        
+                                        fetch("http://localhost:8080/change_cart_amount", {
+                                            method: "Post",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(body)
+                                        })
+                                        .then(function(response) {
+                                            return response.json()
+                                        })
+                                        .then(function(data) {
+                                            const checkData = JSON.parse(JSON.stringify(data))
+                        
+                                            if(checkData.message) {
+                                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                setTimeout(() => {
+                                                    mge.innerHTML = "";
+                                                }, 2000);
+                        
+                                                if(checkData.message === "移出購物車") {
+                                                    cartI.innerHTML = "";
+                                                    cartI.classList.remove("cartInfo");
+                                                }
+                        
+                                            }
+                                        })
+                                        .catch(function(error) {
+                                            console.log(error)
+                                        })
+                                    
+                                    })
+                            
+                                    // 監聽增加數量按鈕
+                                    incrC.addEventListener("click", () => {
+                                        if(countInputC.value < i.stock) {
+                                            countInputC.value++;
+                                            totP += i.price;
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
+                                            totC ++;
+                                            totalC.innerText = "商品總數為 : " + totC;
+                                        }
+                        
+                                        let body = {
+                                            "order_status": {
+                                                "userId": sessionStorage.getItem("userId"),
+                                                "productId": i.productId,
+                                                "updateTime": i.updateTime,
+                                                "amount": countInputC.value
+                                            }
+                                        }
+                        
+                                        fetch("http://localhost:8080/change_cart_amount", {
+                                            method: "Post",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(body)
+                                        })
+                                        .then(function(response) {
+                                            return response.json()
+                                        })
+                                        .then(function(data) {
+                                            const checkData = JSON.parse(JSON.stringify(data))
+                        
+                                            if(checkData.message) {
+                                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                setTimeout(() => {
+                                                    mge.innerHTML = "";
+                                                }, 2000);
+                                                
+                                            }
+                        
+                                        })
+                                        .catch(function(error) {
+                                            console.log(error)
+                                        })
+                        
+                                    })
+                        
+                                    // 監聽input框
+                                    countInputC.addEventListener("change", () => {
+                        
+                                        if(countInputC.value === "") {
+                                            countInputC.value = chaAmount;
+                                        }
+                        
+                                        let body = {
+                                            "order_status": {
+                                                "userId": sessionStorage.getItem("userId"),
+                                                "productId": i.productId,
+                                                "updateTime": i.updateTime,
+                                                "amount": countInputC.value
+                                            }
+                                        }
+                        
+                                        fetch("http://localhost:8080/change_cart_amount", {
+                                            method: "Post",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify(body)
+                                        })
+                                        .then(function(response) {
+                                            return response.json()
+                                        })
+                                        .then(function(data) {
+                                            const checkData = JSON.parse(JSON.stringify(data))
+                                            if(checkData.message) {
+                                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                setTimeout(() => {
+                                                    mge.innerHTML = "";
+                                                }, 2000);
+                                                
+                                                if(overSto.test(checkData.message)) {
+                                                    countInputC.value = i.stock;
+                                                }
+                        
+                                                if(checkData.message === "移出購物車") {
+                                                    cartI.innerHTML = "";
+                                                    cartI.classList.remove("cartInfo");
+                                                }
+                                            }
+                        
+                                            totP += i.price * (countInputC.value - chaAmount);
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
+                                            totC += +(countInputC.value - chaAmount);
+                                            totalC.innerText = "商品總數為 : " + totC;
+                                            chaAmount = countInputC.value;
+                        
+                                        })
+                                        .catch(function(error) {
+                                            console.log(error)
+                                        })
+                                    })
                         
                                     // 刪除購物車的商品
                         
@@ -971,7 +1763,8 @@ searProB.addEventListener("click", () => {
                                             cartI.innerHTML = "";
                                             cartI.classList.remove("cartInfo");
                                             totP -= i.price * i.amount;
-                                            totalP.innerText = "總價格為 : " + totP;
+                                            totalP.innerText = "總價格為 : $" + totP;
+                                            checkP.innerText = "總價格為 : $" + totP;
                                             totC -= i.amount;
                                             totalC.innerText = "商品總數為 : " + totC; 
                                         })
@@ -998,18 +1791,50 @@ searProB.addEventListener("click", () => {
     })
 })
 
+// 台灣各縣市
+
+const addC = document.querySelector("#addressC");
+const cityList = ["臺北市", "新北市", "桃園市", "臺中市", "臺南市", "高雄市", "新竹縣", "苗栗縣", "彰化縣", "南投縣", 
+"雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", "臺東縣", "澎湖縣", "金門縣", "連江縣", "基隆市", "新竹市", "嘉義市"];
+
+    cityList.forEach((i) => {
+        const op = document.createElement("option");
+        op.innerText = i;
+        op.value = i;
+        addC.appendChild(op);
+    })
+
+// 確認購買彈出視窗含式
+
+const checkI = document.querySelector("#checkInfo");
+
+function openCheckAlert() {
+    checkI.style.display = "flex";
+}
+
+function closeCheckAlert() {
+    checkI.style.display = "none";
+}
+
 // 下訂單
 
+const add = document.querySelector("#address");
 const checkoutB = document.querySelector("#checkoutBtn");
 
 checkoutB.addEventListener("click", () => {
+
+
+    let body = {
+        "userid": sessionStorage.getItem("userId"),
+        "address": addC.value + add.value
+    }
 
     fetch("http://localhost:8080/check_out", {
         method: "Post",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(body)
     })
     .then(function(response) {
         return response.json()
@@ -1023,7 +1848,8 @@ checkoutB.addEventListener("click", () => {
             }, 2000);
         }
         
-        totalP.innerText = "總價格為 : ";
+        totalP.innerText = "總價格為 : $";
+        checkP.innerText = "總價格為 : $";
         totalC.innerText = "商品總數為 : ";
 
         // 下單完網頁刷新為全部搜尋
@@ -1135,6 +1961,15 @@ checkoutB.addEventListener("click", () => {
                     incr.addEventListener("click", () => {
                         countInput.value++;
                     })
+
+                    // 自己的商品無法購買
+
+                    if(i.userId === sessionStorage.getItem("userId")) {
+                        addCartB.disabled = true;
+                        incr.disabled = true;
+                        decr.disabled = true;
+                        countInput.disabled = true;
+                    }
         
                     // 新增進購物車
         
@@ -1196,9 +2031,10 @@ checkoutB.addEventListener("click", () => {
                                 }
                             
                                 if(checkData.cart_info_list) {
-                                    totC = 0;
                                     totP = 0;
-                                    checkData.cart_info_list.forEach((i) => {
+                                    totC = 0;
+                                    checkData.cart_info_list.forEach((i,index) => {
+                                        let chaAmount = i.amount;
                                         const cartI = document.createElement("div");
                                         cartI.classList.add("cartInfo");
                                         cartA.appendChild(cartI);
@@ -1228,15 +2064,204 @@ checkoutB.addEventListener("click", () => {
                                         cartProP.innerText = "價格 : " + i.price;
                                         cartProIn.appendChild(cartProP);
                             
-                                        const cartProA = document.createElement("p");
-                                        cartProA.classList.add("cartProAmount");
-                                        cartProA.innerText = "數量 : " + i.amount;
-                                        cartProIn.appendChild(cartProA);
+                                        // const cartProA = document.createElement("p");
+                                        // cartProA.classList.add("cartProAmount");
+                                        // cartProA.innerText = "數量 : " + i.amount;
+                                        // cartProIn.appendChild(cartProA);
                                         totP += i.price * i.amount;
-                                        totalP.innerText = "總價格為 : " + totP;
+                                        totalP.innerText = "總價格為 : $" + totP;
+                                        checkP.innerText = "總價格為 : $" + totP;
                                         totC += i.amount;
-                                        totalC.innerText = "商品總數為 : " + totC; 
+                                        totalC.innerText = "商品總數為 : " + totC;
+
+                                        const decC = document.createElement("button");
+                                        decC.classList.add("countBtn");
+                                        decC.innerText = "◄";
+                                        decC.id = `decrease${index}C`;
+                                        cartProIn.appendChild(decC);
+                                
+                                        const countC = document.createElement("input");
+                                        countC.type = "number";
+                                        countC.min = "0";
+                                        countC.max = "99";
+                                        countC.value = "0";
+                                        countC.value = i.amount;
+                                        countC.classList.add("countInputC");
+                                        countC.id = `${i.productId}CountC`;
+                                        countC.dataset.value = `${i.productId}`;
+                                        cartProIn.appendChild(countC);
+                                
+                                        const incC = document.createElement("button");
+                                        incC.classList.add("countBtn");
+                                        incC.innerText = "►";
+                                        incC.id = `increase${index}C`;
+                                        cartProIn.appendChild(incC);
                             
+                                        // 購物車數量增減按鈕
+                                
+                                        const incrC = document.querySelector(`#increase${index}C`);
+                                        const decrC = document.querySelector(`#decrease${index}C`);
+                                        const countInputC = document.querySelector(`#${i.productId}CountC`)
+                                
+                                        // 增減數量存進購物車
+                                        
+                                        // 監聽減少數量按鈕
+                                        decrC.addEventListener("click", () => {
+                                            if(countInputC.value > 0) {
+                                                countInputC.value--;
+                                                totP -= i.price;
+                                                totalP.innerText = "總價格為 : $" + totP;
+                                                checkP.innerText = "總價格為 : $" + totP;
+                                                totC --;
+                                                totalC.innerText = "商品總數為 : " + totC;
+                                            }
+                            
+                                            let body = {
+                                                "order_status": {
+                                                    "userId": sessionStorage.getItem("userId"),
+                                                    "productId": i.productId,
+                                                    "updateTime": i.updateTime,
+                                                    "amount": countInputC.value
+                                                }
+                                            }
+                            
+                                            fetch("http://localhost:8080/change_cart_amount", {
+                                                method: "Post",
+                                                headers: {
+                                                    "Content-Type": "application/json"
+                                                },
+                                                body: JSON.stringify(body)
+                                            })
+                                            .then(function(response) {
+                                                return response.json()
+                                            })
+                                            .then(function(data) {
+                                                const checkData = JSON.parse(JSON.stringify(data))
+                            
+                                                if(checkData.message) {
+                                                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                    setTimeout(() => {
+                                                        mge.innerHTML = "";
+                                                    }, 2000);
+                            
+                                                    if(checkData.message === "移出購物車") {
+                                                        cartI.innerHTML = "";
+                                                        cartI.classList.remove("cartInfo");
+                                                    }
+                            
+                                                }
+                                            })
+                                            .catch(function(error) {
+                                                console.log(error)
+                                            })
+                                        
+                                        })
+                                
+                                        // 監聽增加數量按鈕
+                                        incrC.addEventListener("click", () => {
+                                            if(countInputC.value < i.stock) {
+                                                countInputC.value++;
+                                                totP += i.price;
+                                                totalP.innerText = "總價格為 : $" + totP;
+                                                checkP.innerText = "總價格為 : $" + totP;
+                                                totC ++;
+                                                totalC.innerText = "商品總數為 : " + totC;
+                                            }
+                            
+                                            let body = {
+                                                "order_status": {
+                                                    "userId": sessionStorage.getItem("userId"),
+                                                    "productId": i.productId,
+                                                    "updateTime": i.updateTime,
+                                                    "amount": countInputC.value
+                                                }
+                                            }
+                            
+                                            fetch("http://localhost:8080/change_cart_amount", {
+                                                method: "Post",
+                                                headers: {
+                                                    "Content-Type": "application/json"
+                                                },
+                                                body: JSON.stringify(body)
+                                            })
+                                            .then(function(response) {
+                                                return response.json()
+                                            })
+                                            .then(function(data) {
+                                                const checkData = JSON.parse(JSON.stringify(data))
+                            
+                                                if(checkData.message) {
+                                                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                    setTimeout(() => {
+                                                        mge.innerHTML = "";
+                                                    }, 2000);
+                                                    
+                                                }
+                            
+                                            })
+                                            .catch(function(error) {
+                                                console.log(error)
+                                            })
+                            
+                                        })
+                            
+                                        // 監聽input框
+                                        countInputC.addEventListener("change", () => {
+                            
+                                            if(countInputC.value === "") {
+                                                countInputC.value = chaAmount;
+                                            }
+                            
+                                            let body = {
+                                                "order_status": {
+                                                    "userId": sessionStorage.getItem("userId"),
+                                                    "productId": i.productId,
+                                                    "updateTime": i.updateTime,
+                                                    "amount": countInputC.value
+                                                }
+                                            }
+                            
+                                            fetch("http://localhost:8080/change_cart_amount", {
+                                                method: "Post",
+                                                headers: {
+                                                    "Content-Type": "application/json"
+                                                },
+                                                body: JSON.stringify(body)
+                                            })
+                                            .then(function(response) {
+                                                return response.json()
+                                            })
+                                            .then(function(data) {
+                                                const checkData = JSON.parse(JSON.stringify(data))
+                                                if(checkData.message) {
+                                                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                                    setTimeout(() => {
+                                                        mge.innerHTML = "";
+                                                    }, 2000);
+                                                    
+                                                    if(overSto.test(checkData.message)) {
+                                                        countInputC.value = i.stock;
+                                                    }
+                            
+                                                    if(checkData.message === "移出購物車") {
+                                                        cartI.innerHTML = "";
+                                                        cartI.classList.remove("cartInfo");
+                                                    }
+                                                }
+                            
+                                                totP += i.price * (countInputC.value - chaAmount);
+                                                totalP.innerText = "總價格為 : $" + totP;
+                                                checkP.innerText = "總價格為 : $" + totP;
+                                                totC += +(countInputC.value - chaAmount);
+                                                totalC.innerText = "商品總數為 : " + totC;
+                                                chaAmount = countInputC.value;
+                            
+                                            })
+                                            .catch(function(error) {
+                                                console.log(error)
+                                            })
+                                        })
+                                        
                                         // 刪除購物車的商品
                             
                                         const removeProB = document.querySelector(`#remove${i.productId}`);
@@ -1272,7 +2297,8 @@ checkoutB.addEventListener("click", () => {
                                                 cartI.innerHTML = "";
                                                 cartI.classList.remove("cartInfo")
                                                 totP -= i.price * i.amount;
-                                                totalP.innerText = "總價格為 : " + totP;
+                                                totalP.innerText = "總價格為 : $" + totP;
+                                                checkP.innerText = "總價格為 : $" + totP;
                                                 totC -= i.amount;
                                                 totalC.innerText = "商品總數為 : " + totC; 
                                             })

@@ -34,8 +34,20 @@
         </div>
         <div class="checkout">
             <p id="totalCount">商品總數為 : </p>
-            <p id="totalPrice">總價格為 : </p>
-            <button id="checkoutBtn" class="checkoutBtn">購買</button>
+            <p id="totalPrice">總價格為 : $</p>
+            <button onclick="openCheckAlert()" class="checkoutBtn">確認付款</button>
+            <div id="checkInfo" class="checkInfo">
+                <div class="checkModel">
+                    <span class="closeAlert" onclick="closeCheckAlert()">&times;</span>
+                    <p id="checkPrice">總價格為 : $</p>
+                    <p>寄件地址 :</p>
+                    <div class="addressArea">
+                        <select id="addressC" class="addressC"></select>
+                        <input type="text" id="address" class="address">
+                    </div>
+                    <button id="checkoutBtn" class="checkoutBtn" onclick="closeCheckAlert()">付款</button>
+                </div>
+            </div>
         </div>
     </div>
 

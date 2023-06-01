@@ -137,7 +137,7 @@ function drawPic() {
     }
 }
 
-// 刪除會員驗證碼
+// 停用會員驗證碼
 
 const imM = document.querySelector("#verImgM");
 const iM = document.querySelector("#memDeleVer");
@@ -235,7 +235,9 @@ function drawPicM() {
 
 // 帶出用戶名販賣的商品
 
-const revProId = document.querySelector("#reviseProId");
+const revProN = document.querySelector("#reviseProName");
+const deleProN = document.querySelector("#deleProName");
+const chaStaProN = document.querySelector("#chaStateProName");
 
 let user = {
     "userid": sessionStorage.getItem("userId")
@@ -254,18 +256,21 @@ fetch("http://localhost:8080/find_mem_sell", {
 .then(function(data) {
     const checkData = JSON.parse(JSON.stringify(data));
     if(checkData.message) {
-        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0"; 
+        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+        setTimeout(() => {
+            mge.innerHTML = "";
+        }, 2000);
     }
 
-    const seleProId = [revProId, deleProId, CSProId];
+    const seleProN = [revProN, deleProN, chaStaProN];
 
-    if(checkData.pro_id_list) {
-        checkData.pro_id_list.forEach(function(i) {
-            seleProId.forEach((proId) => {
-                const op = document.createElement('option');
+    if(checkData.pro_name_set) {
+        checkData.pro_name_set.forEach(function(i) {
+            seleProN.forEach((proN) => {
+                const op = document.createElement("option");
                 op.value = i;
                 op.innerText = i;
-                proId.appendChild(op);
+                proN.appendChild(op);
             });
         })
     }
@@ -299,48 +304,144 @@ searBuyB.addEventListener("click", () => {
     })
     .then(function(data) {
         const checkData = JSON.parse(JSON.stringify(data));
-
         resBuyP.innerHTML = "";
-        const BuyPT = document.createElement("div");
-        BuyPT.classList.add("buyPro");
-        resBuyP.appendChild(BuyPT);
+
+        if(checkData.ord_num_info_list) {
+            checkData.ord_num_info_list.forEach((i) => {
+                let ordNTotP = 0;
+
+                const ordT = document.createElement("div");
+                ordT.classList.add("orderInfo");
+                resBuyP.appendChild(ordT);
+
+                const ordNAT = document.createElement("div");
+                const ordNT = document.createElement("p");
+                ordNT.classList.add("orderN");
+                ordNT.innerText = "訂單編號";
+                ordNAT.appendChild(ordNT);
+                ordT.appendChild(ordNAT);
+
+                const ordPAT = document.createElement("div");
+                const ordPT = document.createElement("p");
+                ordPT.classList.add("orderSP");
+                ordPT.innerText = "賣家電話";
+                ordPAT.appendChild(ordPT);
+                ordT.appendChild(ordPAT);
+
+                const ordAAT = document.createElement("div");
+                const ordAT = document.createElement("p");
+                ordAT.classList.add("orderA");
+                ordAT.innerText = "寄件地址";
+                ordAAT.appendChild(ordAT);
+                ordT.appendChild(ordAAT);
+
+                const ord = document.createElement("div");
+                ord.classList.add("orderInfo");
+                resBuyP.appendChild(ord);
+
+                const ordNA = document.createElement("div");
+                const ordN = document.createElement("p");
+                ordN.classList.add("orderN");
+                ordN.innerText = i.orderNumber;
+                ordNA.appendChild(ordN);
+                ord.appendChild(ordNA);
+
+                const ordPA = document.createElement("div");
+                const ordP = document.createElement("p");
+                ordP.classList.add("orderSP");
+                ordP.innerText = i.phone;
+                ordPA.appendChild(ordP);
+                ord.appendChild(ordPA);
+
+                const ordAA = document.createElement("div");
+                const ordA = document.createElement("p");
+                ordA.classList.add("orderA");
+                ordA.innerText = i.address;
+                ordAA.appendChild(ordA);
+                ord.appendChild(ordAA);
+
+                const BuyPT = document.createElement("div");
+                BuyPT.classList.add("buyPro");
+                resBuyP.appendChild(BuyPT);
+                
+                const buySPNTA = document.createElement("div");
+                const buySPNT = document.createElement("p");
+                buySPNT.innerText = "商品名稱";
+                buySPNTA.appendChild(buySPNT);
+                BuyPT.appendChild(buySPNTA);
         
-        const buySPNTA = document.createElement("div");
-        const buySPNT = document.createElement("p");
-        buySPNT.innerText = "商品名稱";
-        buySPNTA.appendChild(buySPNT);
-        BuyPT.appendChild(buySPNTA);
+                const buySPPTA = document.createElement("div");
+                const buySPPT = document.createElement("p");
+                buySPPT.innerText = "價格";
+                buySPPTA.appendChild(buySPPT);
+                BuyPT.appendChild(buySPPTA);
+        
+                const buySPATA = document.createElement("div");
+                const buySPAT = document.createElement("p");
+                buySPAT.innerText = "數量";
+                buySPATA.appendChild(buySPAT);
+                BuyPT.appendChild(buySPATA);
+        
+                const buySPSTA = document.createElement("div");
+                const buySPST = document.createElement("p");
+                buySPST.innerText = "訂單狀態";
+                buySPSTA.appendChild(buySPST);
+                BuyPT.appendChild(buySPSTA);
+        
+                const buySPUTA = document.createElement("div");
+                const buySPUT = document.createElement("p");
+                buySPUT.innerText = "更新時間";
+                buySPUTA.classList.add("bPUpdA");
+                buySPUTA.appendChild(buySPUT);
+                BuyPT.appendChild(buySPUTA);
+    
+                i.proInfoList.forEach( (j) => {
+                    const BuyP = document.createElement("div");
+                    BuyP.classList.add("buyPro");
+                    resBuyP.appendChild(BuyP);
+                    
+                    const buySPNA = document.createElement("div");
+                    const buySPN = document.createElement("p");
+                    buySPN.innerText = j.productName;
+                    buySPNA.appendChild(buySPN);
+                    BuyP.appendChild(buySPNA);
+    
+                    const buySPPA = document.createElement("div");
+                    const buySPP = document.createElement("p");
+                    buySPP.innerText = j.price;
+                    buySPPA.appendChild(buySPP);
+                    BuyP.appendChild(buySPPA);
+    
+                    const buySPAA = document.createElement("div");
+                    const buySPA = document.createElement("p");
+                    buySPA.innerText = j.amount;
+                    buySPAA.appendChild(buySPA);
+                    BuyP.appendChild(buySPAA);
+    
+                    const buySPSA = document.createElement("div");
+                    const buySPS = document.createElement("p");
+                    buySPS.innerText = j.state;
+                    buySPSA.appendChild(buySPS);
+                    BuyP.appendChild(buySPSA);
+    
+                    const buySPUA = document.createElement("div");
+                    const buySPU = document.createElement("p");
+                    const upTime = j.updateTime.replace("T", " ");
+                    buySPU.innerText = upTime;
+                    buySPUA.classList.add("bPUpdA");
+                    buySPUA.appendChild(buySPU);
+                    BuyP.appendChild(buySPUA);
 
-        const buySPPTA = document.createElement("div");
-        const buySPPT = document.createElement("p");
-        buySPPT.innerText = "價格";
-        buySPPTA.appendChild(buySPPT);
-        BuyPT.appendChild(buySPPTA);
+                    ordNTotP += j.price * j.amount
+                })
 
-        const buySPATA = document.createElement("div");
-        const buySPAT = document.createElement("p");
-        buySPAT.innerText = "數量";
-        buySPATA.appendChild(buySPAT);
-        BuyPT.appendChild(buySPATA);
+                
+                const divide = document.createElement("div")
+                divide.classList.add("divide")
+                resBuyP.appendChild(divide);
+            })
 
-        const buySPPhTA = document.createElement("div");
-        const buySPPhT = document.createElement("p");
-        buySPPhT.innerText = "賣家電話";
-        buySPPhTA.appendChild(buySPPhT);
-        BuyPT.appendChild(buySPPhTA);
-
-        const buySPSTA = document.createElement("div");
-        const buySPST = document.createElement("p");
-        buySPST.innerText = "訂單狀態";
-        buySPSTA.appendChild(buySPST);
-        BuyPT.appendChild(buySPSTA);
-
-        const buySPUTA = document.createElement("div");
-        const buySPUT = document.createElement("p");
-        buySPUT.innerText = "更新時間";
-        buySPUTA.classList.add("bPUpdA");
-        buySPUTA.appendChild(buySPUT);
-        BuyPT.appendChild(buySPUTA);
+        }
 
         if(checkData.message) {
             mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
@@ -349,50 +450,6 @@ searBuyB.addEventListener("click", () => {
             }, 2000);
         }
 
-        if(checkData.cart_info_list) {
-            checkData.cart_info_list.forEach( (i) => {
-                const BuyP = document.createElement("div");
-                BuyP.classList.add("buyPro");
-                resBuyP.appendChild(BuyP);
-                
-                const buySPNA = document.createElement("div");
-                const buySPN = document.createElement("p");
-                buySPN.innerText = i.productName;
-                buySPNA.appendChild(buySPN);
-                BuyP.appendChild(buySPNA);
-
-                const buySPPA = document.createElement("div");
-                const buySPP = document.createElement("p");
-                buySPP.innerText = i.price;
-                buySPPA.appendChild(buySPP);
-                BuyP.appendChild(buySPPA);
-
-                const buySPAA = document.createElement("div");
-                const buySPA = document.createElement("p");
-                buySPA.innerText = i.amount;
-                buySPAA.appendChild(buySPA);
-                BuyP.appendChild(buySPAA);
-
-                const buySPPhA = document.createElement("div");
-                const buySPPh = document.createElement("p");
-                buySPPh.innerText = i.phone;
-                buySPPhA.appendChild(buySPPh);
-                BuyP.appendChild(buySPPhA);
-
-                const buySPSA = document.createElement("div");
-                const buySPS = document.createElement("p");
-                buySPS.innerText = i.state;
-                buySPSA.appendChild(buySPS);
-                BuyP.appendChild(buySPSA);
-
-                const buySPUA = document.createElement("div");
-                const buySPU = document.createElement("p");
-                buySPU.innerText = i.updateTime;
-                buySPUA.classList.add("bPUpdA");
-                buySPUA.appendChild(buySPU);
-                BuyP.appendChild(buySPUA);
-            })
-        }
     })
     .catch(function(error) {
         console.log(error)
@@ -408,8 +465,7 @@ const canCPA = document.querySelector("#canCancelProA");
 const BCPM = document.querySelector("#BCPModal");
 
 function BCPCheckAlert() {
-    BCPM.style.display = "flex";
-    
+    BCPM.style.display = "flex";   
 }
 
 function closeBCPCheAlert() {
@@ -1031,6 +1087,26 @@ const mge = document.querySelector("#message");
 const addPI = document.querySelector(".addProImg");
 let addPP;
 
+addS1.addEventListener("change", () => {
+    if(addS1.value !== "") {
+        addS2.disabled = false
+    } else {
+        addS2.disabled = true
+        addS2.value = ""
+        addS3.disabled = true
+        addS3.value = ""
+    }
+})
+
+addS2.addEventListener("change", () => {
+    if(addS2.value !== "") {
+        addS3.disabled = false
+    } else {
+        addS3.disabled = true
+        addS3.value = ""
+    }
+})
+
 addProP.addEventListener("change", (e) => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -1091,6 +1167,9 @@ addProB.addEventListener("click", function() {
 
         if(checkData.message) {
             mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+            setTimeout(() => {
+                mge.innerHTML = "";
+            },2000)
 
             fetch("http://localhost:8080/find_mem_sell", {
                 method: "Post",
@@ -1105,28 +1184,31 @@ addProB.addEventListener("click", function() {
             .then(function(data) {
                 const checkData = JSON.parse(JSON.stringify(data));
                 if(checkData.message) {
-                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0"; 
+                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                    setTimeout(() => {
+                        mge.innerHTML = "";
+                    }, 2000);
                 }
             
-                const seleProId = [revProId, deleProId, CSProId];
+                const seleProN = [revProN, deleProN, chaStaProN];
 
-                revProId.innerHTML = "";
-                deleProId.innerHTML = "";
-                CSProId.innerHTML = "";
+                revProN.innerHTML = "";
+                deleProN.innerHTML = "";
+                chaStaProN.innerHTML = "";
                 const rNullOp = document.createElement("option");
                 const dNullOp = document.createElement("option");
                 const cNullOp = document.createElement("option");
-                revProId.appendChild(rNullOp);
-                deleProId.appendChild(dNullOp);
-                CSProId.appendChild(cNullOp);
+                revProN.appendChild(rNullOp);
+                deleProN.appendChild(dNullOp);
+                chaStaProN.appendChild(cNullOp);
             
-                if(checkData.pro_id_list) {
-                    checkData.pro_id_list.forEach(function(i) {
-                        seleProId.forEach((proId) => {
+                if(checkData.pro_name_set) {
+                    checkData.pro_name_set.forEach(function(i) {
+                        seleProN.forEach((proN) => {
                             const op = document.createElement('option');
                             op.value = i;
                             op.innerText = i;
-                            proId.appendChild(op);
+                            proN.appendChild(op);
                         });
                     })
                 }
@@ -1134,10 +1216,42 @@ addProB.addEventListener("click", function() {
             .catch(function(error) {
                 console.log(error)
             })
+        }
+    })
+    .catch(function(error) {
+        console.log(error)
+    })
+})
 
-            setTimeout(() => {
-                mge.innerHTML = "";
-            }, 2000);
+// 選取商品名稱帶出商品代碼清單
+
+revProN.addEventListener("change", function() {
+    let body = {
+        "product_info": {
+            "productName": revProN.value
+        }
+    }
+
+    fetch("http://localhost:8080/name_to_id", {
+        method: "Post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        const checkData = JSON.parse(JSON.stringify(data))
+
+        if(checkData.pro_id_list) {
+            checkData.pro_id_list.forEach( (i) => {
+                const op = document.createElement("option");
+                op.value = i;
+                op.innerText = i;
+                revProId.appendChild(op);
+            })
         }
     })
     .catch(function(error) {
@@ -1147,9 +1261,9 @@ addProB.addEventListener("click", function() {
 
 // 帶出修改頁面選取的商品資料
 
-const revPId = document.querySelector("#reviseProId")
+const revProId = document.querySelector("#reviseProId");
 
-revPId.addEventListener("change", function() {
+revProId.addEventListener("change", function() {
     revS1.value = null;
     revS2.value = null;
     revS3.value = null;
@@ -1170,7 +1284,6 @@ revPId.addEventListener("change", function() {
     .then(function(data) {
         const checkData = JSON.parse(JSON.stringify(data))
         if(checkData) {
-            revProN.value = checkData.product_name
             revProPr.value = checkData.price
             revProS.value = checkData.stock
             revPI.src = checkData.product_picture
@@ -1193,7 +1306,6 @@ revPId.addEventListener("change", function() {
 // 修改商品
 
 const revProB = document.querySelector("#reviseProBtn");
-const revProN = document.querySelector("#reviseProName");
 const revProP = document.querySelector("#reviseProPict");
 const revProS = document.querySelector("#reviseProStock");
 const revProPr = document.querySelector("#reviseProPrice");
@@ -1202,6 +1314,26 @@ const revS2 = document.querySelector("#revSort2");
 const revS3 = document.querySelector("#revSort3");
 const revPI = document.querySelector(".revProImg");
 let revPP;
+
+revS1.addEventListener("change", () => {
+    if(revS1.value !== "") {
+        revS2.disabled = false
+    } else {
+        revS2.disabled = true
+        revS2.value = ""
+        revS3.disabled = true
+        revS3.value = ""
+    }
+})
+
+revS2.addEventListener("change", () => {
+    if(revS2.value !== "") {
+        revS3.disabled = false
+    } else {
+        revS3.disabled = true
+        revS3.value = ""
+    }
+})
 
 // 給出下拉式選單種類的值
 
@@ -1280,10 +1412,45 @@ revProB.addEventListener("click", function() {
     })
 })
 
-// 帶出刪除頁面選取的商品名稱
+// 帶出刪除頁面選取商品名稱的商品代碼
+
+deleProN.addEventListener("change", function() {
+    let body = {
+        "product_info": {
+            "productName": deleProN.value
+        }
+    }
+
+    fetch("http://localhost:8080/name_to_id", {
+        method: "Post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        const checkData = JSON.parse(JSON.stringify(data))
+
+        if(checkData.pro_id_list) {
+            checkData.pro_id_list.forEach( (i) => {
+                const op = document.createElement("option");
+                op.value = i;
+                op.innerText = i;
+                deleProId.appendChild(op);
+            })
+        }
+    })
+    .catch(function(error) {
+        console.log(error)
+    })
+})
+
+// 帶出刪除頁面選取的商品名稱(暫時不用)
 
 const deleProId = document.querySelector("#deleProId");
-const deleProN = document.querySelector("#deleProName");
 const deleProB = document.querySelector("#deleProBtn");
 const proDeleM = document.querySelector("#proDeleModal");
 
@@ -1296,31 +1463,31 @@ function closeProDeleCheAlert() {
     proDeleM.style.display = "none";
 }
 
-deleProId.addEventListener("change", function() {
-    let body = {
-        "product_id": deleProId.value
-    }
+// deleProId.addEventListener("change", function() {
+//     let body = {
+//         "product_id": deleProId.value
+//     }
 
-    fetch("http://localhost:8080/get_pro_info", {
-        method: "Post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-    })
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        const checkData = JSON.parse(JSON.stringify(data))
-        if(checkData) {
-            deleProN.value = checkData.product_name
-        }
-    })
-    .catch(function(error) {
-        console.log(error)
-    })
-})
+//     fetch("http://localhost:8080/get_pro_info", {
+//         method: "Post",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(body)
+//     })
+//     .then(function(response) {
+//         return response.json()
+//     })
+//     .then(function(data) {
+//         const checkData = JSON.parse(JSON.stringify(data))
+//         if(checkData) {
+//             deleProN.value = checkData.product_name
+//         }
+//     })
+//     .catch(function(error) {
+//         console.log(error)
+//     })
+// })
 
 // 刪除商品
 
@@ -1339,7 +1506,7 @@ deleProB.addEventListener("click", function() {
             }
         }
     
-        fetch("http://localhost:8080/delete_product", {
+        fetch("http://localhost:8080/dele_product", {
             method: "Post",
             headers: {
                 "Content-Type": "application/json"
@@ -1374,25 +1541,25 @@ deleProB.addEventListener("click", function() {
                         mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0"; 
                     }
                 
-                    const seleProId = [revProId, deleProId, CSProId];
+                    const seleProN = [revProN, deleProN, chaStaProN];
 
-                    revProId.innerHTML = "";
-                    deleProId.innerHTML = "";
-                    CSProId.innerHTML = "";
+                    revProN.innerHTML = "";
+                    deleProN.innerHTML = "";
+                    chaStaProN.innerHTML = "";
                     const rNullOp = document.createElement("option");
                     const dNullOp = document.createElement("option");
                     const cNullOp = document.createElement("option");
-                    revProId.appendChild(rNullOp);
-                    deleProId.appendChild(dNullOp);
-                    CSProId.appendChild(cNullOp);
+                    revProN.appendChild(rNullOp);
+                    deleProN.appendChild(dNullOp);
+                    chaStaProN.appendChild(cNullOp);
                 
-                    if(checkData.pro_id_list) {
-                        checkData.pro_id_list.forEach(function(i) {
-                            seleProId.forEach((proId) => {
+                    if(checkData.pro_name_set) {
+                        checkData.pro_name_set.forEach(function(i) {
+                            seleProN.forEach((proN) => {
                                 const op = document.createElement('option');
                                 op.value = i;
                                 op.innerText = i;
-                                proId.appendChild(op);
+                                proN.appendChild(op);
                             });
                         })
                     }
@@ -1414,10 +1581,45 @@ deleProB.addEventListener("click", function() {
 
 })
 
-// 帶出上下架商品頁面選取的商品名稱
+// 帶出上下架頁面選取商品名稱的商品代碼
+
+chaStaProN.addEventListener("change", function() {
+    let body = {
+        "product_info": {
+            "productName": chaStaProN.value
+        }
+    }
+
+    fetch("http://localhost:8080/name_to_id", {
+        method: "Post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        const checkData = JSON.parse(JSON.stringify(data))
+
+        if(checkData.pro_id_list) {
+            checkData.pro_id_list.forEach( (i) => {
+                const op = document.createElement("option");
+                op.value = i;
+                op.innerText = i;
+                CSProId.appendChild(op);
+            })
+        }
+    })
+    .catch(function(error) {
+        console.log(error)
+    })
+})
+
+// 帶出上下架商品頁面選取的商品上下架狀態
 
 const CSProId = document.querySelector("#chaStateProId");
-const chaStaProN = document.querySelector("#chaStateProName");
 const chaStaB = document.querySelector("#chaStateBtn");
 const sta = document.querySelector("#state");
 
@@ -1439,7 +1641,6 @@ CSProId.addEventListener("change", function() {
     .then(function(data) {
         const checkData = JSON.parse(JSON.stringify(data))
         if(checkData) {
-            chaStaProN.value = checkData.product_name
             sta.value = checkData.state
         }
     })
@@ -1598,7 +1799,7 @@ chPwB.addEventListener("click", function() {
     })
 })
 
-// 刪除用戶名
+// 停用用戶名
 
 const memDeleM = document.querySelector("#memDeleModal");
 const deleMemB = document.querySelector("#deleMemBtn");
@@ -1625,7 +1826,7 @@ deleMemB.addEventListener("click", function() {
             }
         }
     
-        fetch("http://localhost:8080/dele_mem_info", {
+        fetch("http://localhost:8080/disable_mem_info", {
             method: "Post",
             headers: {
                 "Content-Type": "application/json"
@@ -1639,7 +1840,7 @@ deleMemB.addEventListener("click", function() {
             const checkData = JSON.parse(JSON.stringify(data))
             if(checkData.message) {
                 mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
-                if(checkData.message === "會員刪除成功") {
+                if(checkData.message === "會員已停用") {
                     setTimeout(function() {
                         sessionStorage.removeItem("userId")
                         alert("跳轉至登入頁面")

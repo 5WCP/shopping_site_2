@@ -10,6 +10,7 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
+  font-family: "Microsoft JhengHei", Arial, sans-serif;
 }
 
 h1 {
@@ -255,12 +256,39 @@ body {
   position: relative;
   width: 220px;
 }
+.cartArea .cartInfo .countInputC {
+  border: none;
+  margin: 15px 5px 0 5px;
+  width: 25px;
+  background-color: rgba(245, 241, 241, 0);
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}
+.cartArea .cartInfo .countInputC::-webkit-inner-spin-button, .cartArea .cartInfo .countInputC::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.cartArea .cartInfo .countBtn {
+  border: none;
+  outline: none;
+  background-color: rgba(245, 241, 241, 0);
+  color: white;
+  font-size: 12px;
+  transition: 0.6s ease;
+}
+.cartArea .cartInfo .countBtn:hover {
+  color: #5e0e6e;
+}
+.cartArea .cartInfo .countBtn:active {
+  transform: scale(0.9);
+}
 .cartArea .cartInfo .removeCart {
-  color: #1a1010;
+  color: white;
   position: absolute;
-  top: 35px;
-  right: 10px;
-  font-size: 28px;
+  top: 38px;
+  right: 5px;
+  font-size: 20px;
   font-weight: bold;
   transition: 0.6s;
 }
@@ -277,16 +305,13 @@ body {
 .cartArea .cartInfo .cartProInfo {
   overflow: hidden;
   color: aliceblue;
+  text-align: center;
 }
 .cartArea .cartInfo .cartProInfo .cartProName {
   margin: 0;
   font-size: 12px;
 }
 .cartArea .cartInfo .cartProInfo .cartProPrice {
-  margin: 15px 0 0 0;
-  font-size: 12px;
-}
-.cartArea .cartInfo .cartProInfo .cartProAmount {
   margin: 15px 0 0 0;
   font-size: 12px;
 }
@@ -316,6 +341,48 @@ body {
   position: relative;
   text-align: center;
   padding: 10px;
+}
+.checkout .checkInfo {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.checkout .checkInfo .checkModel {
+  width: 500px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(250, 248, 248, 0.9);
+  border-radius: 5px;
+  position: relative;
+}
+.checkout .checkInfo .checkModel .closeAlert {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  transition: 0.6s;
+  cursor: pointer;
+}
+.checkout .checkInfo .checkModel .closeAlert:hover {
+  color: #a980b9;
+}
+.checkout .checkInfo .checkModel .addressArea {
+  margin-bottom: 20px;
+}
+.checkout .checkInfo .checkModel .addressArea .addressC, .checkout .checkInfo .checkModel .addressArea .address {
+  height: 24px;
+  font-size: 15px;
 }
 .checkout .checkoutBtn {
   margin: 0;

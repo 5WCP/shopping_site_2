@@ -25,13 +25,21 @@
         <input type="radio" class="tRadio" name="tab" id="alrBuyPro" checked>
         <label for="alrBuyPro" class="tLabel">商品狀態(買)</label>
         <div class="tContent">
+            <p>買家訂單查詢</p>
             <select name="buyProSta" id="buyProSta">
+                <option value="準備中">準備中</option>
                 <option value="運送中">運送中</option>
+                <option value="待收貨">待收貨</option>
                 <option value="已完成">已完成</option>
                 <option value="已取消">已取消</option>
             </select>
             <button id="searBuyBtn">搜尋</button>
             <div id="resBuyPro" class="resBuyPro">
+                <div class="orderInfo">
+                    <div><p class="orderN">訂單編號</p></div>
+                    <div><p class="orderSP">電話號碼</p></div>
+                    <div><p class="orderA">寄件地址</p></div>
+                </div>
                 <div class="buyPro">
                     <div><p>商品名稱</p></div>
                     <div><p>價格</p></div>
@@ -62,6 +70,7 @@
         <input type="radio" class="tRadio" name="tab" id="alrSellPro">
         <label for="alrSellPro" class="tLabel">商品狀態(賣)</label>
         <div class="tContent">
+            <p>賣家訂單查詢</p>
             <select name="sellProSta" id="sellProSta">
                 <option value="準備中">準備中</option>
                 <option value="運送中">運送中</option>
@@ -118,11 +127,11 @@
                     <option value=""></option>
                 </select>
                 <p>分類2</p>
-                <select name="addSort2" id="addSort2">
+                <select name="addSort2" id="addSort2" disabled>
                     <option value=""></option>
                 </select>
                 <p>分類3</p>
-                <select name="addSort3" id="addSort3">
+                <select name="addSort3" id="addSort3" disabled>
                     <option value=""></option>
                 </select>
             </div>
@@ -136,6 +145,10 @@
         <input type="radio" class="tRadio" name="tab" id="revisePro">
         <label for="revisePro" class="tLabel">修改商品</label>
         <div class="tContent">
+            <p>商品名稱</p>
+            <select name="reviseProName" id="reviseProName">
+                <option value=""></option>
+            </select>
             <p>商品代號</p>
             <select name="reviseProId" id="reviseProId">
                 <option value=""></option>
@@ -145,8 +158,8 @@
                 <input type="file" name="reviseProPict" id="reviseProPict">
                 <img class="revProImg" src="" alt="">
             </div>
-            <label for="reviseProName">商品名稱</label>
-            <input type="text" name="reviseProName" id="reviseProName">
+            <!-- <label for="reviseProName">商品名稱</label>
+            <input type="text" name="reviseProName" id="reviseProName"> -->
             <p>商品分類</p>
             <div class="sortsArea">
                 <p>分類1</p>
@@ -154,11 +167,11 @@
                     <option value=""></option>
                 </select>
                 <p>分類2</p>
-                <select name="revSort2" id="revSort2">
+                <select name="revSort2" id="revSort2" disabled>
                     <option value=""></option>
                 </select>
                 <p>分類3</p>
-                <select name="revSort3" id="revSort3">
+                <select name="revSort3" id="revSort3" disabled>
                     <option value=""></option>
                 </select>
             </div>
@@ -172,12 +185,16 @@
         <input type="radio" class="tRadio" name="tab" id="delePro">
         <label for="delePro" class="tLabel">刪除商品</label>
         <div class="tContent">
+            <p>商品名稱</p>
+            <select name="deleProName" id="deleProName">
+                <option value=""></option>
+            </select>
             <p>商品代號</p>
             <select name="deleProId" id="deleProId">
                 <option value=""></option>
             </select>
-            <label for="deleProName">商品名稱</label>
-            <input type="text" name="deleProName" id="deleProName">
+            <!-- <label for="deleProName">商品名稱</label>
+            <input type="text" name="deleProName" id="deleProName"> -->
             <button onclick="proDeleCheckAlert()" class="checkBtn">刪除</button>
             <div id="proDeleModal" class="proDeleModal">
                 <div class="proDeleModalContent">
@@ -186,6 +203,7 @@
                         <input id="proDeleVer" type="text" class="proDeleVer">
                     </div>
                     <div>
+                        <p>看不清楚點擊圖示換一張</p>
                         <canvas id="verImg" width="130" height="30">
                         </canvas>
                     </div>
@@ -198,12 +216,16 @@
         <input type="radio" class="tRadio" name="tab" id="chaState">
         <label for="chaState" class="tLabel">上/下架商品</label>
         <div class="tContent">
+            <p>商品名稱</p>
+            <select name="chaStateProName" id="chaStateProName">
+                <option value=""></option>
+            </select>
             <p>商品代號</p>
             <select name="chaStateProId" id="chaStateProId">
                 <option value=""></option>
             </select>
-            <label for="chaStateProName">商品名稱</label>
-            <input type="text" name="chaStateProName" id="chaStateProName">
+            <!-- <label for="chaStateProName">商品名稱</label>
+            <input type="text" name="chaStateProName" id="chaStateProName"> -->
             <select name="state" id="state">
                 <option value="true">上架</option>
                 <option value="false">下架</option>
@@ -238,9 +260,9 @@
         </div>
 
         <input type="radio" class="tRadio" name="tab" id="deleMem">
-        <label for="deleMem" class="tLabel">刪除會員</label>
+        <label for="deleMem" class="tLabel">停用會員</label>
         <div class="tContent">
-            <h2>確定要刪除帳號嗎?</h2>
+            <h2>確定要停用該用戶名嗎?</h2>
             <button onclick="memDeleCheckAlert()" class="checkBtn">刪除</button>
             <div id="memDeleModal" class="memDeleModal">
                 <div class="memDeleModalContent">
@@ -249,10 +271,11 @@
                         <input id="memDeleVer" type="text" class="memDeleVer">
                     </div>
                     <div>
+                        <p>看不清楚點擊圖示換一張</p>
                         <canvas id="verImgM" width="130" height="30">
                         </canvas>
                     </div>
-                    <h2>確定要刪除?</h2>
+                    <h2>確定要停用?</h2>
                     <button id="deleMemBtn" class="deleBtn" onclick="closeMemDeleCheAlert()">確定</button>
                 </div>
             </div>
