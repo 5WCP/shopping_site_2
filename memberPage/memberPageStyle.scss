@@ -10,10 +10,23 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
-    background-image: url(./memberPageImg.jpg);
-    background-size: cover;
+    // background-image: url(./memberPageImg.jpg);
+    // background-size: cover;
     position: relative;
     font-family: "Microsoft JhengHei", Arial, sans-serif;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(./memberPageImg.jpg);
+        background-size: cover;
+        filter: blur(2px);
+        z-index: -1;
+    }
 
     .message {
         padding: 5px 0;
@@ -93,62 +106,41 @@ body {
             width: 450px;
             height: 300px;
             overflow: auto;
+            padding: 20px;
+            border-radius: 2px;
 
-            .divide {
-                border: 1px solid black;
-                height: 27px;
-                width: 690px;
-            }
-            
-            .orderInfo {
-                display: flex;
+            .ordNArea {
+                background-color: rgba(69, 102, 163, 0.95);
+                padding: 10px;
+                border-radius: 5px;
+                color: white;
+                margin-bottom: 20px;
+                position: relative;
 
-                div {
-                    border: 1px solid black;
-                    padding: 2px;
-
-                    .orderN {
-                        width: 120px;
-                        text-align: center;
-                    }
-
-                    .orderA {
-                        width: 432px;
-                        text-align: center;
-                    }
-
-                    .orderSP {
-                        width: 120px;
-                        text-align: center;
-                    }
-                }
-            }
-
-            .buyPro {
-                display: flex;
-
-                .bPUpdA {
-
-                    p {
-                        width: 180px;
-                        text-align: center;
-                    }
+                .ordN , .ordS , .ordP{
+                    border-bottom: 1px solid white;
+                    padding: 5px;
                 }
 
-                div {
-                    border: 1px solid black;
+                .ordPro {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 2px;
+                    margin: 10px 0;
 
                     p {
-                        width: 120px;
                         text-align: center;
+                        width: 120px;
                     }
                 }
-                
+
+                .ordU , .ordA{
+                    border-top: 1px solid white;
+                    padding: 5px;
+                }
+
+                .totalP {
+                    margin: 20px 0;
+                }
+
             }
 
         }
@@ -158,40 +150,48 @@ body {
             background-color: rgba(212, 217, 226, 0.9);
             width: 450px;
             height: 300px;
+            padding: 20px;
+            border-radius: 2px;
             overflow: auto;
 
-            .sellPro {
-                display: flex;
+            .ordNArea {
+                background-color: rgba(69, 102, 163, 0.95);
+                padding: 10px;
+                border-radius: 5px;
+                color: white;
+                margin-bottom: 20px;
+                position: relative;
 
-                div {
-                    border: 1px solid black;
+                .ordNC {
+                    position: absolute;
+                    top: 2px;
+                    right: 10px;
+                }
+
+                .ordN , .ordS {
+                    border-bottom: 1px solid white;
+                    padding: 5px;
+                }
+
+                .ordPro {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 2px;
+                    margin: 10px 0;
 
                     p {
+                        text-align: center;
                         width: 120px;
-                        text-align: center;
                     }
                 }
 
-                .CPSUpdA {
-
-                    p {
-                        width: 150px;
-                        text-align: center;
-                    }
+                .ordU , .ordA{
+                    border-top: 1px solid white;
+                    padding: 5px;
                 }
 
-                input {
-                    margin: 0 5px;
+                .totalP {
+                    margin: 20px 0;
                 }
-    
-                .radioS {
-                    visibility: hidden;
-                }
+
             }
 
         }
@@ -201,41 +201,50 @@ body {
             background-color: rgba(212, 217, 226, 0.9);
             width: 450px;
             height: 300px;
+            padding: 20px;
+            border-radius: 2px;
             overflow: auto;
 
-            .sCanCancelPro {
-                display: flex;
+            .ordNArea {
+                background-color: rgba(69, 102, 163, 0.95);
+                padding: 10px;
+                border-radius: 5px;
+                color: white;
+                margin-bottom: 20px;
+                position: relative;
 
-                div {
-                    border: 1px solid black;
+                .ordNC {
+                    position: absolute;
+                    top: 2px;
+                    right: 10px;
+                }
+
+                .ordN , .ordS {
+                    border-bottom: 1px solid white;
+                    padding: 5px;
+                }
+
+                .ordPro {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 2px;
+                    margin: 10px 0;
 
                     p {
+                        text-align: center;
                         width: 120px;
-                        text-align: center;
                     }
                 }
 
-                .sCPUpdA {
-
-                    p {
-                        width: 150px;
-                        text-align: center;
-                    }
+                .ordU , .ordA{
+                    border-top: 1px solid white;
+                    padding: 5px;
                 }
 
-                input {
-                    margin: 0 5px;
+                .totalP {
+                    margin: 20px 0;
                 }
 
-                .radioST {
-                    visibility: hidden;
-                }
             }
+
         }
 
         .canCancelProA {
@@ -243,42 +252,50 @@ body {
             background-color: rgba(212, 217, 226, 0.9);
             width: 450px;
             height: 300px;
+            padding: 20px;
+            border-radius: 2px;
             overflow: auto;
 
-            .canCancelPro {
-                display: flex;
+            .ordNArea {
+                background-color: rgba(69, 102, 163, 0.95);
+                padding: 10px;
+                border-radius: 5px;
+                color: white;
+                margin-bottom: 20px;
+                position: relative;
 
-                div {
-                    border: 1px solid black;
+                .ordNC {
+                    position: absolute;
+                    top: 2px;
+                    right: 10px;
+                }
+
+                .ordN , .ordS {
+                    border-bottom: 1px solid white;
+                    padding: 5px;
+                }
+
+                .ordPro {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 2px;
+                    margin: 10px 0;
 
                     p {
+                        text-align: center;
                         width: 120px;
-                        text-align: center;
                     }
                 }
 
-                .bCPUpdA {
-
-                    p {
-                        width: 150px;
-                        text-align: center;
-                    }
+                .ordU , .ordA{
+                    border-top: 1px solid white;
+                    padding: 5px;
                 }
 
-                input {
-                    margin: 0 5px;
-                }
-
-                .radioT {
-                    visibility: hidden;
+                .totalP {
+                    margin: 20px 0;
                 }
 
             }
+
         }
 
         .proDeleModal {
@@ -622,7 +639,7 @@ body {
     }
   
     .dropDownContent {
-      display: block;
+      display: none;
       position: absolute;
       z-index: 1;
       list-style-type: none;
@@ -634,7 +651,7 @@ body {
       right: 0;
       top: 40px;
       text-align: center;
-      opacity: 0;
+      opacity: 0.95;
       transition: 0.6s;
   
       li {
@@ -672,6 +689,6 @@ body {
     }
   
     .show {
-      opacity: 1;
+        display: block;
     }
 }

@@ -310,135 +310,97 @@ searBuyB.addEventListener("click", () => {
             checkData.ord_num_info_list.forEach((i) => {
                 let ordNTotP = 0;
 
-                const ordT = document.createElement("div");
-                ordT.classList.add("orderInfo");
-                resBuyP.appendChild(ordT);
-
-                const ordNAT = document.createElement("div");
-                const ordNT = document.createElement("p");
-                ordNT.classList.add("orderN");
-                ordNT.innerText = "訂單編號";
-                ordNAT.appendChild(ordNT);
-                ordT.appendChild(ordNAT);
-
-                const ordPAT = document.createElement("div");
-                const ordPT = document.createElement("p");
-                ordPT.classList.add("orderSP");
-                ordPT.innerText = "賣家電話";
-                ordPAT.appendChild(ordPT);
-                ordT.appendChild(ordPAT);
-
-                const ordAAT = document.createElement("div");
-                const ordAT = document.createElement("p");
-                ordAT.classList.add("orderA");
-                ordAT.innerText = "寄件地址";
-                ordAAT.appendChild(ordAT);
-                ordT.appendChild(ordAAT);
-
-                const ord = document.createElement("div");
-                ord.classList.add("orderInfo");
-                resBuyP.appendChild(ord);
-
                 const ordNA = document.createElement("div");
-                const ordN = document.createElement("p");
-                ordN.classList.add("orderN");
-                ordN.innerText = i.orderNumber;
+                ordNA.classList.add("ordNArea");
+                resBuyP.appendChild(ordNA);
+
+                const ordN = document.createElement("div");
+                const ordNP = document.createElement("p");
+                ordNP.innerText = "訂單編號 : " + i.orderNumber;
+                ordN.classList.add("ordN");
+                ordN.appendChild(ordNP);
                 ordNA.appendChild(ordN);
-                ord.appendChild(ordNA);
 
-                const ordPA = document.createElement("div");
-                const ordP = document.createElement("p");
-                ordP.classList.add("orderSP");
-                ordP.innerText = i.phone;
-                ordPA.appendChild(ordP);
-                ord.appendChild(ordPA);
+                const ordS = document.createElement("div");
+                const ordSP = document.createElement("p");
+                ordSP.innerText = "訂單狀態 : " + i.state;
+                ordS.classList.add("ordN");
+                ordS.appendChild(ordSP);
+                ordNA.appendChild(ordS);
 
-                const ordAA = document.createElement("div");
-                const ordA = document.createElement("p");
-                ordA.classList.add("orderA");
-                ordA.innerText = i.address;
-                ordAA.appendChild(ordA);
-                ord.appendChild(ordAA);
+                const ordPh = document.createElement("div");
+                const ordPhP = document.createElement("p");
+                ordPhP.innerText = "賣家電話 : " + i.phone;
+                ordPh.classList.add("ordN");
+                ordPh.appendChild(ordPhP);
+                ordNA.appendChild(ordPh);
 
-                const BuyPT = document.createElement("div");
-                BuyPT.classList.add("buyPro");
-                resBuyP.appendChild(BuyPT);
-                
-                const buySPNTA = document.createElement("div");
-                const buySPNT = document.createElement("p");
-                buySPNT.innerText = "商品名稱";
-                buySPNTA.appendChild(buySPNT);
-                BuyPT.appendChild(buySPNTA);
-        
-                const buySPPTA = document.createElement("div");
-                const buySPPT = document.createElement("p");
-                buySPPT.innerText = "價格";
-                buySPPTA.appendChild(buySPPT);
-                BuyPT.appendChild(buySPPTA);
-        
-                const buySPATA = document.createElement("div");
-                const buySPAT = document.createElement("p");
-                buySPAT.innerText = "數量";
-                buySPATA.appendChild(buySPAT);
-                BuyPT.appendChild(buySPATA);
-        
-                const buySPSTA = document.createElement("div");
-                const buySPST = document.createElement("p");
-                buySPST.innerText = "訂單狀態";
-                buySPSTA.appendChild(buySPST);
-                BuyPT.appendChild(buySPSTA);
-        
-                const buySPUTA = document.createElement("div");
-                const buySPUT = document.createElement("p");
-                buySPUT.innerText = "更新時間";
-                buySPUTA.classList.add("bPUpdA");
-                buySPUTA.appendChild(buySPUT);
-                BuyPT.appendChild(buySPUTA);
-    
+                const ordP = document.createElement("div");
+                ordP.classList.add("ordPro");
+                ordNA.appendChild(ordP);
+
+                const ordPN = document.createElement("p");
+                ordPN.innerText = "商品名稱";
+                ordP.appendChild(ordPN);
+
+                const ordPP = document.createElement("p");
+                ordPP.innerText = "價格";
+                ordP.appendChild(ordPP);
+
+                const ordPA = document.createElement("p");
+                ordPA.innerText = "數量";
+                ordP.appendChild(ordPA);
+
+                const ordPT = document.createElement("p");
+                ordPT.innerText = "總計";
+                ordP.appendChild(ordPT);
+
+
                 i.proInfoList.forEach( (j) => {
-                    const BuyP = document.createElement("div");
-                    BuyP.classList.add("buyPro");
-                    resBuyP.appendChild(BuyP);
                     
-                    const buySPNA = document.createElement("div");
-                    const buySPN = document.createElement("p");
-                    buySPN.innerText = j.productName;
-                    buySPNA.appendChild(buySPN);
-                    BuyP.appendChild(buySPNA);
-    
-                    const buySPPA = document.createElement("div");
-                    const buySPP = document.createElement("p");
-                    buySPP.innerText = j.price;
-                    buySPPA.appendChild(buySPP);
-                    BuyP.appendChild(buySPPA);
-    
-                    const buySPAA = document.createElement("div");
-                    const buySPA = document.createElement("p");
-                    buySPA.innerText = j.amount;
-                    buySPAA.appendChild(buySPA);
-                    BuyP.appendChild(buySPAA);
-    
-                    const buySPSA = document.createElement("div");
-                    const buySPS = document.createElement("p");
-                    buySPS.innerText = j.state;
-                    buySPSA.appendChild(buySPS);
-                    BuyP.appendChild(buySPSA);
-    
-                    const buySPUA = document.createElement("div");
-                    const buySPU = document.createElement("p");
-                    const upTime = j.updateTime.replace("T", " ");
-                    buySPU.innerText = upTime;
-                    buySPUA.classList.add("bPUpdA");
-                    buySPUA.appendChild(buySPU);
-                    BuyP.appendChild(buySPUA);
+                    const ordP = document.createElement("div");
+                    ordP.classList.add("ordPro");
+                    ordNA.appendChild(ordP);
 
-                    ordNTotP += j.price * j.amount
+                    const ordPN = document.createElement("p");
+                    ordPN.innerText = j.productName;
+                    ordP.appendChild(ordPN);
+
+                    const ordPP = document.createElement("p");
+                    ordPP.innerText = j.price;
+                    ordP.appendChild(ordPP);
+
+                    const ordPA = document.createElement("p");
+                    ordPA.innerText = j.amount;
+                    ordP.appendChild(ordPA);
+
+                    const ordPT = document.createElement("p");
+                    ordPT.innerText = (j.price * j.amount);
+                    ordP.appendChild(ordPT);
+
+                    ordNTotP += (j.price * j.amount);
                 })
 
+                const ordNTP = document.createElement("div");
+                ordNTP.classList.add("totalP");
+                ordNTP.innerText = "訂單總金額為 : $ " + ordNTotP;
+                ordNA.appendChild(ordNTP);
+
+                const ordA = document.createElement("div");
+                const ordAP = document.createElement("p");
+                ordAP.innerText = "寄件地址 : " + i.address;
+                ordA.classList.add("ordN");
+                ordA.appendChild(ordAP);
+                ordNA.appendChild(ordA);
+
+                const ordU = document.createElement("div");
+                const ordUP = document.createElement("p");
+                const upTime = i.updateTime.replace("T", " ");
+                ordUP.innerText = "訂單更新時間 : " + upTime;
+                ordU.classList.add("ordN");
+                ordU.appendChild(ordUP);
+                ordNA.appendChild(ordU);
                 
-                const divide = document.createElement("div")
-                divide.classList.add("divide")
-                resBuyP.appendChild(divide);
             })
 
         }
@@ -489,120 +451,119 @@ fetch("http://localhost:8080/sear_buy_pro", {
 })
 .then(function(data) {
     const checkData = JSON.parse(JSON.stringify(data));
-    
     canCPA.innerHTML = "";
-    const canCPT = document.createElement("div");
-    canCPT.classList.add("canCancelPro");
-    canCPA.appendChild(canCPT);
 
-    const canCPCTA = document.createElement("div");
-    const canCPCT = document.createElement("input");
-    canCPCT.type = "radio";
-    canCPCT.classList.add("radioT");
-    canCPCTA.appendChild(canCPCT);
-    canCPT.appendChild(canCPCTA);
-    
-    const canCPNTA = document.createElement("div");
-    const canCPNT = document.createElement("p");
-    canCPNT.innerText = "商品名稱";
-    canCPNTA.appendChild(canCPNT);
-    canCPT.appendChild(canCPNTA);
+    if(checkData.ord_num_info_list) {
+        checkData.ord_num_info_list.forEach((i,index) => {
+            let ordNTotP = 0;
 
-    const canCPPTA = document.createElement("div");
-    const canCPPT = document.createElement("p");
-    canCPPT.innerText = "價格";
-    canCPPTA.appendChild(canCPPT);
-    canCPT.appendChild(canCPPTA);
+            const ordNA = document.createElement("div");
+            ordNA.classList.add("ordNArea");
+            canCPA.appendChild(ordNA);
 
-    const canCPATA = document.createElement("div");
-    const canCPAT = document.createElement("p");
-    canCPAT.innerText = "數量";
-    canCPATA.appendChild(canCPAT);
-    canCPT.appendChild(canCPATA);
+            const ordNC = document.createElement("input");
+            ordNC.classList.add("ordNC");
+            ordNC.type = "radio";
+            ordNC.id = `bcho${index}`;
+            ordNC.name = "ordNC";
+            ordNA.appendChild(ordNC);
 
-    const canCPPhTA = document.createElement("div");
-    const canCPPhT = document.createElement("p");
-    canCPPhT.innerText = "賣家電話";
-    canCPPhTA.appendChild(canCPPhT);
-    canCPT.appendChild(canCPPhTA);
+            const ordN = document.createElement("div");
+            const ordNP = document.createElement("p");
+            ordNP.innerText = "訂單編號 : " + i.orderNumber;
+            ordN.classList.add("ordN");
+            ordN.appendChild(ordNP);
+            ordNA.appendChild(ordN);
 
-    const canCPSTA = document.createElement("div");
-    const canCPST = document.createElement("p");
-    canCPST.innerText = "訂單狀態";
-    canCPSTA.appendChild(canCPST);
-    canCPT.appendChild(canCPSTA);
+            const ordS = document.createElement("div");
+            const ordSP = document.createElement("p");
+            ordSP.innerText = "訂單狀態 : " + i.state;
+            ordS.classList.add("ordN");
+            ordS.appendChild(ordSP);
+            ordNA.appendChild(ordS);
 
-    const canCPUTA = document.createElement("div");
-    const canCPUT = document.createElement("p");
-    canCPUT.innerText = "更新時間";
-    canCPUTA.classList.add("bCPUpdA");
-    canCPUTA.appendChild(canCPUT);
-    canCPT.appendChild(canCPUTA);
+            const ordPh = document.createElement("div");
+            const ordPhP = document.createElement("p");
+            ordPhP.innerText = "賣家電話 : " + i.phone;
+            ordPh.classList.add("ordN");
+            ordPh.appendChild(ordPhP);
+            ordNA.appendChild(ordPh);
 
-    if(checkData.cart_info_list) {
-        checkData.cart_info_list.forEach( (i ,index) => {
+            const ordP = document.createElement("div");
+            ordP.classList.add("ordPro");
+            ordNA.appendChild(ordP);
+
+            const ordPN = document.createElement("p");
+            ordPN.innerText = "商品名稱";
+            ordP.appendChild(ordPN);
+
+            const ordPP = document.createElement("p");
+            ordPP.innerText = "價格";
+            ordP.appendChild(ordPP);
+
+            const ordPA = document.createElement("p");
+            ordPA.innerText = "數量";
+            ordP.appendChild(ordPA);
+
+            const ordPT = document.createElement("p");
+            ordPT.innerText = "總計";
+            ordP.appendChild(ordPT);
+
+
+            i.proInfoList.forEach( (j) => {
+                
+                const ordP = document.createElement("div");
+                ordP.classList.add("ordPro");
+                ordNA.appendChild(ordP);
+
+                const ordPN = document.createElement("p");
+                ordPN.innerText = j.productName;
+                ordP.appendChild(ordPN);
+
+                const ordPP = document.createElement("p");
+                ordPP.innerText = j.price;
+                ordP.appendChild(ordPP);
+
+                const ordPA = document.createElement("p");
+                ordPA.innerText = j.amount;
+                ordP.appendChild(ordPA);
+
+                const ordPT = document.createElement("p");
+                ordPT.innerText = (j.price * j.amount);
+                ordP.appendChild(ordPT);
+
+                ordNTotP += (j.price * j.amount);
+            })
+
+            const ordNTP = document.createElement("div");
+            ordNTP.classList.add("totalP");
+            ordNTP.innerText = "訂單總金額為 : $ " + ordNTotP;
+            ordNA.appendChild(ordNTP);
+
+            const ordA = document.createElement("div");
+            const ordAP = document.createElement("p");
+            ordAP.innerText = "寄件地址 : " + i.address;
+            ordA.classList.add("ordN");
+            ordA.appendChild(ordAP);
+            ordNA.appendChild(ordA);
+
+            const ordU = document.createElement("div");
+            const ordUP = document.createElement("p");
+            const upTime = i.updateTime.replace("T", " ");
+            ordUP.innerText = "訂單更新時間 : " + upTime;
+            ordU.classList.add("ordN");
+            ordU.appendChild(ordUP);
+            ordNA.appendChild(ordU);
+
+            const bChooCa = document.querySelector(`#bcho${index}`);
             
-            const canCP = document.createElement("div");
-            canCP.classList.add("canCancelPro");
-            canCPA.appendChild(canCP);
-        
-            const canCPCA = document.createElement("div");
-            const canCPC = document.createElement("input");
-            canCPCA.classList.add("radioTA");
-            canCPC.type = "radio";
-            canCPC.id = `canCP${index}`;
-            canCPC.name = "chooCP";
-            canCPCA.appendChild(canCPC);
-            canCP.appendChild(canCPCA);
-            
-            const canCPNA = document.createElement("div");
-            const canCPN = document.createElement("p");
-            canCPN.innerText = i.productName;
-            canCPNA.appendChild(canCPN);
-            canCP.appendChild(canCPNA);
-        
-            const canCPPA = document.createElement("div");
-            const canCPP = document.createElement("p");
-            canCPP.innerText = i.price;
-            canCPPA.appendChild(canCPP);
-            canCP.appendChild(canCPPA);
-        
-            const canCPAmA = document.createElement("div");
-            const canCPAm = document.createElement("p");
-            canCPAm.innerText = i.amount;
-            canCPAmA.appendChild(canCPAm);
-            canCP.appendChild(canCPAmA);
-
-            const canCPPhA = document.createElement("div");
-            const canCPPh = document.createElement("p");
-            canCPPh.innerText = i.phone;
-            canCPPhA.appendChild(canCPPh);
-            canCP.appendChild(canCPPhA);
-        
-            const canCPSA = document.createElement("div");
-            const canCPS = document.createElement("p");
-            canCPS.innerText = i.state;
-            canCPSA.appendChild(canCPS);
-            canCP.appendChild(canCPSA);
-        
-            const canCPUA = document.createElement("div");
-            const canCPU = document.createElement("p");
-            canCPU.innerText = i.updateTime;
-            canCPUA.classList.add("bCPUpdA");
-            canCPUA.appendChild(canCPU);
-            canCP.appendChild(canCPUA);
-
             BCancelPB.addEventListener("click", () => {
 
-                const chooC = document.querySelector(`#canCP${index}`);
-
-                if(chooC.checked) {
+                if(bChooCa.checked) {
 
                     let body = {
                         "order_status": {
-                            "userId": sessionStorage.getItem("userId"),
-                            "productId": i.productId,
-                            "updateTime": i.updateTime
+                            "orderNumber": i.orderNumber
                         }
                     }
 
@@ -619,23 +580,29 @@ fetch("http://localhost:8080/sear_buy_pro", {
                     .then(function(data) {
                         const checkData = JSON.parse(JSON.stringify(data));
                         if(checkData.message) {
-                            console.log(checkData.message);
                             mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                            ordNA.innerHTML = "";
+                            ordNA.classList.remove("ordNArea");
                             setTimeout(() => {
                                 mge.innerHTML = "";
                             }, 2000);
                         }
-                        canCP.innerHTML = "";
                     })
                     .catch(function(error) {
                         console.log(error)
                     })
-
                 }
             })
-
         })
     }
+
+    if(checkData.message) {
+        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+        setTimeout(() => {
+            mge.innerHTML = "";
+        }, 2000);
+    }
+
 })
 .catch(function(error) {
     console.log(error)
@@ -666,217 +633,164 @@ searSellB.addEventListener("click", (i) => {
     })
     .then(function(data) {
         const checkData = JSON.parse(JSON.stringify(data))
-
         resSellP.innerHTML = "";
-        const sellPT = document.createElement("div");
-        sellPT.classList.add("sellPro");
-        resSellP.appendChild(sellPT);
-    
-        const sellPCTA = document.createElement("div");
-        const sellPCT = document.createElement("input");
-        sellPCT.type = "radio";
-        sellPCT.classList.add("radioS");
-        sellPCTA.appendChild(sellPCT);
-        sellPT.appendChild(sellPCTA);
 
-        const sellPBTA = document.createElement("div");
-        const sellPBT = document.createElement("p");
-        sellPBT.innerText = "買家(用戶名)";
-        sellPBTA.appendChild(sellPBT);
-        sellPT.appendChild(sellPBTA);
+        if(checkData.ord_num_info_list) {
+            checkData.ord_num_info_list.forEach((i,index) => {
+                let ordNTotP = 0;
+                devSellStaB.style.display = "inline"; 
 
-        const sellPBPTA = document.createElement("div");
-        const sellPBPT = document.createElement("p");
-        sellPBPT.innerText = "買家電話";
-        sellPBPTA.appendChild(sellPBPT);
-        sellPT.appendChild(sellPBPTA);
-        
-        const sellPNTA = document.createElement("div");
-        const sellPNT = document.createElement("p");
-        sellPNT.innerText = "商品名稱";
-        sellPNTA.appendChild(sellPNT);
-        sellPT.appendChild(sellPNTA);
-    
-        const sellPPTA = document.createElement("div");
-        const sellPPT = document.createElement("p");
-        sellPPT.innerText = "價格";
-        sellPPTA.appendChild(sellPPT);
-        sellPT.appendChild(sellPPTA);
-    
-        const sellPATA = document.createElement("div");
-        const sellPAT = document.createElement("p");
-        sellPAT.innerText = "數量";
-        sellPATA.appendChild(sellPAT);
-        sellPT.appendChild(sellPATA);
-    
-        const sellPSTA = document.createElement("div");
-        const sellPST = document.createElement("p");
-        sellPST.innerText = "訂單狀態";
-        sellPSTA.appendChild(sellPST);
-        sellPT.appendChild(sellPSTA);
-    
-        const sellPUTA = document.createElement("div");
-        const sellPUT = document.createElement("p");
-        sellPUT.innerText = "更新時間";
-        sellPUTA.classList.add("CPSUpdA");
-        sellPUTA.appendChild(sellPUT);
-        sellPT.appendChild(sellPUTA);
+                const ordNA = document.createElement("div");
+                ordNA.classList.add("ordNArea");
+                resSellP.appendChild(ordNA);
 
-        if(checkData.cart_info_list) {
+                const ordNC = document.createElement("input");
+                ordNC.classList.add("ordNC");
+                ordNC.type = "radio";
+                ordNC.id = `chSta${index}`;
+                ordNC.name = "ordNC";
+                ordNA.appendChild(ordNC);
 
-            if(body.state === "準備中" || body.state === "運送中" || body.state === "待收貨") {
-                devSellStaB.disabled = false;
-                // devSellStaB.style.display = inline;
+                const ordN = document.createElement("div");
+                const ordNP = document.createElement("p");
+                ordNP.innerText = "訂單編號 : " + i.orderNumber;
+                ordN.classList.add("ordN");
+                ordN.appendChild(ordNP);
+                ordNA.appendChild(ordN);
 
-                checkData.cart_info_list.forEach((i, index) => {
-                    const sellP = document.createElement("div");
-                    sellP.classList.add("sellPro");
-                    resSellP.appendChild(sellP);
-                
-                    const sellPCA = document.createElement("div");
-                    const sellPC = document.createElement("input");
-                    sellPC.type = "radio";
-                    sellPC.id = `cCS${index}`
-                    sellPC.name = "chooCS";
-                    sellPCA.appendChild(sellPC);
-                    sellP.appendChild(sellPCA);
+                const ordS = document.createElement("div");
+                const ordSP = document.createElement("p");
+                ordSP.innerText = "訂單狀態 : " + i.state;
+                ordS.classList.add("ordN");
+                ordS.appendChild(ordSP);
+                ordNA.appendChild(ordS);
+
+                const ordPh = document.createElement("div");
+                const ordPhP = document.createElement("p");
+                ordPhP.innerText = "買家電話 : " + i.phone;
+                ordPh.classList.add("ordN");
+                ordPh.appendChild(ordPhP);
+                ordNA.appendChild(ordPh);
+
+                const ordP = document.createElement("div");
+                ordP.classList.add("ordPro");
+                ordNA.appendChild(ordP);
+
+                const ordPN = document.createElement("p");
+                ordPN.innerText = "商品名稱";
+                ordP.appendChild(ordPN);
+
+                const ordPP = document.createElement("p");
+                ordPP.innerText = "價格";
+                ordP.appendChild(ordPP);
+
+                const ordPA = document.createElement("p");
+                ordPA.innerText = "數量";
+                ordP.appendChild(ordPA);
+
+                const ordPT = document.createElement("p");
+                ordPT.innerText = "總計";
+                ordP.appendChild(ordPT);
+
+
+                i.proInfoList.forEach( (j) => {
+                    
+                    const ordP = document.createElement("div");
+                    ordP.classList.add("ordPro");
+                    ordNA.appendChild(ordP);
+
+                    const ordPN = document.createElement("p");
+                    ordPN.innerText = j.productName;
+                    ordP.appendChild(ordPN);
+
+                    const ordPP = document.createElement("p");
+                    ordPP.innerText = j.price;
+                    ordP.appendChild(ordPP);
+
+                    const ordPA = document.createElement("p");
+                    ordPA.innerText = j.amount;
+                    ordP.appendChild(ordPA);
+
+                    const ordPT = document.createElement("p");
+                    ordPT.innerText = (j.price * j.amount);
+                    ordP.appendChild(ordPT);
+
+                    ordNTotP += (j.price * j.amount);
+                })
+
+                const ordNTP = document.createElement("div");
+                ordNTP.classList.add("totalP");
+                ordNTP.innerText = "訂單總金額為 : $ " + ordNTotP;
+                ordNA.appendChild(ordNTP);
+
+                const ordA = document.createElement("div");
+                const ordAP = document.createElement("p");
+                ordAP.innerText = "寄件地址 : " + i.address;
+                ordA.classList.add("ordN");
+                ordA.appendChild(ordAP);
+                ordNA.appendChild(ordA);
+
+                const ordU = document.createElement("div");
+                const ordUP = document.createElement("p");
+                const upTime = i.updateTime.replace("T", " ");
+                ordUP.innerText = "訂單更新時間 : " + upTime;
+                ordU.classList.add("ordN");
+                ordU.appendChild(ordUP);
+                ordNA.appendChild(ordU);
+
+                const chStaChoo = document.querySelector(`#chSta${index}`);
             
-                    const sellPBA = document.createElement("div");
-                    const sellPB = document.createElement("p");
-                    sellPB.innerText = i.userId;
-                    sellPBA.appendChild(sellPB);
-                    sellP.appendChild(sellPBA);
-
-                    const sellPBPA = document.createElement("div");
-                    const sellPBP = document.createElement("p");
-                    sellPBP.innerText = i.phone;
-                    sellPBPA.appendChild(sellPBP);
-                    sellP.appendChild(sellPBPA);
-                    
-                    const sellPNA = document.createElement("div");
-                    const sellPN = document.createElement("p");
-                    sellPN.innerText = i.productName;
-                    sellPNA.appendChild(sellPN);
-                    sellP.appendChild(sellPNA);
-                
-                    const sellPPA = document.createElement("div");
-                    const sellPP = document.createElement("p");
-                    sellPP.innerText = i.price;
-                    sellPPA.appendChild(sellPP);
-                    sellP.appendChild(sellPPA);
-                
-                    const sellPAA = document.createElement("div");
-                    const sellPA = document.createElement("p");
-                    sellPA.innerText = i.amount;
-                    sellPAA.appendChild(sellPA);
-                    sellP.appendChild(sellPAA);
-                
-                    const sellPSA = document.createElement("div");
-                    const sellPS = document.createElement("p");
-                    sellPS.innerText = i.state;
-                    sellPSA.appendChild(sellPS);
-                    sellP.appendChild(sellPSA);
-                
-                    const sellPUA = document.createElement("div");
-                    const sellPU = document.createElement("p");
-                    sellPU.innerText = i.updateTime;
-                    sellPUA.classList.add("CPSUpdA");
-                    sellPUA.appendChild(sellPU);
-                    sellP.appendChild(sellPUA);
-
-                    devSellStaB.addEventListener("click", () => {
-                        
-                        const choocCS = document.querySelector(`#cCS${index}`);
-
-                        if(choocCS.checked){
-                            let body = {
-                                "order_status": {
-                                    "userId": i.userId,
-                                    "productId": i.productId,
-                                    "updateTime": i.updateTime,
-                                    "state": i.state
-                                }
-                            }
-        
-                            fetch("http://localhost:8080/change_ord_state", {
-                                method: "Post",
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: JSON.stringify(body)
-                            })
-                            .then(function(response) {
-                                return response.json()
-                            })
-                            .then(function(data) {
-                                const checkData = JSON.parse(JSON.stringify(data))
-                                if(checkData.message) {
-                                    mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
-                                }
-                                sellP.innerHTML = "";
-                            })
-                            .catch(function(error) {
-                                console.log(error)
-                            })
-                        }
-                    })
-                })
-            }
-
-            if(body.state === "已取消" || body.state === "已完成") {
-                sellPCTA.parentNode.removeChild(sellPCTA);
-                devSellStaB.disabled = true;
-                // devSellStaB.style.display = none;
-
-                checkData.cart_info_list.forEach((i) => {
-                    const sellP = document.createElement("div");
-                    sellP.classList.add("sellPro");
-                    resSellP.appendChild(sellP);
+                devSellStaB.addEventListener("click", () => {
     
-                    const sellPBA = document.createElement("div");
-                    const sellPB = document.createElement("p");
-                    sellPB.innerText = i.userId;
-                    sellPBA.appendChild(sellPB);
-                    sellP.appendChild(sellPBA);
-
-                    const sellPBPA = document.createElement("div");
-                    const sellPBP = document.createElement("p");
-                    sellPBP.innerText = i.phone;
-                    sellPBPA.appendChild(sellPBP);
-                    sellP.appendChild(sellPBPA);
-                    
-                    const sellPNA = document.createElement("div");
-                    const sellPN = document.createElement("p");
-                    sellPN.innerText = i.productName;
-                    sellPNA.appendChild(sellPN);
-                    sellP.appendChild(sellPNA);
-                
-                    const sellPPA = document.createElement("div");
-                    const sellPP = document.createElement("p");
-                    sellPP.innerText = i.price;
-                    sellPPA.appendChild(sellPP);
-                    sellP.appendChild(sellPPA);
-                
-                    const sellPAA = document.createElement("div");
-                    const sellPA = document.createElement("p");
-                    sellPA.innerText = i.amount;
-                    sellPAA.appendChild(sellPA);
-                    sellP.appendChild(sellPAA);
-                
-                    const sellPSA = document.createElement("div");
-                    const sellPS = document.createElement("p");
-                    sellPS.innerText = i.state;
-                    sellPSA.appendChild(sellPS);
-                    sellP.appendChild(sellPSA);
-                
-                    const sellPUA = document.createElement("div");
-                    const sellPU = document.createElement("p");
-                    sellPU.innerText = i.updateTime;
-                    sellPUA.classList.add("CPSUpdA");
-                    sellPUA.appendChild(sellPU);
-                    sellP.appendChild(sellPUA);
+                    if(chStaChoo.checked) {
+    
+                        let body = {
+                            "order_status": {
+                                "orderNumber": i.orderNumber
+                            }
+                        }
+    
+                        fetch("http://localhost:8080/change_ord_state", {
+                            method: "Post",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(body)
+                        })
+                        .then(function(response) {
+                            return response.json()
+                        })
+                        .then(function(data) {
+                            const checkData = JSON.parse(JSON.stringify(data));
+                            if(checkData.message) {
+                                mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                                ordNA.innerHTML = "";
+                                ordNA.classList.remove("ordNArea");
+                                setTimeout(() => {
+                                    mge.innerHTML = "";
+                                }, 2000);
+                            }
+                        })
+                        .catch(function(error) {
+                            console.log(error)
+                        })
+                    }
                 })
-            }
+
+                if(sellProS.value === "已完成" || sellProS.value === "已取消") {
+                    ordNC.style.display = "none";
+                    devSellStaB.style.display = "none"; 
+                }
+                
+            })
+
+        }
+
+        if(checkData.message) {
+            mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+            setTimeout(() => {
+                mge.innerHTML = "";
+            }, 2000);
         }
 
     })
@@ -915,134 +829,122 @@ fetch("http://localhost:8080/sear_sell_pro", {
     const checkData = JSON.parse(JSON.stringify(data));
     
     sCanCPA.innerHTML = "";
-    const sCanCPT = document.createElement("div");
-    sCanCPT.classList.add("sCanCancelPro");
-    sCanCPA.appendChild(sCanCPT);
 
-    const sCanCPCTA = document.createElement("div");
-    const sCanCPCT = document.createElement("input");
-    sCanCPCT.type = "radio";
-    sCanCPCT.classList.add("radioST");
-    sCanCPCTA.appendChild(sCanCPCT);
-    sCanCPT.appendChild(sCanCPCTA);
+    if(checkData.ord_num_info_list) {
+        checkData.ord_num_info_list.forEach((i,index) => {
+            let ordNTotP = 0;
 
-    const sCanCPBTA = document.createElement("div");
-    const sCanCPBT = document.createElement("p");
-    sCanCPBT.innerText = "買家(用戶名)";
-    sCanCPBTA.appendChild(sCanCPBT);
-    sCanCPT.appendChild(sCanCPBTA);
-    
-    const sCanCPBPTA = document.createElement("div");
-    const sCanCPBPT = document.createElement("p");
-    sCanCPBPT.innerText = "買家電話";
-    sCanCPBPTA.appendChild(sCanCPBPT);
-    sCanCPT.appendChild(sCanCPBPTA);
+            const ordNA = document.createElement("div");
+            ordNA.classList.add("ordNArea");
+            sCanCPA.appendChild(ordNA);
 
-    const sCanCPNTA = document.createElement("div");
-    const sCanCPNT = document.createElement("p");
-    sCanCPNT.innerText = "商品名稱";
-    sCanCPNTA.appendChild(sCanCPNT);
-    sCanCPT.appendChild(sCanCPNTA);
+            const ordNC = document.createElement("input");
+            ordNC.classList.add("ordNC");
+            ordNC.type = "radio";
+            ordNC.id = `scho${index}`;
+            ordNC.name = "ordNC";
+            ordNA.appendChild(ordNC);
 
-    const sCanCPPTA = document.createElement("div");
-    const sCanCPPT = document.createElement("p");
-    sCanCPPT.innerText = "價格";
-    sCanCPPTA.appendChild(sCanCPPT);
-    sCanCPT.appendChild(sCanCPPTA);
+            const ordN = document.createElement("div");
+            const ordNP = document.createElement("p");
+            ordNP.innerText = "訂單編號 : " + i.orderNumber;
+            ordN.classList.add("ordN");
+            ordN.appendChild(ordNP);
+            ordNA.appendChild(ordN);
 
-    const sCanCPATA = document.createElement("div");
-    const sCanCPAT = document.createElement("p");
-    sCanCPAT.innerText = "數量";
-    sCanCPATA.appendChild(sCanCPAT);
-    sCanCPT.appendChild(sCanCPATA);
+            const ordS = document.createElement("div");
+            const ordSP = document.createElement("p");
+            ordSP.innerText = "訂單狀態 : " + i.state;
+            ordS.classList.add("ordN");
+            ordS.appendChild(ordSP);
+            ordNA.appendChild(ordS);
 
-    const sCanCPSTA = document.createElement("div");
-    const sCanCPST = document.createElement("p");
-    sCanCPST.innerText = "訂單狀態";
-    sCanCPSTA.appendChild(sCanCPST);
-    sCanCPT.appendChild(sCanCPSTA);
+            const ordPh = document.createElement("div");
+            const ordPhP = document.createElement("p");
+            ordPhP.innerText = "買家電話 : " + i.phone;
+            ordPh.classList.add("ordN");
+            ordPh.appendChild(ordPhP);
+            ordNA.appendChild(ordPh);
 
-    const sCanCPUTA = document.createElement("div");
-    const sCanCPUT = document.createElement("p");
-    sCanCPUT.innerText = "更新時間";
-    sCanCPUTA.classList.add("sCPUpdA");
-    sCanCPUTA.appendChild(sCanCPUT);
-    sCanCPT.appendChild(sCanCPUTA);
+            const ordP = document.createElement("div");
+            ordP.classList.add("ordPro");
+            ordNA.appendChild(ordP);
 
-    if(checkData.cart_info_list) {
-        checkData.cart_info_list.forEach( (i ,index) => {
+            const ordPN = document.createElement("p");
+            ordPN.innerText = "商品名稱";
+            ordP.appendChild(ordPN);
+
+            const ordPP = document.createElement("p");
+            ordPP.innerText = "價格";
+            ordP.appendChild(ordPP);
+
+            const ordPA = document.createElement("p");
+            ordPA.innerText = "數量";
+            ordP.appendChild(ordPA);
+
+            const ordPT = document.createElement("p");
+            ordPT.innerText = "總計";
+            ordP.appendChild(ordPT);
+
+
+            i.proInfoList.forEach( (j) => {
+                
+                const ordP = document.createElement("div");
+                ordP.classList.add("ordPro");
+                ordNA.appendChild(ordP);
+
+                const ordPN = document.createElement("p");
+                ordPN.innerText = j.productName;
+                ordP.appendChild(ordPN);
+
+                const ordPP = document.createElement("p");
+                ordPP.innerText = j.price;
+                ordP.appendChild(ordPP);
+
+                const ordPA = document.createElement("p");
+                ordPA.innerText = j.amount;
+                ordP.appendChild(ordPA);
+
+                const ordPT = document.createElement("p");
+                ordPT.innerText = (j.price * j.amount);
+                ordP.appendChild(ordPT);
+
+                ordNTotP += (j.price * j.amount);
+            })
+
+            const ordNTP = document.createElement("div");
+            ordNTP.classList.add("totalP");
+            ordNTP.innerText = "訂單總金額為 : $ " + ordNTotP;
+            ordNA.appendChild(ordNTP);
+
+            const ordA = document.createElement("div");
+            const ordAP = document.createElement("p");
+            ordAP.innerText = "寄件地址 : " + i.address;
+            ordA.classList.add("ordN");
+            ordA.appendChild(ordAP);
+            ordNA.appendChild(ordA);
+
+            const ordU = document.createElement("div");
+            const ordUP = document.createElement("p");
+            const upTime = i.updateTime.replace("T", " ");
+            ordUP.innerText = "訂單更新時間 : " + upTime;
+            ordU.classList.add("ordN");
+            ordU.appendChild(ordUP);
+            ordNA.appendChild(ordU);
+
+            const sChooCa = document.querySelector(`#scho${index}`);
             
-            const sCanCP = document.createElement("div");
-            sCanCP.classList.add("sCanCancelPro");
-            sCanCPA.appendChild(sCanCP);
-        
-            const sCanCPCA = document.createElement("div");
-            const sCanCPC = document.createElement("input");
-            sCanCPCA.classList.add("radioTA");
-            sCanCPC.type = "radio";
-            sCanCPC.id = `canSCP${index}`;
-            sCanCPC.name = "chooSCP";
-            sCanCPCA.appendChild(sCanCPC);
-            sCanCP.appendChild(sCanCPCA);
-
-            const sCanCPBA = document.createElement("div");
-            const sCanCPB = document.createElement("p");
-            sCanCPB.innerText = i.userId;
-            sCanCPBA.appendChild(sCanCPB);
-            sCanCP.appendChild(sCanCPBA);
-
-            const sCanCPBPA = document.createElement("div");
-            const sCanCPBP = document.createElement("p");
-            sCanCPBP.innerText = i.phone;
-            sCanCPBPA.appendChild(sCanCPBP);
-            sCanCP.appendChild(sCanCPBPA);
-            
-            const sCanCPNA = document.createElement("div");
-            const sCanCPN = document.createElement("p");
-            sCanCPN.innerText = i.productName;
-            sCanCPNA.appendChild(sCanCPN);
-            sCanCP.appendChild(sCanCPNA);
-        
-            const sCanCPPA = document.createElement("div");
-            const sCanCPP = document.createElement("p");
-            sCanCPP.innerText = i.price;
-            sCanCPPA.appendChild(sCanCPP);
-            sCanCP.appendChild(sCanCPPA);
-        
-            const sCanCPAmA = document.createElement("div");
-            const sCanCPAm = document.createElement("p");
-            sCanCPAm.innerText = i.amount;
-            sCanCPAmA.appendChild(sCanCPAm);
-            sCanCP.appendChild(sCanCPAmA);
-        
-            const sCanCPSA = document.createElement("div");
-            const sCanCPS = document.createElement("p");
-            sCanCPS.innerText = i.state;
-            sCanCPSA.appendChild(sCanCPS);
-            sCanCP.appendChild(sCanCPSA);
-        
-            const sCanCPUA = document.createElement("div");
-            const sCanCPU = document.createElement("p");
-            sCanCPU.innerText = i.updateTime;
-            sCanCPUA.classList.add("sCPUpdA");
-            sCanCPUA.appendChild(sCanCPU);
-            sCanCP.appendChild(sCanCPUA);
-
             SCancelPB.addEventListener("click", () => {
 
-                const chooSC = document.querySelector(`#canSCP${index}`);
-
-                if(chooSC.checked) {
+                if(sChooCa.checked) {
 
                     let body = {
                         "order_status": {
-                            "userId": i.userId,
-                            "productId": i.productId,
-                            "updateTime": i.updateTime
+                            "orderNumber": i.orderNumber
                         }
                     }
 
-                    fetch("http://localhost:8080/sell_cancel_ord", {
+                    fetch("http://localhost:8080/buy_cancel_ord", {
                         method: "Post",
                         headers: {
                             "Content-Type": "application/json"
@@ -1056,21 +958,31 @@ fetch("http://localhost:8080/sear_sell_pro", {
                         const checkData = JSON.parse(JSON.stringify(data));
                         if(checkData.message) {
                             mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+                            ordNA.innerHTML = "";
+                            ordNA.classList.remove("ordNArea");
                             setTimeout(() => {
                                 mge.innerHTML = "";
                             }, 2000);
                         }
-                        sCanCP.innerHTML = "";
                     })
                     .catch(function(error) {
                         console.log(error)
                     })
-
                 }
             })
-
         })
     }
+
+    if(checkData.message) {
+        mge.innerHTML = "\u00A0" + `${checkData.message}` + "\u00A0";
+        setTimeout(() => {
+            mge.innerHTML = "";
+        }, 2000);
+    }
+
+})
+.catch(function(error) {
+    console.log(error)
 })
 
 // 新增商品

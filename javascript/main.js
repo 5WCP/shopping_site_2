@@ -168,6 +168,11 @@ fetch("http://localhost:8080/sear_all_pro", {
             const addCB = document.querySelector(`#add${i.productId}Btn`);
             
             addCB.addEventListener("click", () => {
+
+                if(countInput === "" || countInput < 0) {
+                    countInput.value = 0;
+                }
+
                 let body = {
                     "order_status": {
                         "userId": sessionStorage.getItem("userId"),
@@ -400,7 +405,7 @@ fetch("http://localhost:8080/sear_all_pro", {
                                 // 監聽input框
                                 countInputC.addEventListener("change", () => {
                     
-                                    if(countInputC.value === "") {
+                                    if(countInputC.value === "" || countInputC.value < 0) {
                                         countInputC.value = chaAmount;
                                     }
                     
@@ -718,7 +723,7 @@ fetch("http://localhost:8080/user_cart_info", {
             // 監聽input框
             countInputC.addEventListener("change", () => {
 
-                if(countInputC.value === "") {
+                if(countInputC.value === "" || countInputC.value < 0) {
                     countInputC.value = chaAmount;
                 }
 
@@ -1179,7 +1184,7 @@ searS.addEventListener("change", () => {
                                     // 監聽input框
                                     countInputC.addEventListener("change", () => {
                         
-                                        if(countInputC.value === "") {
+                                        if(countInputC.value === "" || countInputC.value < 0) {
                                             countInputC.value = chaAmount;
                                         }
                         
@@ -1674,7 +1679,7 @@ searProB.addEventListener("click", () => {
                                     // 監聽input框
                                     countInputC.addEventListener("change", () => {
                         
-                                        if(countInputC.value === "") {
+                                        if(countInputC.value === "" || countInputC.value < 0) {
                                             countInputC.value = chaAmount;
                                         }
                         
@@ -2208,7 +2213,7 @@ checkoutB.addEventListener("click", () => {
                                         // 監聽input框
                                         countInputC.addEventListener("change", () => {
                             
-                                            if(countInputC.value === "") {
+                                            if(countInputC.value === "" || countInputC.value < 0) {
                                                 countInputC.value = chaAmount;
                                             }
                             
